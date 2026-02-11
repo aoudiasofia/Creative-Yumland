@@ -29,9 +29,6 @@ body {
 
 /* HEADER : LOGO GAUCHE / NAV DROITE*/
 
-/* ==========================================================================
-   HEADER : LOGO GAUCHE / NAV DROITE (TEXTE BLANC)
-   ========================================================================== */
 
 .main-header {
     display: flex;
@@ -39,7 +36,7 @@ body {
     align-items: center;
     padding: 20px 5%;
     
-    /* Le fond est BLEU (--accent) donc le texte doit être BLANC */
+    
     background-color: var(--accent); 
     
     border-bottom: var(--main-border);
@@ -51,7 +48,7 @@ body {
 .logo {
     font-family: 'Archivo Black', sans-serif;
     font-size: 2rem;
-    color: var(--white); /* Logo en BLANC */
+    color: var(--white); 
 }
 
 nav ul {
@@ -63,12 +60,12 @@ nav ul {
 
 nav a {
     text-decoration: none;
-    color: var(--white); /* Liens en BLANC */
+    color: var(--white); 
     font-weight: 700;
     font-size: 0.9rem;
     padding: 10px 15px;
     transition: 0.2s;
-    border: 2px solid transparent; /* Pour éviter le décalage au survol */
+    border: 2px solid transparent; 
 }
 
 
@@ -81,7 +78,7 @@ nav a:hover {
 
 .nav-login:hover {
     background: var(--white);
-    color: var(--accent); /* Le texte devient bleu au survol */
+    color: var(--accent); 
     border-color: var(--white);
 }
 
@@ -153,13 +150,11 @@ nav a:hover {
     opacity: 0.7;
 }
 
-/* ==========================================================================
-   SECTION "QUI SOMMES-NOUS" VERSION SIMPLE
-   ========================================================================== */
+/*  SECTION "QUI SOMMES-NOUS"  */
 
 .about-simple {
     padding: 80px 5%;
-    background-color: var(--white); /* Fond blanc pour contraster avec le header bleu */
+    background-color: var(--white); 
     border-bottom: var(--main-border);
     text-align: left;
 }
@@ -167,7 +162,7 @@ nav a:hover {
 .section-title-simple {
     font-family: 'Archivo Black', sans-serif;
     font-size: 2.5rem;
-    color: var(--accent); /* Titre en bleu pour le rappel froid */
+    color: var(--accent); 
     margin-bottom: 30px;
 }
 
@@ -195,6 +190,6 @@ nav a:hover {
     padding: 20px;
     border: 3px solid var(--text);
     display: inline-block;
-    box-shadow: 8px 8px 0px var(--accent); /* Petite ombre bleue pour le style */
+    box-shadow: 8px 8px 0px var(--accent); 
 }
 
