@@ -193,9 +193,7 @@ nav a:hover {
     box-shadow: 8px 8px 0px var(--accent); 
 }
 
-/* ==========================================================================
-   BARRE DE RECHERCHE TACTIQUE
-   ========================================================================== */
+/*  BARRE DE RECHERCHE TACTIQUE */
 
 .search-unit {
     max-width: 650px;
@@ -241,4 +239,11 @@ nav a:hover {
     box-shadow: 10px 10px 0px var(--accent);
     transform: translate(-2px, -2px);
     transition: 0.2s;
+}
+
+
+/* moufle */
+html, body, a, button, .social-box, .btn-brutal, .search-submit {
+    /* Remplace 'images/moufle.png' par le nom exact de ton fichier */
+    cursor: url('../images/moufle.png'), auto;
 }
