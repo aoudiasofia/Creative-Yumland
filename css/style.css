@@ -1,0 +1,200 @@
+
+.kold-mode {
+    --bg: #e0e4e8;          /* Gris acier froid */
+    --text: #0a0a0a;        /* Noir profond */
+    --accent: #0047FF;      /* Bleu électrique (Froid) */
+    --white: #ffffff;
+    --border-weight: 4px;
+    --main-border: var(--border-weight) solid var(--text);
+}
+
+
+/* BASES (RESET) */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-transform: uppercase; 
+}
+
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 0; /* On gère le padding dans les sections */
+    line-height: 1.2;
+}
+
+/* HEADER : LOGO GAUCHE / NAV DROITE*/
+
+/* ==========================================================================
+   HEADER : LOGO GAUCHE / NAV DROITE (TEXTE BLANC)
+   ========================================================================== */
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    
+    /* Le fond est BLEU (--accent) donc le texte doit être BLANC */
+    background-color: var(--accent); 
+    
+    border-bottom: var(--main-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2rem;
+    color: var(--white); /* Logo en BLANC */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center; /* Centre verticalement les liens et le bouton */
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--white); /* Liens en BLANC */
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    transition: 0.2s;
+    border: 2px solid transparent; /* Pour éviter le décalage au survol */
+}
+
+
+nav a:hover {
+    background: var(--white);
+    color: var(--text); 
+    border-color: var(--text);
+}
+
+
+.nav-login:hover {
+    background: var(--white);
+    color: var(--accent); /* Le texte devient bleu au survol */
+    border-color: var(--white);
+}
+
+/* HERO SECTION : SLOGAN & IMAGE */
+
+
+.hero-brutal {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.main-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3rem, 12vw, 8rem);
+    line-height: 0.8;
+    margin-bottom: 20px;
+}
+
+.hero-status {
+    background: var(--text);
+    color: var(--white);
+    display: inline-block;
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 40px;
+}
+
+.hero-frame {
+    max-width: 650px; 
+    margin: 0 auto 40px auto;
+    border: var(--main-border);
+    background: var(--white);
+    box-shadow: 15px 15px 0px var(--accent); 
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block; 
+}
+
+/*  BOUTON & FOOTER  */
+
+.btn-brutal {
+    display: inline-block;
+    background: var(--text);
+    color: var(--white);
+    padding: 20px 40px;
+    text-decoration: none;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.2rem;
+    border: var(--main-border);
+    box-shadow: 8px 8px 0px var(--accent);
+    transition: 0.1s;
+}
+
+.btn-brutal:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px var(--accent);
+}
+
+.kold-footer {
+    text-align: center;
+    padding: 40px;
+    border-top: var(--main-border);
+    font-size: 0.7rem;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   SECTION "QUI SOMMES-NOUS" VERSION SIMPLE
+   ========================================================================== */
+
+.about-simple {
+    padding: 80px 5%;
+    background-color: var(--white); /* Fond blanc pour contraster avec le header bleu */
+    border-bottom: var(--main-border);
+    text-align: left;
+}
+
+.section-title-simple {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2.5rem;
+    color: var(--accent); /* Titre en bleu pour le rappel froid */
+    margin-bottom: 30px;
+}
+
+.about-content-simple {
+    max-width: 800px;
+}
+
+.about-content-simple p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.about-content-simple strong {
+    background-color: var(--text);
+    color: var(--white);
+    padding: 0 5px;
+}
+
+.motto-simple {
+    margin-top: 40px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.5rem;
+    padding: 20px;
+    border: 3px solid var(--text);
+    display: inline-block;
+    box-shadow: 8px 8px 0px var(--accent); /* Petite ombre bleue pour le style */
+}
+
