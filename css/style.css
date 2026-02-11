@@ -193,3 +193,52 @@ nav a:hover {
     box-shadow: 8px 8px 0px var(--accent); 
 }
 
+/* ==========================================================================
+   BARRE DE RECHERCHE TACTIQUE
+   ========================================================================== */
+
+.search-unit {
+    max-width: 650px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+.search-form {
+    display: flex;
+    border: var(--main-border);
+    background: var(--white);
+    box-shadow: 6px 6px 0px var(--text);
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 15px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+}
+
+.search-submit {
+    background: var(--text);
+    color: var(--white);
+    border: none;
+    border-left: var(--main-border);
+    padding: 0 25px;
+    font-family: 'Archivo Black', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-submit:hover {
+    background: var(--accent);
+}
+
+/* Effet de focus quand on clique dans la barre */
+.search-form:focus-within {
+    box-shadow: 10px 10px 0px var(--accent);
+    transform: translate(-2px, -2px);
+    transition: 0.2s;
+}
