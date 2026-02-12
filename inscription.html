@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSCRIPTION</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="kold-mode">
+
+    <header class="main-header">
+        <div class="logo">❄️ KØLD</div>
+        <nav>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="presentation.html">La Carte</a></li>
+                <li><a href="login.html" class="nav-login">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="login-container">
+        
+        <div class="kold-form">
+            <h2 class="section-title-simple">Inscription</h2>
+            
+            <form action="#" method="post">
+                
+                <div class="input-group">
+                    <label class="label-tech" for="nom">Nom</label>
+                    <div class="input-col">
+                        <input type="text" id="nom" name="nom" placeholder="EX: PHILIPPOT" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="label-tech" for="nom">Prénom</label>
+                    <div class="input-col">
+                        <input type="text" id="nom" name="nom" placeholder="EX: LUCIE" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="label-tech" for="email">Email</label>
+                    <div class="input-col">
+                        <input type="email" id="email" name="email" placeholder="KØLD@GMAIL.COM" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="label-tech" for="password">Mot de passe</label>
+                    <div class="input-col">
+                        <input type="password" id="password" name="password" placeholder="*******" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="label-tech" for="telephone">Téléphone</label>
+                    <div class="input-col">
+                        <input type="tel" id="telephone" name="telephone" placeholder="06 12 12 12 12" pattern="[0-9]{10}" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="label-tech" for="adresse">Adresse complète</label>
+                    <div class="input-col">
+                        <input type="text" id="adresse" name="adresse" placeholder="N°, RUE, VILLE..." required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="label-tech" for="infos">Informations supplémentaires</label>
+                    <div class="input-col">
+                        <input type="text" id="infos" name="infos" placeholder="INTERPHONE, ÉTAGE...">
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="btn-login">VALIDER L'INSCRIPTION</button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="kold-footer">
+        <p> KØLD // PROJET PREING2 - 2025-2026</p>
+    </footer>
+
+</body>
+</html>

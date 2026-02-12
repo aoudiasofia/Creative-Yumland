@@ -19,6 +19,10 @@
     text-transform: uppercase; 
 }
 
+input,textarea {
+    text-transform: none;
+}
+
 body {
     font-family: 'Space Mono', monospace;
     background-color: var(--bg);
@@ -335,3 +339,146 @@ html, body, a, button, .social-box, .btn-brutal, .search-submit {
     color: var(--white);
     border-color: var(--text);
 }
+
+/* ==========================================================================
+   PAGE PROFIL
+   ========================================================================== */
+
+.profil-container {
+    padding: 60px 5%;
+}
+
+.profil-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.profil-box {
+    background: var(--white);
+    border: var(--main-border);
+    padding: 25px;
+    box-shadow: 10px 10px 0px var(--text);
+}
+
+.box-header {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--bg);
+    padding-bottom: 5px;
+}
+
+/* Items avec le crayon */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bg);
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer; /* Ta moufle apparaîtra ici */
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+
+.edit-btn:hover { transform: scale(1.2); }
+
+/* Fidélité */
+.points-display {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.fidelity-bar {
+    height: 20px;
+    background: var(--bg);
+    border: 2px solid var(--text);
+    margin-bottom: 10px;
+}
+
+.progress {
+    height: 100%;
+    background: var(--accent);
+}
+
+/* Tableau des commandes */
+.orders-table {
+    width: 100%;
+    font-size: 0.9rem;
+    border-collapse: collapse;
+}
+
+.orders-table td {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bg);
+}
+
+/* ==========================================================================
+   PAGE NOTATION
+   ========================================================================== */
+
+.notation-container {
+    padding: 60px 5%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.rating-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* On cache l'input radio par défaut */
+.rate-box input {
+    display: none;
+}
+
+/* Le style du carré avec le chiffre */
+.rate-box span {
+    display: block;
+    padding: 15px;
+    border: var(--main-border);
+    background: var(--white);
+    text-align: center;
+    font-family: 'Archivo Black', sans-serif;
+    cursor: pointer; /* Ta moufle apparaîtra ici */
+    transition: 0.1s;
+}
+
+/* Style quand on coche ou survole */
+.rate-box input:checked + span, 
+.rate-box span:hover {
+    background: var(--accent);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 0px var(--text);
+}
+
+/* Zone de texte */
+.kold-textarea {
+    width: 100%;
+    height: 100px;
+    border: var(--main-border);
+    background: var(--bg);
+    padding: 15px;
+    font-family: 'Space Mono', monospace;
+    resize: none;
+    outline: none;
+}
+
+.kold-textarea:focus {
+    background: var(--white);
+    border-color: var(--accent);
+}
+
+
