@@ -1,28 +1,55 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="fr">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KØLD </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="connexion-page">
-    <form>
-        <div class="email-row">
-            <div class="email-col">E-mail</div>
-            <div class="input-col">
-                <input type="text" name="email">
-            </div>
-        </div>
-        <div class="password-row">
-            <div class="password-col">Mot de passe</div>
-            <div class="input-col">
-                <input type="password" name="password">
-            </div>
-        </div>
-        <div class="button-row">
-            <button type="submit">Connexion</button>
-        </div>
-    </form>
-</body>
+<body class="kold-mode connexion-page">
 
+    <header class="main-header">
+        <div class="logo">KØLD</div>
+        <nav>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="presentation.html">La Carte</a></li>
+                <li><a href="#" class="nav-login active">CONNEXION</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="login-container">
+        <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">IDENTIFICATION</h1>
+        
+        <form class="kold-form">
+        
+            
+            <div class="email-row input-group">
+                <div class="email-col label-tech">E-MAIL</div>
+                <div class="input-col">
+                    <input type="text" name="email" placeholder="">
+                </div>
+            </div>
+
+            <div class="password-row input-group">
+                <div class="password-col label-tech">MOT DE PASSE</div>
+                <div class="input-col">
+                    <input type="password" name="password" placeholder="••••••••">
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-login">INITIALISER LA SESSION</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="kold-footer">
+        <p>SYSTÈME SÉCURISÉ KØLD // 2025-2026</p>
+    </footer>
+
+</body>
 </html>

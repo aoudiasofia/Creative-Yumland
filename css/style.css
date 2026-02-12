@@ -247,3 +247,91 @@ html, body, a, button, .social-box, .btn-brutal, .search-submit {
     /* Remplace 'images/moufle.png' par le nom exact de ton fichier */
     cursor: url('../images/moufle.png'), auto;
 }
+
+/* ==========================================================================
+   PAGE DE CONNEXION (LOGIN)
+   ========================================================================== */
+
+/* Centrage du formulaire dans la page */
+.login-container {
+    min-height: 80vh; /* Prend presque toute la hauteur */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg);
+}
+
+/* Le cadre du formulaire (Style Carte Tactique) */
+.kold-form {
+    background: var(--white);
+    border: var(--main-border);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 15px 15px 0px var(--accent); /* Ombre bleue signature */
+    position: relative;
+}
+
+
+
+/* Espacement des lignes */
+.input-group {
+    margin-bottom: 25px;
+}
+
+/* Style des labels (E-mail, Mot de passe) */
+.label-tech {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: block; /* Force le label à être au-dessus de l'input */
+}
+
+/* Style des champs de saisie (Inputs) */
+.input-col input {
+    width: 100%;
+    padding: 15px;
+    background: var(--bg); /* Fond gris clair à l'intérieur */
+    border: var(--main-border);
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    outline: none;
+    color: var(--text);
+    transition: 0.2s;
+}
+
+/* Quand on clique dans le champ */
+.input-col input:focus {
+    background: var(--white);
+    box-shadow: 6px 6px 0px var(--text); /* Ombre noire au focus */
+    transform: translate(-2px, -2px);
+}
+
+/* Le bouton de connexion */
+.button-row {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.btn-login {
+    width: 100%;
+    background: var(--text);
+    color: var(--white);
+    padding: 20px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.2rem;
+    border: var(--main-border);
+    cursor: pointer; /* Ta moufle apparaîtra ici grâce au code précédent */
+    box-shadow: 8px 8px 0px var(--accent);
+    transition: 0.2s;
+}
+
+/* Animation du bouton au survol */
+.btn-login:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px var(--accent);
+    background: var(--accent); /* Devient bleu */
+    color: var(--white);
+    border-color: var(--text);
+}
