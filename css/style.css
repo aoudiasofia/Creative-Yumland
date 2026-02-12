@@ -1,8 +1,8 @@
 
 .kold-mode {
-    --bg: #e0e4e8;          /* Gris acier froid */
+    --bg: #afd0f2;          /* Gris acier froid */
     --text: #0a0a0a;        /* Noir profond */
-    --accent: #0047FF;      /* Bleu électrique (Froid) */
+    --accent: #5dacf1ea;      /* Bleu électrique (Froid) */
     --white: #ffffff;
     --border-weight: 4px;
     --main-border: var(--border-weight) solid var(--text);
