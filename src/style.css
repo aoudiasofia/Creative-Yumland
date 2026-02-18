@@ -117,19 +117,34 @@ nav a:hover {
     margin-bottom: 40px;
 }
 
-.hero-frame {
-    max-width: 650px;
-    margin: 0 auto 40px auto;
-    border: var(--main-border);
-    background: var(--white);
-    box-shadow: 15px 15px 0px var(--accent);
+/* BANNIERE FULL WIDTH (bord à bord écran) */
+
+.hero-banner{
+    height: 70vh; /* ← la clé */
+
+    background-image: url('../images/accueil2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* full largeur */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    border-top: var(--main-border);
+    border-bottom: var(--main-border);
 }
 
-.hero-image {
-    width: 100%;
-    height: auto;
-    display: block;
+.cta-group{
+    margin-top: 60px;
+    margin-bottom: 80px;
 }
+
+
 
 /*  BOUTON & FOOTER  */
 
@@ -161,46 +176,99 @@ nav a:hover {
 }
 
 /*  SECTION "QUI SOMMES-NOUS"  */
+/* ==========================================================================
+   SECTION "QUI SOMMES-NOUS" (LAYOUT AVEC IMAGE)
+   ========================================================================== */
 
 .about-simple {
     padding: 80px 5%;
     background-color: var(--white);
     border-bottom: var(--main-border);
-    text-align: left;
 }
 
 .section-title-simple {
     font-family: 'Archivo Black', sans-serif;
     font-size: 2.5rem;
     color: var(--accent);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    text-align: left;
 }
 
+/* Conteneur principal en Flexbox */
 .about-content-simple {
-    max-width: 800px;
+    display: flex;
+    align-items: center; /* Aligne verticalement le texte et l'image */
+    gap: 60px;           /* Espace entre le texte et l'image */
+    max-width: 1200px;
 }
 
-.about-content-simple p {
+/* Colonne de gauche : Le texte */
+.about-text {
+    flex: 1.2; /* Prend un peu plus de place que l'image */
+}
+
+.about-text p {
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: var(--text);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
-.about-content-simple strong {
+.about-text strong {
     background-color: var(--text);
     color: var(--white);
     padding: 0 5px;
 }
 
+/* Le badge "Motto" */
 .motto-simple {
-    margin-top: 40px;
+    margin-top: 30px;
     font-family: 'Archivo Black', sans-serif;
     font-size: 1.5rem;
     padding: 20px;
     border: 3px solid var(--text);
     display: inline-block;
     box-shadow: 8px 8px 0px var(--accent);
+}
+
+/* Colonne de droite : L'image */
+.about-image {
+    flex: 0.8;
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: var(--main-border); /* Bordure noire épaisse */
+    box-shadow: 15px 15px 0px var(--accent); /* Ombre décalée bleue */
+    filter: grayscale(0.2); /* Optionnel : pour un look plus industriel */
+}
+
+/* ==========================================================================
+   RESPONSIVE (MOBILE)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .about-content-simple {
+        flex-direction: column; /* On empile verticalement sur tablettes/mobiles */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .section-title-simple {
+        text-align: center;
+    }
+
+    .about-image {
+        width: 100%;
+        max-width: 450px; /* Évite que l'image soit trop géante sur mobile */
+    }
+
+    .motto-simple {
+        display: block;
+    }
 }
 
 /*  BARRE DE RECHERCHE TACTIQUE */
