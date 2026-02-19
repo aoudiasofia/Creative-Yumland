@@ -300,15 +300,16 @@ button,
    PAGE DE CONNEXION (LOGIN)
    ========================================================================== */
 
+
 /* Centrage du formulaire dans la page */
 .login-container {
-    min-height: 80vh;
-    /* Prend presque toute la hauteur */
+    min-height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--bg);
+    padding: 60px 20px;
 }
 
 /* Le cadre du formulaire (Style Carte Tactique) */
