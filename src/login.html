@@ -27,20 +27,19 @@
     <main class="login-container">
         <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">IDENTIFICATION</h1>
 
-        <form class="kold-form">
-
+        <form class="kold-form" action="#" method="post">
 
             <div class="email-row input-group">
-                <div class="email-col label-tech">E-MAIL</div>
+                <label class="email-col label-tech" for="email">E-MAIL</label>
                 <div class="input-col">
-                    <input type="text" name="email" placeholder="">
+                    <input type="email" id="email" name="email" placeholder="KØLD@GMAIL.COM" required>
                 </div>
             </div>
 
             <div class="password-row input-group">
-                <div class="password-col label-tech">MOT DE PASSE</div>
+                <label class="password-col label-tech" for="password">MOT DE PASSE</label>
                 <div class="input-col">
-                    <input type="password" name="password" placeholder="••••••••">
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
                 </div>
             </div>
 
