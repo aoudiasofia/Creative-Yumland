@@ -836,3 +836,31 @@ button,
 .btn-confirm:hover {
     background-color: #66BB6A;
 }
+
+/* ==========================================================================
+   STYLE DES PRIX SUR LA CARTE
+   ========================================================================== */
+
+/* Conteneur de la ligne du bas (Bouton + Prix) */
+.product-action {
+    display: flex;
+    align-items: center; /* Aligne le bouton et le prix verticalement */
+    width: 100%;
+}
+
+/* On s'assure que le bouton ne rétrécit pas */
+.btn-small {
+    flex-shrink: 0;
+    margin-right: 10px; /* Espace de sécurité entre le bouton et le prix */
+}
+
+/* Style pour les prix sur la carte */
+.product-price {
+    flex-grow: 1; /* Le prix prend tout l'espace restant à droite */
+    text-align: center; /* Et le texte se centre dans cet espace */
+
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 0;
+}
