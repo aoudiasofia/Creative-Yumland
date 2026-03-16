@@ -16,7 +16,7 @@
         <div class="logo">KØLD</div>
         <nav>
             <ul>
-                 <li><a href="#" class="nav-login">RESTO_KITCHEN</a></li>
+                <li><a href="#" class="nav-login">RESTO_KITCHEN</a></li>
             </ul>
         </nav>
     </header>
@@ -25,11 +25,9 @@
         <h1 class="main-title" style="font-size: 4rem;">GESTION DES COMMANDES</h1>
 
         <div class="commande-grid">
-            
-            <!-- Colonne EN ATTENTE -->
             <section class="commande-column">
                 <h2 class="column-title">EN ATTENTE</h2>
-                
+
                 <div class="order-card">
                     <div class="order-header">
                         <span class="order-id">#KB-8925</span>
@@ -56,11 +54,10 @@
 
             </section>
 
-            <!-- Colonne EN PRÉPARATION -->
             <section class="commande-column">
                 <h2 class="column-title">EN PRÉPARATION</h2>
 
-                 <div class="order-card order-in-progress">
+                <div class="order-card order-in-progress">
                     <div class="order-header">
                         <span class="order-id">#KB-8923</span>
                         <span class="order-time">14:25</span>
@@ -71,14 +68,13 @@
                     </ul>
                     <button class="btn-brutal btn-full btn-ready">PRÊT POUR LIVRAISON</button>
                 </div>
-                
+
             </section>
 
-            <!-- Colonne EN LIVRAISON -->
             <section class="commande-column">
                 <h2 class="column-title">EN LIVRAISON</h2>
-                
-                 <div class="order-card order-in-delivery">
+
+                <div class="order-card order-in-delivery">
                     <div class="order-header">
                         <span class="order-id">#KB-8922</span>
                         <span class="order-time">14:20</span>
