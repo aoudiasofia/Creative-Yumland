@@ -1,0 +1,33 @@
+[
+    {
+        "id_commande": "KB-69c11502307bd",
+        "date": "2026-03-23 10:25:06",
+        "preparation": "plus_tard",
+        "total": 18.4,
+        "statut": "en_attente",
+        "articles": {
+            "p1": 1,
+            "p14": 1
+        }
+    },
+    {
+        "id_commande": "KB-69c115359c299",
+        "date": "2026-03-23 10:25:57",
+        "preparation": "plus_tard",
+        "total": 9.5,
+        "statut": "en_attente",
+        "articles": {
+            "p6": 1
+        }
+    },
+    {
+        "id_commande": "KB-69c1154b13ad8",
+        "date": "2026-03-23 10:26:19",
+        "preparation": "immediat",
+        "total": 13.5,
+        "statut": "en_attente",
+        "articles": {
+            "p2": 1
+        }
+    }
+]
