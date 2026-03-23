@@ -29,5 +29,15 @@
         "articles": {
             "p2": 1
         }
+    },
+    {
+        "id_commande": "KB-69c11c729c3fa",
+        "date": "2026-03-23 10:56:50",
+        "preparation": "plus_tard",
+        "total": 9.9,
+        "statut": "en_attente",
+        "articles": {
+            "p7": 1
+        }
     }
 ]
