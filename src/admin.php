@@ -1,13 +1,35 @@
+<?php
+session_start(); // UNE SEULE FOIS, TOUT EN HAUT
+
+// 1. PROTECTION : Si pas admin, retour à l'accueil
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: accueil.php");
+    exit();
+}
+
+// 2. RECUPERATION DES DONNÉES (Attention au nom du fichier : user.json)
+$json_path = __DIR__ . '/../data/user.json'; 
+$users = [];
+
+if (file_exists($json_path)) {
+    $json_data = file_get_contents($json_path);
+    $users = json_decode($json_data, true);
+    
+    // Sécurité au cas où le JSON est vide
+    if (!is_array($users)) {
+        $users = [];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KØLD | ADMIN</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="kold-mode">
@@ -19,13 +41,25 @@
         <nav>
             <ul>
                 <li><a href="presentation.php">La Carte</a></li>
-                <li><a href="#" class="nav-login">ADMIN</a></li>
+                
+                <?php if (isset($_SESSION['user'])): ?>
+                    <li class="user-status">ID: <?php echo htmlspecialchars($_SESSION['user']); ?></li>
+                    
+                    <?php if ($_SESSION['role'] === 'admin'): ?>
+                        <li><a href="admin.php" style="color: #ff0055;">[PANNEAU_ADMIN]</a></li>
+                    <?php endif; ?>
+                    
+                    <li><a href="logout.php" class="nav-login">Déconnexion</a></li>
+                    
+                <?php else: ?>
+                    <li><a href="login.php" class="nav-login">Connexion</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
 
     <main class="admin-container">
-        <h1 class="main-title">ADMIN</h1>
+        <h1 class="main-title">ADMIN PANEL</h1>
 
         <div class="admin-table-wrapper">
             <table class="admin-table">
@@ -39,41 +73,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>#U-8924</td>
-                        <td>SOFIA_01</td>
-                        <td>SOFIA@CYTECH.FR</td>
-                        <td><span class="status-chip status-active">ACTIF</span></td>
-                        <td><a href="profil.php" class="btn-brutal btn-small">VOIR</a></td>
-                    </tr>
-                    <tr>
-                        <td>#U-7612</td>
-                        <td>MARC_G</td>
-                        <td>MARC.G@GMAIL.COM</td>
-                        <td><span class="status-chip status-active">ACTIF</span></td>
-                        <td><a href="#" class="btn-brutal btn-small">VOIR</a></td>
-                    </tr>
-                    <tr>
-                        <td>#U-5433</td>
-                        <td>LIVREUR_03</td>
-                        <td>LIVRAISON.PRO@KOLD.FR</td>
-                        <td><span class="status-chip status-delivery">LIVREUR</span></td>
-                        <td><a href="#" class="btn-brutal btn-small">VOIR</a></td>
-                    </tr>
-                     <tr>
-                        <td>#U-4431</td>
-                        <td>RESTO_KITCHEN</td>
-                        <td>CONTACT@KOLD.FR</td>
-                        <td><span class="status-chip status-resto">RESTAURATEUR</span></td>
-                        <td><a href="#" class="btn-brutal btn-small">VOIR</a></td>
-                    </tr>
-                    <tr>
-                        <td>#U-2198</td>
-                        <td>KEVIN.D</td>
-                        <td>KD95@HOTMAIL.FR</td>
-                        <td><span class="status-chip status-inactive">INACTIF</span></td>
-                        <td><a href="#" class="btn-brutal btn-small">VOIR</a></td>
-                    </tr>
+                    <?php if (!empty($users)): ?>
+                        <?php foreach ($users as $u): ?>
+                        <tr>
+                            <td>#U-<?php echo $u['id']; ?></td>
+                            <td><?php echo strtoupper(htmlspecialchars($u['login'])); ?></td>
+                            <td><?php echo isset($u['email']) ? strtoupper(htmlspecialchars($u['email'])) : 'NON_RENSEIGNÉ'; ?></td>
+                            <td>
+                                <?php 
+                                    $role = isset($u['role']) ? $u['role'] : 'client';
+                                    $statusClass = "status-active";
+                                    if ($role === 'livreur') $statusClass = "status-delivery";
+                                    if ($role === 'restaurateur') $statusClass = "status-resto";
+                                ?>
+                                <span class="status-chip <?php echo $statusClass; ?>">
+                                    <?php echo strtoupper($role); ?>
+                                </span>
+                            </td>
+                            <td>
+                                <a href="profil.php?id=<?php echo $u['id']; ?>" class="btn-brutal btn-small">VOIR</a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="5">AUCUN UTILISATEUR TROUVÉ DANS <?php echo realpath($json_path); ?></td></tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -84,5 +108,4 @@
     </footer>
 
 </body>
-
 </html>
