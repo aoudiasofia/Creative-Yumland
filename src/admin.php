@@ -14,11 +14,11 @@
 
     <header class="main-header">
          <div class="logo">
-            <a href="accueil.html" style="text-decoration: none; color: inherit;">KØLD</a>
+            <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
         </div>
         <nav>
             <ul>
-                <li><a href="presentation.html">La Carte</a></li>
+                <li><a href="presentation.php">La Carte</a></li>
                 <li><a href="#" class="nav-login">ADMIN</a></li>
             </ul>
         </nav>
@@ -44,7 +44,7 @@
                         <td>SOFIA_01</td>
                         <td>SOFIA@CYTECH.FR</td>
                         <td><span class="status-chip status-active">ACTIF</span></td>
-                        <td><a href="profil.html" class="btn-brutal btn-small">VOIR</a></td>
+                        <td><a href="profil.php" class="btn-brutal btn-small">VOIR</a></td>
                     </tr>
                     <tr>
                         <td>#U-7612</td>

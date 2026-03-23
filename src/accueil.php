@@ -16,9 +16,9 @@
         <div class="logo">KØLD</div>
         <nav>
             <ul>
-                <li><a href="presentation.html">La Carte</a></li>
-                <li><a href="inscription.html">Inscription</a></li>
-                <li><a href="login.html">Connexion</a></li>
+                <li><a href="presentation.php">La Carte</a></li>
+                <li><a href="inscription.php">Inscription</a></li>
+                <li><a href="login.php">Connexion</a></li>
             </ul>
         </nav>
     </header>
@@ -40,7 +40,7 @@
 
 
                 <div class="cta-group">
-                    <a href="presentation.html" class="btn-brutal">ACCÉDER AU MENU</a>
+                    <a href="presentation.php" class="btn-brutal">ACCÉDER AU MENU</a>
                 </div>
             </div>
         </section>
