@@ -874,3 +874,10 @@ body {
         margin: 0;
     }
 }
+
+.user-status {
+    font-family: 'Space Mono', monospace;
+    color: #00ff00; /* Vert style "terminal" pour le côté tech */
+    font-size: 0.8rem;
+    margin-right: 15px;
+}

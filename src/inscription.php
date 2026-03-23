@@ -30,7 +30,7 @@
         <div class="kold-form">
             <h2 class="section-title-simple">Inscription</h2>
 
-            <form action="#" method="post">
+            <form action="traitement_inscription.php" method="post">
 
                 <div class="input-group">
                     <label class="label-tech" for="nom">Nom</label>
