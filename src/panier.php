@@ -5,12 +5,14 @@ initialiserPanier();
 
 $message_systeme = ""; 
 
+// Action : vider le panier
 if (isset($_GET['action']) && $_GET['action'] === 'vider') {
     viderPanier();
     header('Location: panier.php');
     exit;
 }
 
+// Action : payer la commande
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'payer') {
     $total_a_payer = calculerTotalPanier();
     
@@ -138,14 +140,16 @@ $total_panier = calculerTotalPanier();
             <form method="POST" action="panier.php" style="margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 20px;">
                 <input type="hidden" name="action" value="payer">
                 
-                <div style="background: var(--white); padding: 20px; border: var(--main-border); width: 100%; max-width: 400px;">
-                    <label class="label-tech" style="margin-bottom: 15px;">PRÉPARATION :</label>
-                    <div>
-                        <label style="display: block; margin-bottom: 10px; cursor: pointer;">
-                            <input type="radio" name="preparation" value="immediat" checked> DÈS QUE POSSIBLE
+                <div style="background: var(--white); padding: 20px; border: var(--main-border); width: 100%; max-width: 400px; cursor: url('../images/moufle.png'), auto !important;">
+                    <label class="label-tech" style="margin-bottom: 20px; cursor: url('../images/moufle.png'), auto !important;">PRÉPARATION :</label>
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <label style="display: flex; align-items: center; font-size: 1.1rem; font-weight: bold; cursor: url('../images/moufle.png'), auto !important;">
+                            <input type="radio" name="preparation" value="immediat" style="transform: scale(1.8); margin-right: 15px; margin-left: 10px; cursor: url('../images/moufle.png'), auto !important;" checked> 
+                            DÈS QUE POSSIBLE
                         </label>
-                        <label style="display: block; cursor: pointer;">
-                            <input type="radio" name="preparation" value="plus_tard"> POUR PLUS TARD (PRÉCOMMANDE)
+                        <label style="display: flex; align-items: center; font-size: 1.1rem; font-weight: bold; cursor: url('../images/moufle.png'), auto !important;">
+                            <input type="radio" name="preparation" value="plus_tard" style="transform: scale(1.8); margin-right: 15px; margin-left: 10px; cursor: url('../images/moufle.png'), auto !important;"> 
+                            POUR PLUS TARD (PRÉCOMMANDE)
                         </label>
                     </div>
                 </div>
