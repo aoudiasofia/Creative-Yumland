@@ -31,6 +31,7 @@
         }
     },
     {
+<<<<<<< HEAD
         "id_commande": "KB-69c11c729c3fa",
         "date": "2026-03-23 10:56:50",
         "preparation": "plus_tard",
@@ -38,6 +39,15 @@
         "statut": "en_attente",
         "articles": {
             "p7": 1
+=======
+        "id_commande": "KB-69c11b92a8590",
+        "date": "2026-03-23 10:53:06",
+        "preparation": "plus_tard",
+        "total": 13.5,
+        "statut": "en_attente",
+        "articles": {
+            "p2": 1
+>>>>>>> 819750100175e4f60917e79859b3b414be607eb4
         }
     }
 ]
