@@ -22,6 +22,7 @@ session_start();
         <nav>
             <ul>
                 <li><a href="presentation.php">La Carte</a></li>
+                <li><a href="mes_commandes.php">Mes Commandes</a></li>
                 
                 <?php if (isset($_SESSION['user'])): ?>
                     <li class="user-status">ID: <?php echo strtoupper(htmlspecialchars($_SESSION['user'])); ?></li>

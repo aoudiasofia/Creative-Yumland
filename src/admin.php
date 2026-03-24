@@ -41,6 +41,7 @@ if (file_exists($json_path)) {
         <nav>
             <ul>
                 <li><a href="presentation.php">La Carte</a></li>
+                <li><a href="mes_commandes.php">Mes Commandes</a></li>
                 
                 <?php if (isset($_SESSION['user'])): ?>
                     <li class="user-status">ID: <?php echo htmlspecialchars($_SESSION['user']); ?></li>
@@ -60,6 +61,19 @@ if (file_exists($json_path)) {
 
     <main class="admin-container">
         <h1 class="main-title">ADMIN PANEL</h1>
+
+        <div class="admin-section">
+            <h2>Gestion des Commandes</h2>
+            <p>Gérer les commandes en cours, et assigner les livreurs.</p>
+            <a href="restaurant.php" class="btn-brutal">Voir les commandes</a>
+        </div>
+
+        <div class="admin-section">
+            <h2>Vue Livreur</h2>
+            <p>Accéder à la vue des livreurs pour le suivi des livraisons.</p>
+            <a href="livreur.php" class="btn-brutal">Voir les livraisons</a>
+        </div>
+
 
         <div class="admin-table-wrapper">
             <table class="admin-table">
