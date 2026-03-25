@@ -1,53 +1,13 @@
 [
     {
-        "id_commande": "KB-69c11502307bd",
-        "date": "2026-03-23 10:25:06",
-        "preparation": "plus_tard",
-        "total": 18.4,
-        "statut": "en_attente",
-        "articles": {
-            "p1": 1,
-            "p14": 1
-        }
-    },
-    {
-        "id_commande": "KB-69c115359c299",
-        "date": "2026-03-23 10:25:57",
-        "preparation": "plus_tard",
-        "total": 9.5,
-        "statut": "en_attente",
-        "articles": {
-            "p6": 1
-        }
-    },
-    {
-        "id_commande": "KB-69c1154b13ad8",
-        "date": "2026-03-23 10:26:19",
+        "id_commande": "KB-69c399cb0d06a",
+        "date": "2026-03-25 08:16:11",
         "preparation": "immediat",
-        "total": 13.5,
+        "total": 26.4,
         "statut": "en_attente",
         "articles": {
-            "p2": 1
-        }
-    },
-    {
-<<<<<<< HEAD
-        "id_commande": "KB-69c11c729c3fa",
-        "date": "2026-03-23 10:56:50",
-        "preparation": "plus_tard",
-        "total": 9.9,
-        "statut": "en_attente",
-        "articles": {
-            "p7": 1
-=======
-        "id_commande": "KB-69c11b92a8590",
-        "date": "2026-03-23 10:53:06",
-        "preparation": "plus_tard",
-        "total": 13.5,
-        "statut": "en_attente",
-        "articles": {
-            "p2": 1
->>>>>>> 819750100175e4f60917e79859b3b414be607eb4
+            "p2": 1,
+            "p9": 1
         }
     }
 ]

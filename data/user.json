@@ -1,7 +1,7 @@
 [
     {
         "id": 1774261296,
-        "login": "admin",
+        "login": "Admin",
         "nom": "ADMIN",
         "prenom": "Admin",
         "email": "admin@cytech.fr",
@@ -21,12 +21,23 @@
     },
     {
     "id": 1711186000,
-    "login": "PHILIPPOT_LUCIE",
+    "login": "Lucie",
     "nom": "PHILIPPOT",
-    "prenom": "LUCIE",
+    "prenom": "Lucie",
     "email": "lucie@cytech.fr",
     "password": "123",
     "tel": "0601020304",
     "role": "admin"
-}
+    },
+    {
+    "id": 1711186000,
+    "login": "Camille",
+    "nom": "DELECHENEAU",
+    "prenom": "Camille",
+    "email": "cam@cytech.fr",
+    "password": "123",
+    "tel": "0601020304",
+    "role": "admin"
+    }
+
 ]
