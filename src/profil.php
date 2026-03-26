@@ -11,22 +11,23 @@ if (!isset($_SESSION['user'])) {
 $json_path = __DIR__ . '/../data/user.json';
 $user_data = null;
 
-// On regarde si on affiche notre propre profil ou celui d'un autre (si on est admin)
+// Si un ID est dans l'URL (via admin.php), on l'utilise, sinon on prend le nôtre
 $id_a_chercher = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id'];
 
 if (file_exists($json_path)) {
     $users = json_decode(file_get_contents($json_path), true);
-    foreach ($users as $u) {
-        if ($u['id'] == $id_a_chercher) {
-            $user_data = $u;
-            break;
+    if (is_array($users)) {
+        foreach ($users as $u) {
+            if ($u['id'] == $id_a_chercher) {
+                $user_data = $u;
+                break;
+            }
         }
     }
 }
 
-// Si l'utilisateur n'existe pas dans le JSON
 if (!$user_data) {
-    die("Utilisateur introuvable.");
+    die("Erreur : Utilisateur introuvable dans la base.");
 }
 ?>
 
@@ -55,6 +56,10 @@ if (!$user_data) {
     </header>
 
     <main class="profil-container">
+        <?php if (isset($_GET['id'])): ?>
+            <a href="admin.php" style="color: var(--accent); text-decoration: none; font-size: 0.8rem;">← RETOUR À LA LISTE ADMIN</a>
+        <?php endif; ?>
+
         <h1 class="main-title">PROFIL // <?php echo strtoupper($user_data['login']); ?></h1>
 
         <div class="profil-grid">
@@ -64,17 +69,17 @@ if (!$user_data) {
 
                 <div class="info-item">
                     <span>NOM : <?php echo strtoupper($user_data['nom'] . " " . $user_data['prenom']); ?></span>
-                    <button class="edit-btn">✏️</button>
+                    <button class="edit-btn" onclick="alert('Phase 3 : Édition du nom')">✏️</button>
                 </div>
 
                 <div class="info-item">
                     <span>E-MAIL : <?php echo strtoupper($user_data['email']); ?></span>
-                    <button class="edit-btn">✏️</button>
+                    <button class="edit-btn" onclick="alert('Phase 3 : Édition de l\'email')">✏️</button>
                 </div>
 
                 <div class="info-item">
-                    <span>TÉL : <?php echo $user_data['tel'] ?? 'NON_RENSEIGNÉ'; ?></span>
-                    <button class="edit-btn">✏️</button>
+                    <span>TÉL : <?php echo htmlspecialchars($user_data['tel'] ?? 'NON_RENSEIGNÉ'); ?></span>
+                    <button class="edit-btn" onclick="alert('Phase 3 : Édition du tel')">✏️</button>
                 </div>
 
                 <div class="info-item">
@@ -98,16 +103,22 @@ if (!$user_data) {
                 <div class="box-header">DERNIÈRES_COMMANDES</div>
                 <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
                     <?php 
-                    // Simulation de commandes pour l'exemple
+                    // Simulation de commandes pour le workflow
                     $commandes = [
                         ['id' => 'KB-892', 'date' => '12/02/26', 'etat' => 'LIVRÉ'],
-                        ['id' => 'KB-741', 'date' => '05/02/26', 'etat' => 'LIVRÉ']
+                        ['id' => 'KB-741', 'date' => '05/02/26', 'etat' => 'EN_COURS']
                     ];
                     foreach ($commandes as $cmd): ?>
                     <tr style="border-bottom: 1px solid #333;">
                         <td style="padding: 10px 0;">#<?php echo $cmd['id']; ?></td>
                         <td><?php echo $cmd['date']; ?></td>
-                        <td style="text-align: right; color: var(--accent);"><?php echo $cmd['etat']; ?></td>
+                        <td style="text-align: right;">
+                            <?php if ($cmd['etat'] === 'LIVRÉ'): ?>
+                                <a href="notation.php?order=<?php echo $cmd['id']; ?>" class="btn-brutal btn-small" style="background:var(--accent); color:white; text-decoration:none; padding: 2px 8px;">NOTER</a>
+                            <?php else: ?>
+                                <span style="color: #888;"><?php echo $cmd['etat']; ?></span>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
@@ -115,7 +126,12 @@ if (!$user_data) {
 
         </div>
 
-    
+        <?php if ($id_a_chercher == $_SESSION['id']): ?>
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="logout.php" class="btn-brutal" style="background: #ff0055; color: white; text-decoration: none;">DÉCONNEXION</a>
+        </div>
+        <?php endif; ?>
+
     </main>
 
     <footer class="kold-footer">

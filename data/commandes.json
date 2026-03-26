@@ -1,13 +1,13 @@
 [
     {
-        "id_commande": "KB-69c399cb0d06a",
-        "date": "2026-03-25 08:16:11",
-        "preparation": "immediat",
-        "total": 26.4,
-        "statut": "en_attente",
-        "articles": {
-            "p2": 1,
-            "p9": 1
-        }
+        "id": "KB-101",
+        "user_id": "lucie_p",
+        "items": [
+            {"name": "Poke Saumon", "quantity": 1},
+            {"name": "Iceberg", "quantity": 1}
+        ],
+        "total": 20.40,
+        "status": "en attente",
+        "livreur": ""
     }
 ]

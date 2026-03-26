@@ -1,30 +1,28 @@
 <?php
 session_start();
+$file = '../data/commandes.json';
 
-if (isset($_POST['order_id']) && isset($_POST['new_status'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
     $order_id = $_POST['order_id'];
     $new_status = $_POST['new_status'];
-    $orders_file = '../data/commandes.json';
 
-    $orders = [];
-    if (file_exists($orders_file)) {
-        $orders_json = file_get_contents($orders_file);
-        $orders = json_decode($orders_json, true);
-    }
+    $data = json_decode(file_get_contents($file), true);
 
-    $order_found = false;
-    foreach ($orders as &$order) {
+    foreach ($data as &$order) {
         if ($order['id'] === $order_id) {
             $order['status'] = $new_status;
-            $order_found = true;
-            break;
+            // Si on attribue un livreur
+            if (isset($_POST['livreur_id'])) {
+                $order['livreur'] = $_POST['livreur_id'];
+            }
         }
     }
 
-    if ($order_found) {
-        file_put_contents($orders_file, json_encode($orders, JSON_PRETTY_PRINT));
-    }
+    file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT));
+    
+    // On redirige selon qui a cliqué
+    if ($_SESSION['role'] === 'restaurateur') header("Location: restaurant.php");
+    elseif ($_SESSION['role'] === 'livreur') header("Location: livreur.php");
+    else header("Location: accueil.php");
+    exit();
 }
-
-header('Location: restaurant.php');
-exit();

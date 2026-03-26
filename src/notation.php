@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+// 1. SECURITÉ : On vérifie que l'utilisateur est bien connecté
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// 2. RÉCUPÉRATION DU NUMÉRO DE COMMANDE (optionnel, via l'URL)
+$id_commande = isset($_GET['order']) ? $_GET['order'] : 'NON_DÉFINIE';
+
+// 3. SIMULATION D'ENVOI (Pour la Phase 2, on redirige juste avec un petit message)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ici on pourrait enregistrer dans un fichier avis.json plus tard
+    header("Location: profil.php?feedback=success");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -17,15 +37,16 @@
         </div>
         <nav>
             <ul>
-                <li><a href="profil.php" class="nav-login">SOFIA_01</a></li>
+                <li><a href="presentation.php">La Carte</a></li>
+                <li><a href="profil.php" class="nav-login"><?php echo strtoupper($_SESSION['user']); ?></a></li>
             </ul>
         </nav>
     </header>
 
     <main class="notation-container">
-        <h1 class="main-title">AVIS</h1>
+        <h1 class="main-title">QUALITY_CONTROL // #<?php echo htmlspecialchars($id_commande); ?></h1>
 
-            <form class="kold-form" action="#" method="post">
+            <form class="kold-form" action="notation.php" method="post">
             <div class="rating-section">
                 <label class="label-tech">ÉVALUATION_LOGISTIQUE (LIVRAISON)</label>
                 <div class="rating-grid">
@@ -54,7 +75,7 @@
                 <textarea class="kold-textarea" name="commentaires" placeholder="RAS / TRANSMISSION EN COURS..."></textarea>
             </div>
 
-            <button type="submit" class="btn-brutal btn-full" style="margin-top: 30px;">TRANSMETTRE </button>
+            <button type="submit" class="btn-brutal btn-full" style="margin-top: 30px; cursor: pointer;">TRANSMETTRE_DONNÉES</button>
         </form>
     </main>
 
@@ -63,5 +84,4 @@
     </footer>
 
 </body>
-
 </html>
