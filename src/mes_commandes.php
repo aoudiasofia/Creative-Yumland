@@ -53,7 +53,7 @@ if (is_array($all_orders)) {
         </nav>
     </header>
 
-    <main class="admin-container"> <h1 class="main-title">HISTORIQUE_FLUX</h1>
+    <main class="admin-container"> <h1 class="main-title">HISTORIQUE</h1>
 
         <div class="admin-table-wrapper">
             <?php if (empty($user_orders)): ?>
@@ -112,7 +112,7 @@ if (is_array($all_orders)) {
     </main>
 
     <footer class="kold-footer">
-        <p> KØLD // USER_ARCHIVE_UNIT - 2025-2026</p>
+        <p> KØLD // PROJET PREING2 - 2025-2026</p>
     </footer>
 
 </body>
