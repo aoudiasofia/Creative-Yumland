@@ -99,7 +99,7 @@ $deliveries = array_filter($orders, function($o) {
     </main>
 
     <footer class="kold-footer">
-        <p> KØLD // LOGISTICS_UNIT - 2025-2026</p>
+        <p> KØLD // PROJET PREING2 - 2025-2026</p>
     </footer>
 
 </body>
