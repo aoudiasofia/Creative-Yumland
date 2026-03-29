@@ -34,26 +34,18 @@ if (file_exists($users_file)) {
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>KØLD | RESTO_UNIT</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-</head>
+<?php 
+    $titre_page = "KØLD | restaurant";
+    include '../includes/head.php';
+?>
+
 
 <body class="kold-mode">
 
-    <header class="main-header">
-         <div class="logo">
-            <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="presentation.php">La Carte</a></li>
-                <li><a href="profil.php" class="nav-login"><?php echo strtoupper($_SESSION['user']); ?></a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        $nom_page = "restaurant";
+        include '../includes/header.php';
+    ?>
 
     <main class="admin-container">
         <h1 class="main-title">GESTION_RESTO // COMMANDES_ENTRANTES</h1>
@@ -118,9 +110,7 @@ if (file_exists($users_file)) {
         <?php endif; ?>
     </main>
 
-    <footer class="kold-footer">
-        <p> KØLD // RESTO_MANAGEMENT - 2025-2026</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
 </html>

@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSCRIPTION</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-</head>
+<<?php 
+    $titre_page = "KØLD | INSCRIPTION";
+    include '../includes/head.php';
+?>
+
 
 <body class="kold-mode">
 
-    <header class="main-header">
-        <div class="logo">
-            <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
-        </div>
-        <nav>
-            <ul>
-                
-                <li><a href="presentation.php">La Carte</a></li>
-                <li><a href="login.php" class="nav-login">Connexion</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        $nom_page = "inscription";
+        include '../includes/header.php';
+    ?>
 
     <main class="login-container">
 
@@ -90,10 +79,7 @@
         </div>
     </main>
 
-    <footer class="kold-footer">
-        <p> KØLD // PROJET PREING2 - 2025-2026</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
-
 </html>

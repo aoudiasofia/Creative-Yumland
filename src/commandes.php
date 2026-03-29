@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KØLD | GESTION COMMANDES</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-</head>
+<?php 
+    $titre_page = "KØLD | COMMANDES";
+    include '../includes/head.php';
+?>
+
 
 <body class="kold-mode">
 
-    <header class="main-header">
-        <div class="logo">KØLD</div>
-        <nav>
-            <ul>
-                <li><a href="#" class="nav-login">RESTO_KITCHEN</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        $nom_page = "commandes";
+        include '../includes/header.php';
+    ?>
 
     <main class="commande-container">
         <h1 class="main-title" style="font-size: 4rem;">GESTION DES COMMANDES</h1>
@@ -89,10 +82,7 @@
         </div>
     </main>
 
-    <footer class="kold-footer">
-        <p> KØLD // PROJET PREING2 - 2025-2026</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
-
 </html>

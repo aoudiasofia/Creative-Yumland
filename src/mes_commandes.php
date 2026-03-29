@@ -27,31 +27,18 @@ if (is_array($all_orders)) {
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KØLD | ARCHIVES_COMMANDES</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-</head>
+<?php 
+    $titre_page = "KØLD | HISTORIQUE COMMANDE";
+    include '../includes/head.php';
+?>
+
 
 <body class="kold-mode">
 
-    <header class="main-header">
-        <div class="logo">
-            <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="presentation.php">La Carte</a></li>
-                <?php if (isset($_SESSION['user'])): ?>
-                    <li><a href="mes_commandes.php" class="nav-active">Mes Commandes</a></li>
-                    <li class="user-status" style="color: var(--accent);">ID: <?php echo strtoupper(htmlspecialchars($_SESSION['user'])); ?></li>
-                    <li><a href="logout.php" class="nav-login">DÉCONNEXION</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        $nom_page = "histo";
+        include '../includes/header.php';
+    ?>
 
     <main class="admin-container"> <h1 class="main-title">HISTORIQUE</h1>
 
@@ -111,9 +98,7 @@ if (is_array($all_orders)) {
         </div>
     </main>
 
-    <footer class="kold-footer">
-        <p> KØLD // PROJET PREING2 - 2025-2026</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
 </html>

@@ -24,40 +24,18 @@ if (file_exists($json_path)) {
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KØLD | ADMIN</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-</head>
+<?php 
+    $titre_page = "KØLD | ADMIN";
+    include '../includes/head.php';
+?>
+
 
 <body class="kold-mode">
 
-    <header class="main-header">
-         <div class="logo">
-            <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="presentation.php">La Carte</a></li>
-                <li><a href="mes_commandes.php">Mes Commandes</a></li>
-                
-                <?php if (isset($_SESSION['user'])): ?>
-                    <li class="user-status">ID: <?php echo htmlspecialchars($_SESSION['user']); ?></li>
-                    
-                    <?php if ($_SESSION['role'] === 'admin'): ?>
-                        <li><a href="admin.php" style="color: #ff0055;">[PANNEAU_ADMIN]</a></li>
-                    <?php endif; ?>
-                    
-                    <li><a href="logout.php" class="nav-login">Déconnexion</a></li>
-                    
-                <?php else: ?>
-                    <li><a href="login.php" class="nav-login">Connexion</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        $nom_page = "admin";
+        include '../includes/header.php';
+    ?>
 
     <main class="admin-container">
         <h1 class="main-title">ADMIN PANEL</h1>
@@ -117,9 +95,7 @@ if (file_exists($json_path)) {
         </div>
     </main>
 
-    <footer class="kold-footer">
-        <p> KØLD // PROJET PREING2 - 2025-2026</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
 </html>

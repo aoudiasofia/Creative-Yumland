@@ -873,11 +873,13 @@ body {
         color: var(--accent);
         margin: 0;
     }
-}
 
-.user-status {
-    font-family: 'Space Mono', monospace;
-    color: #00ff00; /* Vert style "terminal" pour le côté tech */
-    font-size: 0.8rem;
-    margin-right: 15px;
+    .user-status {
+        color: #FFFFFF;
+        background-color: rgba(255, 255, 255, 0.15);
+        padding: 6px 15px;
+        border: 1px solid #FFFFFF;
+        letter-spacing: 1px;
+        display: inline-block;
+    }
 }

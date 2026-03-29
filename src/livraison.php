@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KØLD | LIVRAISON</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-</head>
+<?php 
+    $titre_page = "KØLD | ADMIN";
+    include '../includes/head.php';
+?>
+
 
 <body class="kold-mode">
 
-    <header class="main-header">
-        <div class="logo">
-            <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#" class="nav-login">LIVREUR_03</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        $nom_page = "admin";
+        include '../includes/header.php';
+    ?>
+
 
     <main class="livraison-container">
         <h1 class="main-title" style="font-size: 3rem;">LIVRAISON<br>EN COURS</h1>
@@ -59,10 +51,7 @@
         </div>
     </main>
 
-    <footer class="kold-footer">
-        <p>KØLD // PROJET PREING2 - 2025-2026</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
-
 </html>
