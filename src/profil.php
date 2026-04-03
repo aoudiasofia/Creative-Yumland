@@ -62,22 +62,6 @@ if (!$user_data) {
             </section>
 
             <section class="profil-box">
-                <div class="box-header">ADRESSE_LIVRAISON</div>
-
-                <div class="info-item" style="flex-direction: column; align-items: flex-start;">
-                    <span style="margin-bottom: 10px; word-break: break-word;"><?php echo htmlspecialchars($user_data['adresse'] ?? 'NON_RENSEIGNÉE'); ?></span>
-                    <button class="edit-btn" onclick="alert('Phase 3 : Édition de l\'adresse')">✏️</button>
-                </div>
-
-                <?php if (!empty($user_data['infosup'])): ?>
-                <div class="info-item" style="flex-direction: column; align-items: flex-start; margin-top: 15px;">
-                    <span style="font-size: 0.7rem; color: var(--accent); margin-bottom: 5px;">INFO SUPPLÉMENTAIRE</span>
-                    <span style="word-break: break-word; font-size: 0.9rem;"><?php echo htmlspecialchars($user_data['infosup']); ?></span>
-                </div>
-                <?php endif; ?>
-            </section>
-
-            <section class="profil-box">
                 <div class="box-header">STATUT_FIDÉLITÉ</div>
                 <div class="points-display">
                     <span style="font-family: 'Archivo Black'; font-size: 3rem;"><?php echo (intval($user_data['id']) * 2); ?></span>
