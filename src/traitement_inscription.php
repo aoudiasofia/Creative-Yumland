@@ -1,44 +1,36 @@
 <?php
-// 1. Définir les chemins
-$dossier_data = __DIR__ . '/../data';
-$fichier_final = $dossier_data . '/user.json';
-
-// 2. CRÉATION AUTOMATIQUE DU DOSSIER (si absent)
-if (!is_dir($dossier_data)) {
-    mkdir($dossier_data, 0777, true); 
-    // Crée le dossier 'data' avec les droits d'écriture
-}
+include '../includes/fonctions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    $new_user = [
-        "id"       => time(),
-        "login"    => $_POST['nom'] . "_" . $_POST['prenom'],
-        "nom"      => strtoupper($_POST['nom']),
-        "prenom"   => $_POST['prenom'],
-        "email"    => $_POST['email'],
-        "password" => $_POST['password'],
-        "tel"      => $_POST['telephone'],
-        "role"     => "client"
-    ];
-
-    $users_array = [];
-
-    // 3. LECTURE SÉCURISÉE
-    if (file_exists($fichier_final)) {
-        $json_contenu = file_get_contents($fichier_final);
-        $users_array = json_decode($json_contenu, true);
-        if (!is_array($users_array)) $users_array = [];
+    $nom = trim($_POST['nom'] ?? '');
+    $prenom = trim($_POST['prenom'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $telephone = trim($_POST['telephone'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $adresse = trim($_POST['adresse'] ?? '');
+    $infos = trim($_POST['infos'] ?? '');
+    
+    if (empty($nom) || empty($prenom) || empty($email) || empty($telephone) || empty($password) || empty($adresse)) {
+        header("Location: inscription.php?error=champs_vides");
+        exit();
     }
-
-    // 4. AJOUT
-    $users_array[] = $new_user;
-
-    // 5. SAUVEGARDE (Crée le fichier s'il n'existe pas)
-    if (file_put_contents($fichier_final, json_encode($users_array, JSON_PRETTY_PRINT))) {
-        header("Location: login.php?signup_success=1");
+    
+    if (existeDeja($email)) {
+        header("Location: inscription.php?error=email_existe");
+        exit();
+    }
+    
+    if (creerNouvelUtilisateur($nom, $prenom, $password, $email, $telephone, $adresse, $infos)) {
+        header("Location: connexion.php?signup_success=1");
         exit();
     } else {
-        echo "ERREUR_FATALE : Impossible de générer le fichier de base.";
+        header("Location: inscription.php?error=erreur_creation");
+        exit();
     }
+    
+} else {
+    header("Location: inscription.php");
+    exit();
 }
+?>

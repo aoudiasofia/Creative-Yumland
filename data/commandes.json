@@ -1,13 +1,335 @@
 [
     {
-        "id": "KB-101",
-        "user_id": "lucie_p",
-        "items": [
-            {"name": "Poke Saumon", "quantity": 1},
-            {"name": "Iceberg", "quantity": 1}
+        "id": 1,
+        "user_id": 1,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 5,
+                "quantite": 1
+            }
         ],
-        "total": 20.40,
-        "status": "en attente",
-        "livreur": ""
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "terminée",
+        "date_heure": "2026-03-28 14:30",
+        "montant_payé": 20.39999999999999857891452847979962825775146484375,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 2,
+        "user_id": 2,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": 2
+            }
+        ],
+        "adresse_livraison": "zizouzou",
+        "statut_paiement": "payé",
+        "statut_commande": "en livraison",
+        "date_heure": "2026-03-29 12:15",
+        "montant_payé": 17.800000000000000710542735760100185871124267578125,
+        "remise": 0,
+        "livreur": 4,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 3,
+        "user_id": 2,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 3,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 4,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "zizouzou",
+        "statut_paiement": "payé",
+        "statut_commande": "terminée",
+        "date_heure": "2026-03-25 19:45",
+        "montant_payé": 18.5,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 4,
+        "user_id": 3,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "a livrée",
+        "date_heure": "2026-03-30 13:00",
+        "montant_payé": 14.9000000000000003552713678800500929355621337890625,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 5,
+        "user_id": 4,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 5,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "en attente",
+        "date_heure": "2026-03-31 10:20",
+        "montant_payé": 0,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 6,
+        "user_id": 5,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 3,
+                "quantite": 2
+            }
+        ],
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "en livraison",
+        "date_heure": "2026-03-31 15:30",
+        "montant_payé": 16,
+        "remise": 0,
+        "livreur": 4,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 7,
+        "user_id": 1,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 4,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "terminée",
+        "date_heure": "2026-03-24 11:45",
+        "montant_payé": 8.9000000000000003552713678800500929355621337890625,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 8,
+        "user_id": 2,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "zizouzou",
+        "statut_paiement": "payé",
+        "statut_commande": "abandonnée",
+        "date_heure": "2026-03-22 16:00",
+        "montant_payé": 23.800000000000000710542735760100185871124267578125,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 9,
+        "user_id": 3,
+        "articles": [
+            {
+                "id_produit": 5,
+                "quantite": 2
+            }
+        ],
+        "adresse_livraison": "",
+        "statut_paiement": "remboursé",
+        "statut_commande": "abandonnée",
+        "date_heure": "2026-03-20 09:30",
+        "montant_payé": 0,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 10,
+        "user_id": 4,
+        "articles": [
+            {
+                "type": "menu",
+                "id_produit": 3,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "en livraison",
+        "date_heure": "2026-04-01 08:15",
+        "montant_payé": 15,
+        "remise": 0,
+        "livreur": 4,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 11,
+        "user_id": 5,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 3,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "en attente",
+        "date_heure": "2026-04-01 14:00",
+        "montant_payé": 23.39999999999999857891452847979962825775146484375,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 12,
+        "user_id": 1,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 4,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 5,
+                "quantite": 1
+            }
+        ],
+        "statut_paiement": "payé",
+        "statut_commande": "en attente",
+        "date_heure": "2026-04-01 17:45",
+        "montant_payé": 14.4000000000000003552713678800500929355621337890625,
+        "remise": 0,
+        "livreur": null,
+        "notation": 4,
+        "commentaire": "c'etait tres bon"
+    },
+    {
+        "id": 13,
+        "user_id": null,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": 4
+            },
+            {
+                "type": "plats",
+                "id_produit": 6,
+                "quantite": 2
+            },
+            {
+                "type": "plats",
+                "id_produit": 9,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 12,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 4,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "",
+        "livreur": null,
+        "statut_paiement": "payé",
+        "statut_commande": "en attente",
+        "date_heure": "2026-04-03 13:41",
+        "montant_payé": 123.200000000000017053025658242404460906982421875,
+        "remise": 0,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 14,
+        "user_id": null,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 12,
+                "quantite": 1
+            }
+        ],
+        "adresse_livraison": "",
+        "livreur": null,
+        "statut_paiement": "payé",
+        "statut_commande": "en attente",
+        "date_heure": "2026-04-03 13:46",
+        "montant_payé": 6.9000000000000003552713678800500929355621337890625,
+        "remise": 0,
+        "notation": null,
+        "commentaire": null
     }
 ]

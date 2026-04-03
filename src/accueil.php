@@ -28,7 +28,7 @@ session_start();
                 </div>
                 <div class="hero-banner"></div>
                 <div class="cta-group">
-                    <a href="presentation.php" class="btn-brutal">ACCÉDER AU MENU</a>
+                    <a href="carte.php" class="btn-brutal">ACCÉDER A LA CARTE</a>
                 </div>
             </div>
         </section>

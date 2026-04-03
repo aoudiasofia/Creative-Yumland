@@ -1,21 +1,33 @@
 <?php
 session_start();
 
-// 1. SECURITÉ : On vérifie que l'utilisateur est bien connecté
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
-// 2. RÉCUPÉRATION DU NUMÉRO DE COMMANDE (optionnel, via l'URL)
-$id_commande = isset($_GET['order']) ? $_GET['order'] : 'NON_DÉFINIE';
+include '../includes/fonctions.php';
 
-// 3. SIMULATION D'ENVOI (Pour la Phase 2, on redirige juste avec un petit message)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ici on pourrait enregistrer dans un fichier avis.json plus tard
-    header("Location: profil.php?feedback=success");
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: historique_commandes_client.php");
     exit();
 }
+
+$id_commande = intval($_GET['id']);
+$commande = getCommandeById($id_commande);
+
+if (!$commande) {
+    header("Location: historique_commandes_client.php");
+    exit();
+}
+
+if ($commande['user_id'] != $_SESSION['user']) {
+    header("Location: historique_commandes_client.php");
+    exit();
+}
+
+$details = calculerDetailCommande($commande);
+
 ?>
 
 <!DOCTYPE html>
@@ -35,39 +47,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ?>
 
     <main class="notation-container">
-        <h1 class="main-title">QUALITY_CONTROL // #<?php echo htmlspecialchars($id_commande); ?></h1>
+        <h1 class="main-title">NOTER VOTRE COMMANDE</h1>
 
-            <form class="kold-form" action="notation.php" method="post">
-            <div class="rating-section">
-                <label class="label-tech">ÉVALUATION_LOGISTIQUE (LIVRAISON)</label>
-                <div class="rating-grid">
-                    <label class="rate-box"><input type="radio" name="delivery" value="1"><span>01</span></label>
-                    <label class="rate-box"><input type="radio" name="delivery" value="2"><span>02</span></label>
-                    <label class="rate-box"><input type="radio" name="delivery" value="3"><span>03</span></label>
-                    <label class="rate-box"><input type="radio" name="delivery" value="4"><span>04</span></label>
-                    <label class="rate-box"><input type="radio" name="delivery" value="5"
-                            checked><span>05</span></label>
+        <div class="notation-card">
+            <div class="commande-preview">
+                <p><strong>Commande #<?php echo htmlspecialchars($commande['id']); ?></strong> - <?php echo $commande['date_heure']; ?></p>
+                <p style="font-size: 0.9rem; color: var(--accent);">Montant total: <?php echo number_format($details['prix_apres_remise'], 2, ',', ' '); ?> €</p>
+            </div>
+
+            <form method="post" action="traitement_notation.php" class="notation-form">
+                <input type="hidden" name="id_commande" value="<?php echo htmlspecialchars($commande['id']); ?>" />
+
+                <!-- NOTATION -->
+                <div class="form-group">
+                    <label class="form-label">Notez votre commande (de 1 à 5)</label>
+                    <div class="rating-grid">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <label class="rate-box">
+                                <input type="radio" name="notation" value="<?php echo $i; ?>" <?php echo $i === 3 ? 'checked' : ''; ?> />
+                                <span><?php echo $i; ?></span>
+                            </label>
+                        <?php endfor; ?>
+                    </div>
                 </div>
-            </div>
 
-            <div class="rating-section" style="margin-top: 30px;">
-                <label class="label-tech">QUALITÉ_DES_PRODUITS</label>
-                <div class="rating-grid">
-                    <label class="rate-box"><input type="radio" name="product" value="1"><span>01</span></label>
-                    <label class="rate-box"><input type="radio" name="product" value="2"><span>02</span></label>
-                    <label class="rate-box"><input type="radio" name="product" value="3"><span>03</span></label>
-                    <label class="rate-box"><input type="radio" name="product" value="4"><span>04</span></label>
-                    <label class="rate-box"><input type="radio" name="product" value="5" checked><span>05</span></label>
+                <!-- COMMENTAIRE -->
+                <div class="form-group">
+                    <label class="form-label">Commentaire (optionnel)</label>
+                    <textarea name="commentaire" class="kold-textarea" placeholder="Partagez votre retour..."></textarea>
                 </div>
-            </div>
 
-            <div class="rating-section" style="margin-top: 30px;">
-                <label class="label-tech">COMMENTAIRES_ADDITIONNELS</label>
-                <textarea class="kold-textarea" name="commentaires" placeholder="RAS / TRANSMISSION EN COURS..."></textarea>
-            </div>
-
-            <button type="submit" class="btn-brutal btn-full" style="margin-top: 30px; cursor: pointer;">TRANSMETTRE_DONNÉES</button>
-        </form>
+                <!-- BOUTONS -->
+                <div class="notation-actions">
+                    <button type="submit" class="btn-brutal">ENVOYER VOTRE NOTE</button>
+                    <a href="historique_commandes_client.php" class="btn-retour">← Retour</a>
+                </div>
+            </form>
+        </div>
     </main>
 
     <?php include '../includes/footer.php'; ?>

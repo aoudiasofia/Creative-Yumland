@@ -1,33 +1,75 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
-if (isset($_POST['order_id']) && isset($_POST['new_status'])) {
-    $order_id = $_POST['order_id'];
-    $new_status = $_POST['new_status'];
-    $orders_file = '../data/commandes.json';
+// Autorisé : livreur, restaurateur ou admin
+if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['livreur', 'restaurateur', 'admin'])) {
+    header('Location: connexion.php');
+    exit();
+}
 
-    $orders = [];
-    if (file_exists($orders_file)) {
-        $orders_json = file_get_contents($orders_file);
-        $orders_json = preg_replace('/^<<<<<<< .*?^=======\s*|>>>>>>> .*/ms', '', $orders_json);
-        $orders = json_decode($orders_json, true);
-    }
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: livraison.php');
+    exit();
+}
 
-    $order_found = false;
-    if (is_array($orders)) {
-        foreach ($orders as &$order) {
-            if (isset($order['id']) && $order['id'] === $order_id) {
-                $order['status'] = $new_status;
-                $order_found = true;
-                break;
-            }
-        }
-    }
+$id_commande = isset($_POST['id_commande']) ? intval($_POST['id_commande']) : 0;
+$commande = getCommandeById($id_commande);
 
-    if ($order_found) {
-        file_put_contents($orders_file, json_encode($orders, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+if (!$commande) {
+    header('Location: ' . ($_SESSION['role'] === 'livreur' ? 'livraison.php' : 'restaurant.php'));
+    exit();
+}
+
+// Pour un livreur, vérifier qu'il est bien le livreur de la commande
+if ($_SESSION['role'] === 'livreur') {
+    $livreur_id = isset($_SESSION['id']) ? intval($_SESSION['id']) : 0;
+    if (!isset($commande['livreur']) || intval($commande['livreur']) !== $livreur_id) {
+        header('Location: livraison.php');
+        exit();
     }
 }
 
-header('Location: livreur.php');
+$redirect = ($_SESSION['role'] === 'livreur') ? 'livraison.php' : 'restaurant.php';
+
+$ok = false;
+
+// Mise à jour du statut de commande
+if (isset($_POST['nouveau_statut']) && strlen(trim($_POST['nouveau_statut'])) > 0) {
+    $nouveau_statut = trim($_POST['nouveau_statut']);
+
+    // Pour livreur, on n'autorise que terminée ou abandonnée
+    if ($_SESSION['role'] === 'livreur') {
+        if (!in_array($nouveau_statut, ['terminée', 'abandonnée'])) {
+            header('Location: ' . $redirect . '?erreur=statut');
+            exit();
+        }
+    }
+
+    if (mettreAJourStatutCommande($id_commande, $nouveau_statut)) {
+        $ok = true;
+    }
+}
+
+// Attribution d'un livreur (restaurateur/admin)
+if (isset($_POST['id_livreur']) && in_array($_SESSION['role'], ['restaurateur', 'admin'])) {
+    $id_livreur = intval($_POST['id_livreur']);
+
+    // Si valeur vide, on retire l'attribution
+    if ($id_livreur === 0) {
+        if (attribuerLivreurCommande($id_commande, null)) {
+            $ok = true;
+        }
+    } else {
+        if (attribuerLivreurCommande($id_commande, $id_livreur)) {
+            $ok = true;
+        }
+    }
+}
+
+if ($ok) {
+    header('Location: ' . $redirect . '?success=1');
+} else {
+    header('Location: ' . $redirect . '?success=0');
+}
 exit();

@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "nom": "ADMIN",
+        "prenom": "Admin",
+        "email": "admin@cytech.fr",
+        "password": "abc",
+        "tel": "0657656329",
+        "role": "admin",
+        "adresse": "blablabla",
+        "infosup": "",
+        "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
+    },
+    {
+        "id": 2,
+        "nom": "AOUDIA",
+        "prenom": "Sofia",
+        "email": "so@cytech.fr",
+        "password": "abc",
+        "tel": "0652463812",
+        "role": "restaurateur",
+        "adresse": "zizouzou",
+        "infosup": "",
+        "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
+    },
+    {
+        "id": 3,
+        "nom": "PHILIPPOT",
+        "prenom": "Lucie",
+        "email": "lucie@cytech.fr",
+        "password": "123",
+        "tel": "0601020304",
+        "role": "admin",
+        "adresse": "blablabla",
+        "infosup": "",
+        "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
+    },
+    {
+        "id": 4,
+        "nom": "DELECHENEAU",
+        "prenom": "Camille",
+        "email": "cam@cytech.fr",
+        "password": "123",
+        "tel": "0601020304",
+        "role": "livreur",
+        "adresse": "blablabla",
+        "infosup": "",
+        "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
+    },
+    {
+        "id": 5,
+        "nom": "JEAN",
+        "prenom": "Kuleki",
+        "email": "jeankuleki@gmale.com",
+        "password": "16",
+        "tel": "0666666666",
+        "role": "livreur",
+        "adresse": "blablabla",
+        "infosup": "",
+        "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
+    }
+]

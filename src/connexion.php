@@ -10,19 +10,19 @@
 <body class="kold-mode">
 
     <?php 
-        $nom_page = "login";
+        $nom_page = "connexion";
         include '../includes/header.php';
     ?>
 
     <main class="login-container">
         <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">IDENTIFICATION</h1>
 
-        <form class="kold-form" action="verif_login.php" method="post">
+        <form class="kold-form" action="traitement_connexion.php" method="post">
 
             <div class="email-row input-group">
-                <label class="email-col label-tech" for="login">LOGIN</label>
+                <label class="email-col label-tech" for="email">E-MAIL</label>
                 <div class="input-col">
-                    <input type="text" id="login" name="login" placeholder="VOTRE_IDENTIFIANT" required>
+                    <input type="text" id="email" name="email" placeholder="E-MAIL" required>
                 </div>
             </div>
 
