@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
 include '../includes/fonctions.php';
 
 $user_id = $_SESSION['user'];
-$commandes = getCommandesByUserId($user_id);
+$commandes = array_reverse(getCommandesByUserId($user_id));
 
 ?>
 
