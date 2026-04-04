@@ -24,7 +24,7 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
 <body class="kold-mode">
 
     <?php 
-        $nom_page = "histo";
+        $nom_page = "historique_commandes_client";
         include '../includes/header.php';
     ?>
 

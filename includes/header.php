@@ -6,50 +6,55 @@
         <ul>
 
             <?php
-            //SECTION POUR LA PAGE ACCEUIL
-            if ($nom_page === 'acceuil' || $nom_page === 'carte') {
+            // LIENS CONDITIONNELS SELON LA PAGE
+            if ($nom_page === 'acceuil') {
+                // Pour la page accueil : carte et profil pour tous
                 echo "<li><a href='carte.php'>La carte</a></li>";
                 echo "<li><a href='profil.php'>Profil</a></li>";
-                if ($nom_page === 'carte') {
-                    echo "<li><a href='panier.php'>Panier</a></li>";
+
+                // Liens spécifiques aux rôles
+                if (isset($_SESSION['role'])) {
+                    if ($_SESSION['role'] === 'admin') {
+                        echo "<li><a href='admin.php'>[PANNEAU_ADMIN]</a></li>";
+                    } elseif ($_SESSION['role'] === 'livreur') {
+                        echo "<li><a href='livraison.php'>Livraison</a></li>";
+                    } elseif ($_SESSION['role'] === 'restaurateur') {
+                        echo "<li><a href='restaurant.php'>Restaurant</a></li>";
+                    }
                 }
-
-            //SECTION POUR LA PAGE PROFIL
-            } elseif ($nom_page === 'profil') {
-                echo "<li><a href='mes_commandes.php'>Mes commandes</a></li>";
-
-            //SECTION POUR LA PAGE ADMIN
-            } elseif ($nom_page === 'admin'|| $nom_page === 'restaurant' || $nom_page === 'livreur' || $nom_page === 'livraison' || $nom_page === 'commandes') {
-                echo "<li><a href='restaurant.php'>Restaurant</a></li>";
-                echo "<li><a href='livreur.php'>Livreur</a></li>";
-                echo "<li><a href='livraison.php'>Livraison</a></li>";
-                echo "<li><a href='commandes.php'>Commandes</a></li>";
             }
 
-            //SECTION COMMUNE A TOUTES LES PAGES (sauf l'inscription/connexion)
-            if ($nom_page !== 'inscription' && $nom_page !== 'connexion') {
-                if (isset($_SESSION['user'])) {
+            // Pour inscription : juste connexion
+            elseif ($nom_page === 'inscription') {
+                echo "<li><a href='connexion.php' class='nav-login'>Connexion</a></li>";
+            }
 
-                    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-                        echo "<li><a href='admin.php'>[PANNEAU_ADMIN]</a></li>";
-                    }
-                    
-                    echo "<li><a href='logout.php' class='nav-login'>Déconnexion</a></li>";
-                    echo "<li class='user-status'>ID: " . strtoupper(htmlspecialchars($_SESSION['prenom'])) . "</li>";
-                
-                } else {
-                    echo "<li><a href='connexion.php' class='nav-login'>Connexion</a></li>";
-                    echo "<li class='user-status'>STATUT: INVITÉ</li>";
-                }
+            // Pour connexion : juste inscription
+            elseif ($nom_page === 'connexion') {
+                echo "<li><a href='inscription.php' class='nav-login'>Inscription</a></li>";
+            }
 
-            } elseif ($nom_page === 'inscription') {
+            // Pour toutes les autres pages : rien d'autre
+
+            // Bouton panier dynamique si connecté
+            if (isset($_SESSION['user'])) {
+                initialiserPanier();
+                $total_panier = calculerTotalPanier();
+                $user_info = getInfoUser($_SESSION['id']);
+                $remise = floatval($user_info['remise'] ?? 0);
+                $total_final = $total_panier - $remise;
+                echo "<li><a href='panier.php' class='nav-panier'>PANIER (" . number_format($total_final, 2) . " €)</a></li>";
+            }
+
+            // TOUJOURS PRÉSENT : CONNEXION/DÉCONNEXION ET STATUT/ID
+            if (isset($_SESSION['user'])) {
+                echo "<li><a href='traitement_deconnexion.php' class='nav-login'>Déconnexion</a></li>";
+                echo "<li class='user-status'>ID: " . strtoupper(htmlspecialchars($_SESSION['prenom'])) . "</li>";
+            } else {
                 echo "<li><a href='connexion.php' class='nav-login'>Connexion</a></li>";
                 echo "<li class='user-status'>STATUT: INVITÉ</li>";
-
-            } elseif ($nom_page === 'connexion') {
-                echo "<li><a href='inscription.php' class='nav-login'>Inscription</a></li>";
-                echo "<li class='user-status'>STATUT: INVITÉ</li>";
-            } ?>
+            }
+            ?>
 
         </ul>
     </nav>

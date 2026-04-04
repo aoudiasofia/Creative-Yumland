@@ -80,6 +80,11 @@ body {
         border-color: var(--text);
     }
 
+    .nav-panier {
+        background: var(--accent);
+        border-color: var(--text);
+    }
+
     /* HERO SECTION & RECHERCHE */
     .hero-brutal {
         padding: 60px 5%;

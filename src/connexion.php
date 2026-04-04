@@ -3,7 +3,7 @@
 
 <?php 
     $titre_page = "KØLD | LOGIN";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 
@@ -15,7 +15,7 @@
     ?>
 
     <main class="login-container">
-        <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">IDENTIFICATION</h1>
+        <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">CONNEXION</h1>
 
         <form class="kold-form" action="traitement_connexion.php" method="post">
 
