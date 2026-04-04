@@ -1523,5 +1523,129 @@ body {
     .historique-commande-detail .detail-header div:last-child {
         text-align: left !important;
     }
+    
+}
+
+/* PAGE PANIER */
+.panier-section {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.panier-items {
+    margin-bottom: 40px;
+}
+
+.panier-item {
+    background: var(--white);
+    border: var(--main-border);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 8px 8px 0 var(--text);
+}
+
+.panier-item h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.total-section {
+    background: var(--accent);
+    color: var(--white);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    border: var(--main-border);
+    box-shadow: 8px 8px 0 var(--text);
+}
+
+.total-section h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2rem;
+}
+
+.total-section .prix-ligne {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+    color: var(--white);
+}
+
+.total-section .prix-ligne.remise {
+    color: #ffeb3b;
+}
+
+.validation-form {
+    background: var(--white);
+    border: var(--main-border);
+    padding: 40px;
+    box-shadow: 15px 15px 0 var(--accent);
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Mono', monospace;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    background: var(--bg);
+    border: var(--main-border);
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input[type="text"]:focus {
+    background: var(--white);
+    box-shadow: 6px 6px 0 var(--text);
+    transform: translate(-2px, -2px);
+}
+
+.paiement-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.paiement-buttons .btn-brutal {
+    flex: 1;
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .radio-group {
+        flex-direction: column;
+    }
+    
+    .paiement-buttons {
+        flex-direction: column;
+    }
 }
 }

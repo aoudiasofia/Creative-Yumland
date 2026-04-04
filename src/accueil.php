@@ -6,7 +6,7 @@ session_start();
 
 <?php 
     $titre_page = "KØLD | STAY KØLD";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
  
 <body class="kold-mode">
@@ -88,7 +88,7 @@ session_start();
         </div>
     </section>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
     
 </body>
 </html>

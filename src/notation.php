@@ -35,7 +35,7 @@ $details = calculerDetailCommande($commande);
 
 <?php 
     $titre_page = "KØLD | NOTATION";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 
@@ -86,7 +86,7 @@ $details = calculerDetailCommande($commande);
         </div>
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

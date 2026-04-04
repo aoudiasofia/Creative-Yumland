@@ -17,7 +17,7 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | HISTORIQUE COMMANDE";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 
@@ -45,6 +45,7 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
                             <p style="color: var(--accent); font-weight: bold; margin-top: 5px;">
                                 <?php echo $commande['date_heure']; ?>
                             </p>
+                            <p style="margin-top: 5px;"><strong>Livraison:</strong> <?php echo $commande['quand'] === 'maintenant' ? 'Dès que possible' : 'Plus tard'; ?></p>
                         </div>
                         <div style="text-align: right;">
                             <p style="margin-bottom: 5px;"><strong>Statut de commande:</strong> <?php echo htmlspecialchars($commande['statut_commande']); ?></p>
@@ -137,7 +138,7 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
 
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

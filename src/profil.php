@@ -21,7 +21,7 @@ if (!$user_data) {
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | PROFIL";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 
@@ -117,7 +117,7 @@ if (!$user_data) {
 
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

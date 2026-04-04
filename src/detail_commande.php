@@ -39,7 +39,7 @@ $livreurs = getTousLesLivreurs();
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | Détail Commande";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 <body class="kold-mode">
@@ -136,6 +136,12 @@ $livreurs = getTousLesLivreurs();
                     <p><?php echo htmlspecialchars($commande['adresse_livraison']) ?: 'Non spécifiée'; ?></p>
                 </div>
 
+                <!-- QUAND -->
+                <div class="info-box">
+                    <h4>Livraison</h4>
+                    <p><?php echo $commande['quand'] === 'maintenant' ? 'Dès que possible' : 'Plus tard'; ?></p>
+                </div>
+
                 <!-- STATUT DE PAIEMENT -->
                 <div class="info-box">
                     <h4>Statut du paiement</h4>
@@ -213,7 +219,7 @@ $livreurs = getTousLesLivreurs();
 
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

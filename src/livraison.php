@@ -20,7 +20,7 @@ $commandes_attribuees = array_filter($commandes, function($commande) use ($livre
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | Livraison";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 
@@ -55,7 +55,7 @@ $commandes_attribuees = array_filter($commandes, function($commande) use ($livre
 
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

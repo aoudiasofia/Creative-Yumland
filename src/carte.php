@@ -22,7 +22,7 @@ $noms_categories = [
 
 <?php 
     $titre_page = "KØLD | CARTE";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 <body class="kold-mode">
@@ -83,7 +83,7 @@ $noms_categories = [
 
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

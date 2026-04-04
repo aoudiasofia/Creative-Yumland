@@ -31,7 +31,7 @@ if ($user_id_detail) {
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | ADMIN";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 
@@ -159,7 +159,7 @@ if ($user_id_detail) {
 
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
     <style>
         .admin-container {

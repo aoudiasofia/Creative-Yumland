@@ -14,6 +14,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
         "statut_commande": "terminée",
@@ -34,6 +35,7 @@
                 "quantite": 2
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "zizouzou",
         "statut_paiement": "payé",
         "statut_commande": "en livraison",
@@ -59,6 +61,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "zizouzou",
         "statut_paiement": "payé",
         "statut_commande": "terminée",
@@ -79,6 +82,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
         "statut_commande": "a livrée",
@@ -104,6 +108,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "plus tard",
         "adresse_livraison": "blablabla",
         "statut_paiement": "en attente",
         "statut_commande": "en attente",
@@ -124,6 +129,7 @@
                 "quantite": 2
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
         "statut_commande": "en livraison",
@@ -144,6 +150,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
         "statut_commande": "terminée",
@@ -169,6 +176,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "plus tard",
         "adresse_livraison": "zizouzou",
         "statut_paiement": "payé",
         "statut_commande": "abandonnée",
@@ -208,6 +216,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
         "statut_commande": "en livraison",
@@ -233,6 +242,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
         "statut_commande": "en attente",
@@ -258,6 +268,8 @@
                 "quantite": 1
             }
         ],
+        "quand": "plus tard",
+        "adresse_livraison": "",
         "statut_paiement": "payé",
         "statut_commande": "en attente",
         "date_heure": "2026-04-01 17:45",
@@ -302,6 +314,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "",
         "livreur": null,
         "statut_paiement": "payé",
@@ -322,6 +335,7 @@
                 "quantite": 1
             }
         ],
+        "quand": "maintenant",
         "adresse_livraison": "",
         "livreur": null,
         "statut_paiement": "payé",
@@ -329,6 +343,37 @@
         "date_heure": "2026-04-03 13:46",
         "montant_payé": 6.9000000000000003552713678800500929355621337890625,
         "remise": 0,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 15,
+        "user_id": 1,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 11,
+                "quantite": 1
+            },
+            {
+                "type": "plats",
+                "id_produit": 14,
+                "quantite": 1
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "payé",
+        "statut_commande": "en attente",
+        "date_heure": "2026-04-04 10:24",
+        "montant_payé": 22.5,
+        "remise": 0,
+        "livreur": null,
         "notation": null,
         "commentaire": null
     }

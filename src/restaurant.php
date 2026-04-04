@@ -27,7 +27,7 @@ foreach ($commandes as $commande) {
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | restaurant";
-    include '../includes/head.php';
+    include '../includes/head.html';
 ?>
 
 <body class="kold-mode">
@@ -53,6 +53,7 @@ foreach ($commandes as $commande) {
                     echo "<div class='commande-item'>";
                     echo "<p><strong>ID Commande:</strong> " . htmlspecialchars($commande['id']) . "</p>";
                     echo "<p><strong>Date:</strong> " . htmlspecialchars($commande['date_heure']) . "</p>";
+                    echo "<p><strong>Livraison:</strong> " . ($commande['quand'] === 'maintenant' ? 'Dès que possible' : 'Plus tard') . "</p>";
                     echo "<p><strong>Montant:</strong> " . htmlspecialchars($commande['montant_payé']) . " €</p>";
                     echo "<a href='detail_commande.php?id=" . $commande['id'] . "' class='btn-detail'>Voir le détail</a>";
                     echo "</div>";
@@ -65,7 +66,7 @@ foreach ($commandes as $commande) {
         ?>
     </main>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/footer.html'; ?>
 
 </body>
 </html>

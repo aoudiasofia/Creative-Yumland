@@ -433,4 +433,47 @@ function ajouterNotationCommande($id_commande, $notation, $commentaire = '') {
     return false;
 }
 
+function creerNouvelleCommande($user_id, $articles, $quand, $adresse_livraison, $statut_paiement, $montant_paye, $remise = 0) {
+    $commandes = getToutesLesCommandes();
+    $nouveau_id = getDernierId(__DIR__ . '/../data/commandes.json') + 1;
+    $date_heure = date('Y-m-d H:i');
+    
+    // Statut commande initial
+    $statut_commande = ($statut_paiement === 'payé') ? 'en attente' : 'en attente'; // Peut ajuster selon logique
+    
+    $nouvelle_commande = [
+        'id' => $nouveau_id,
+        'user_id' => $user_id,
+        'articles' => $articles,
+        'quand' => $quand,
+        'adresse_livraison' => $adresse_livraison,
+        'statut_paiement' => $statut_paiement,
+        'statut_commande' => $statut_commande,
+        'date_heure' => $date_heure,
+        'montant_payé' => $montant_paye,
+        'remise' => $remise,
+        'livreur' => null,
+        'notation' => null,
+        'commentaire' => null
+    ];
+    
+    $commandes[] = $nouvelle_commande;
+    
+    return enregistrerToutesLesCommandes($commandes) ? $nouveau_id : false;
+}
+
+function getPanier(){
+    $articles_panier = [];
+    foreach ($_SESSION['panier'] as $id_produit => $quantite) {
+        $plat = getPlatById($id_produit);
+        if ($plat) {
+            $articles_panier[] = [
+                'plat' => $plat,
+                'quantite' => $quantite,
+                'prix_total' => $plat['prix'] * $quantite
+            ];
+        }
+    }
+    return $articles_panier;
+}
 ?>
