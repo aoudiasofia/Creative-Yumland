@@ -799,6 +799,110 @@ body {
         color: #f9a825;
     }
 
+    /* Détail utilisateur - Admin */
+    .users-list-section {
+        background: var(--white);
+        border: var(--main-border);
+        padding: 20px;
+    }
+
+    .users-list-section h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: var(--accent);
+    }
+
+    .user-detail-section {
+        margin-top: 20px;
+    }
+
+    .user-profile-card {
+        background-color: var(--white);
+        padding: 30px;
+        border: var(--main-border);
+        box-shadow: 10px 10px 0 var(--text);
+        margin-top: 20px;
+    }
+
+    .user-profile-card h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        border-bottom: var(--main-border);
+        padding-bottom: 10px;
+        color: var(--accent);
+    }
+
+    .user-info {
+        margin-bottom: 30px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .user-info p {
+        margin: 0;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .user-info strong {
+        color: var(--accent);
+        font-family: 'Archivo Black', sans-serif;
+    }
+
+    .user-actions {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: var(--main-border);
+    }
+
+    .user-actions h3 {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 1.3rem;
+        color: var(--accent);
+        margin-bottom: 20px;
+    }
+
+    .action-group {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: var(--bg);
+        border: 1px solid var(--text);
+        border-radius: 0;
+    }
+
+    .action-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+        color: var(--text);
+        font-family: 'Archivo Black', sans-serif;
+    }
+
+    .action-group select,
+    .action-group input[type="number"] {
+        padding: 8px;
+        margin-right: 10px;
+        border: 2px solid var(--text);
+        background: var(--white);
+        font-family: 'Space Mono', monospace;
+        border-radius: 0;
+    }
+
+    .action-group select:focus,
+    .action-group input[type="number"]:focus {
+        outline: none;
+        box-shadow: 4px 4px 0 var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .user-info {
+            grid-template-columns: 1fr;
+        }
+    }
+
 
     /* PAGE COMMANDE (RESTAURATEUR) */
 

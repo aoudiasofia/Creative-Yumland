@@ -68,5 +68,19 @@
         "statut": "Moldu",
         "remise": "0",
         "bloqué": false
+    },
+    {
+        "id": 6,
+        "nom": "DD",
+        "prenom": "Toma",
+        "email": "tiboinshape@gmail.com",
+        "password": "123",
+        "tel": "0666688888",
+        "role": "client",
+        "adresse": "blablabla",
+        "infosup": "",
+        "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
     }
 ]

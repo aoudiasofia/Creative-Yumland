@@ -281,7 +281,7 @@
     },
     {
         "id": 13,
-        "user_id": null,
+        "user_id": 4,
         "articles": [
             {
                 "type": "plats",
@@ -327,7 +327,7 @@
     },
     {
         "id": 14,
-        "user_id": null,
+        "user_id": 5,
         "articles": [
             {
                 "type": "plats",
