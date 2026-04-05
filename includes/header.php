@@ -37,7 +37,7 @@
             // Pour toutes les autres pages : rien d'autre
 
             // Bouton panier dynamique si connecté
-            if (isset($_SESSION['user'])) {
+            if (isset($_SESSION['user']) && $nom_page === 'carte') {
                 initialiserPanier();
                 $total_panier = calculerTotalPanier();
                 $user_info = getInfoUser($_SESSION['id']);
