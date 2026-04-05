@@ -1,9 +1,14 @@
+<?php
+session_start();
+include '../includes/fonctions.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <?php 
-    $titre_page = "KØLD | LOGIN";
-    include '../includes/head.html';
+    $titre_page = "KØLD | CONNEXION";
+    include '../includes/head.php';
 ?>
 
 

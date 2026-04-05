@@ -1,17 +1,13 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
-// 1. SECURITÉ : Si pas connecté, retour au login
 if (!isset($_SESSION['user'])) {
     header("Location: connexion.php");
     exit();
 }
 
-include '../includes/fonctions.php';
-
-// 2. RÉCUPÉRATION DE L'UTILISATEUR
 $user_data = getInfoUser($_SESSION['user']);
-
 if (!$user_data) {
     die("Erreur : Utilisateur introuvable dans la base.");
 }
@@ -21,7 +17,7 @@ if (!$user_data) {
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | PROFIL";
-    include '../includes/head.html';
+    include '../includes/head.php';
 ?>
 
 

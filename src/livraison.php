@@ -1,13 +1,11 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
-// 1. SÉCURITÉ : Seul le livreur
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'livreur')) {
     header("Location: connexion.php");
     exit();
 }
-
-include '../includes/fonctions.php';
 
 $livreur_id = isset($_SESSION['id']) ? intval($_SESSION['id']) : 0;
 $commandes = getToutesLesCommandes();
@@ -19,8 +17,8 @@ $commandes_attribuees = array_filter($commandes, function($commande) use ($livre
 <!DOCTYPE html>
 <html lang="fr">
 <?php 
-    $titre_page = "KØLD | Livraison";
-    include '../includes/head.html';
+    $titre_page = "KØLD | LIVRAISON";
+    include '../includes/head.php';
 ?>
 
 

@@ -1,12 +1,11 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
-
-include '../includes/fonctions.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: historique_commandes_client.php");
@@ -35,7 +34,7 @@ $details = calculerDetailCommande($commande);
 
 <?php 
     $titre_page = "KØLD | NOTATION";
-    include '../includes/head.html';
+    include '../includes/head.php';
 ?>
 
 

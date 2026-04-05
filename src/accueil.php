@@ -1,12 +1,13 @@
 <?php 
 session_start(); 
+include '../includes/fonctions.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 
 <?php 
     $titre_page = "KØLD | STAY KØLD";
-    include '../includes/head.html';
+    include '../includes/head.php';
 ?>
  
 <body class="kold-mode">

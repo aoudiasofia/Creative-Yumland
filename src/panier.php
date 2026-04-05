@@ -3,7 +3,6 @@ session_start();
 require_once '../includes/fonctions.php';
 initialiserPanier();
 
-// Vérifier si utilisateur connecté
 if (!isset($_SESSION['user'])) {
     header('Location: connexion.php');
     exit;
@@ -21,7 +20,7 @@ $articles_panier = getPanier();
 
 <?php 
     $titre_page = "KØLD | PANIER";
-    include '../includes/head.html';
+    include '../includes/head.php';
 ?>
 
 <body class="kold-mode">

@@ -1,23 +1,21 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
-include '../includes/fonctions.php';
-
 $user_id = $_SESSION['user'];
 $commandes = array_reverse(getCommandesByUserId($user_id));
-
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | HISTORIQUE COMMANDE";
-    include '../includes/head.html';
+    include '../includes/head.php';
 ?>
 
 

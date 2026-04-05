@@ -1,12 +1,11 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'restaurateur' && $_SESSION['role'] !== 'admin')) {
     header("Location: connexion.php");
     exit();
 }
-
-include '../includes/fonctions.php';
 
 $commandes = getToutesLesCommandes();
 $livreurs = getTousLesLivreurs();
@@ -20,14 +19,13 @@ foreach ($commandes as $commande) {
     }
     $grouped_commandes[$statut][] = $commande;
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <?php 
-    $titre_page = "KØLD | restaurant";
-    include '../includes/head.html';
+    $titre_page = "KØLD | RESTAURANT";
+    include '../includes/head.php';
 ?>
 
 <body class="kold-mode">

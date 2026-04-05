@@ -1,19 +1,13 @@
 <?php
-session_start(); // UNE SEULE FOIS, TOUT EN HAUT
+session_start();
+include '../includes/fonctions.php';
 
-// 1. PROTECTION : Si pas admin, retour à l'accueil
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: accueil.php");
     exit();
 }
 
-// 2. INCLUSION DES FONCTIONS
-include '../includes/fonctions.php';
-
-// 3. RECUPERATION DES UTILISATEURS
 $utilisateurs = getTousLesUtilisateurs();
-
-// 4. TRAITEMENT DE L'AFFICHAGE (détail d'un utilisateur ou liste)
 $user_id_detail = isset($_GET['user_id']) ? intval($_GET['user_id']) : null;
 $user_detail = null;
 
@@ -31,7 +25,7 @@ if ($user_id_detail) {
 <html lang="fr">
 <?php 
     $titre_page = "KØLD | ADMIN";
-    include '../includes/head.html';
+    include '../includes/head.php';
 ?>
 
 

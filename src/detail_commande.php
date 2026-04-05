@@ -1,12 +1,11 @@
 <?php
 session_start();
+include '../includes/fonctions.php';
 
 if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['restaurateur', 'admin', 'livreur'])) {
     header("Location: connexion.php");
     exit();
 }
-
-include '../includes/fonctions.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: restaurant.php");
@@ -38,8 +37,8 @@ $livreurs = getTousLesLivreurs();
 <!DOCTYPE html>
 <html lang="fr">
 <?php 
-    $titre_page = "KØLD | Détail Commande";
-    include '../includes/head.html';
+    $titre_page = "KØLD | DETAIL COMMANDE";
+    include '../includes/head.php';
 ?>
 
 <body class="kold-mode">
