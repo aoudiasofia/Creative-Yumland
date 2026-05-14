@@ -7,9 +7,12 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$user_data = getInfoUser($_SESSION['user']);
+// On appelle la nouvelle fonction intelligente
+$user_data = getInfoUser($_SESSION['user']); 
+
 if (!$user_data) {
-    die("Erreur : Utilisateur introuvable dans la base.");
+    // Si ça affiche encore l'erreur, on va afficher ce que contient la session pour comprendre
+    die("Erreur : Utilisateur introuvable. La session contient : " . $_SESSION['user']);
 }
 ?>
 
@@ -37,22 +40,37 @@ if (!$user_data) {
             <section class="profil-box">
                 <div class="box-header">DONNÉES_CLIENT</div>
 
-                <div class="info-item">
-                    <span>NOM : <?php echo strtoupper($user_data['nom'] . " " . $user_data['prenom']); ?></span>
-                    <button class="edit-btn" onclick="alert('Phase 3 : Édition du nom')">✏️</button>
-                </div>
+                <form id="form-profil">
+                    <input type="hidden" id="user-id" value="<?php echo htmlspecialchars($user_data['id']); ?>">
 
-                <div class="info-item">
-                    <span>E-MAIL : <?php echo htmlspecialchars($user_data['email']); ?></span>
-                    <button class="edit-btn" onclick="alert('Phase 3 : Édition de l\'email')">✏️</button>
-                </div>
+                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label style="font-weight: bold; font-size: 0.9rem;">PRÉNOM :</label>
+                        <input type="text" id="prenom" value="<?php echo htmlspecialchars($user_data['prenom']); ?>" style="padding: 5px; width: 65%; border: 1px solid var(--text);" required>
+                    </div>
 
-                <div class="info-item">
-                    <span>TÉL : <?php echo htmlspecialchars($user_data['tel'] ?? 'NON_RENSEIGNÉ'); ?></span>
-                    <button class="edit-btn" onclick="alert('Phase 3 : Édition du tel')">✏️</button>
-                </div>
+                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label style="font-weight: bold; font-size: 0.9rem;">NOM :</label>
+                        <input type="text" id="nom" value="<?php echo htmlspecialchars($user_data['nom']); ?>" style="padding: 5px; width: 65%; border: 1px solid var(--text);" required>
+                    </div>
 
-                <div class="info-item">
+                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label style="font-weight: bold; font-size: 0.9rem;">E-MAIL :</label>
+                        <input type="email" id="email" value="<?php echo htmlspecialchars($user_data['email']); ?>" style="padding: 5px; width: 65%; border: 1px solid var(--text);" required>
+                    </div>
+
+                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <label style="font-weight: bold; font-size: 0.9rem;">TÉL :</label>
+                        <input type="text" id="tel" value="<?php echo htmlspecialchars($user_data['tel'] ?? ''); ?>" style="padding: 5px; width: 65%; border: 1px solid var(--text);">
+                    </div>
+
+                    <button type="submit" class="btn-brutal" style="width: 100%; font-size: 0.8rem; padding: 10px; background: var(--text); color: white;">
+                        SAUVEGARDER
+                    </button>
+                    
+                    <div id="message-retour" style="margin-top: 10px; font-weight: bold; text-align: center; font-size: 0.9rem;"></div>
+                </form>
+
+                <div class="info-item" style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
                     <span>RÔLE : <b style="color:var(--accent)"><?php echo strtoupper($user_data['role']); ?></b></span>
                 </div>
             </section>
@@ -114,6 +132,54 @@ if (!$user_data) {
     </main>
 
     <?php include '../includes/footer.html'; ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formProfil = document.getElementById('form-profil');
+
+        if(formProfil) {
+            formProfil.addEventListener('submit', function(e) {
+                e.preventDefault(); // On bloque le rechargement de la page !
+
+                const messageDiv = document.getElementById('message-retour');
+                messageDiv.innerText = "Sauvegarde en cours...";
+                messageDiv.style.color = "orange";
+
+                // On ramasse toutes les nouvelles valeurs écrites par le client
+                const donnees = new FormData();
+                donnees.append('action', 'update_profile');
+                donnees.append('id', document.getElementById('user-id').value); 
+                donnees.append('prenom', document.getElementById('prenom').value);
+                donnees.append('nom', document.getElementById('nom').value);
+                donnees.append('email', document.getElementById('email').value);
+                donnees.append('tel', document.getElementById('tel').value);
+
+                // Envoi via le Talkie-Walkie (Fetch)
+                fetch('ajax_handler.php', {
+                    method: 'POST',
+                    body: donnees
+                })
+                .then(reponse => reponse.json())
+                .then(data => {
+                    if (data.success) {
+                        messageDiv.innerText = "✓ Profil mis à jour !";
+                        messageDiv.style.color = "green";
+                        // On attend 1 seconde pour que l'utilisateur voit le message, puis on recharge
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        messageDiv.innerText = "✗ Erreur : " + data.message;
+                    }
+                })
+                .catch(error => {
+                    console.error("Erreur:", error);
+                    messageDiv.innerText = "✗ Erreur technique.";
+                    messageDiv.style.color = "red";
+                });
+            });
+        }
+    });
+    </script>
 
 </body>
 </html>

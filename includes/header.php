@@ -1,3 +1,14 @@
+<?php
+// INITIALISATION ET SÉCURITÉ (SOFIA)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once '../includes/fonctions.php';
+
+// Vérification immédiate : si l'utilisateur est bloqué, il est éjecté ici
+verifierUtilisateurBloque(); 
+?>
+
 <header class="main-header">
     <div class="logo">
         <a href="accueil.php" style="text-decoration: none; color: inherit;">KØLD</a>
@@ -40,10 +51,11 @@
             if (isset($_SESSION['user']) && $nom_page === 'carte') {
                 initialiserPanier();
                 $total_panier = calculerTotalPanier();
-                $user_info = getInfoUser($_SESSION['id']);
+                // Utilisation de $_SESSION['user'] pour l'ID
+                $user_info = getInfoUser($_SESSION['user']);
                 $remise = floatval($user_info['remise'] ?? 0);
                 $total_final = $total_panier - $remise;
-                echo "<li><a href='panier.php' class='nav-panier'>PANIER (" . number_format($total_final, 2) . " €)</a></li>";
+                echo "<li><a href='panier.php' class='nav-panier'>PANIER (" . number_format($total_final, 2, '.', ' ') . " €)</a></li>";
             }
 
             // TOUJOURS PRÉSENT : CONNEXION/DÉCONNEXION ET STATUT/ID

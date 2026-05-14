@@ -273,29 +273,27 @@ function getDernierId($fichier_json) {
     return $dernier_id;
 }
 
-function getInfoUser($user_id) {
-    $fichier_users = __DIR__ . '/../data/users.json';
-    
-    if (!file_exists($fichier_users)) {
-        return null; // Fichier inexistant
+function getInfoUser($identifiant) {
+    // 1. On vérifie le chemin
+    $chemin = __DIR__ . '/../data/users.json';
+    if (!file_exists($chemin)) {
+        die("Erreur critique : Le fichier JSON est introuvable à cet endroit : " . $chemin);
     }
-    
-    $contenu_json = file_get_contents($fichier_users);
-    $users = json_decode($contenu_json, true);
-    
-    if (!is_array($users)) {
-        return null; // JSON invalide
-    }
-    
+
+    $users = json_decode(file_get_contents($chemin), true);
+
     foreach ($users as $user) {
-        if (isset($user['id']) && $user['id'] == $user_id) {
-            // Retourner toutes les infos sauf le mot de passe pour des raisons de sécurité
+        // On teste l'ID (en forçant la comparaison en texte pour éviter les bugs)
+        $matchId = (string)$user['id'] === (string)$identifiant;
+        // On teste l'Email
+        $matchEmail = strtolower($user['email']) === strtolower($identifiant);
+
+        if ($matchId || $matchEmail) {
             unset($user['password']);
             return $user;
         }
     }
-    
-    return null; // Utilisateur non trouvé
+    return null;
 }
 
 function getMenuById($id_recherche) {
@@ -475,6 +473,26 @@ function verifierConnexion($email, $password) {
 function viderPanier() {
     initialiserPanier();
     $_SESSION['panier'] = [];
+}
+
+function verifierUtilisateurBloque() {
+    if (isset($_SESSION['user'])) {
+        $idUser = (int)$_SESSION['user'];
+        $utilisateurs = json_decode(file_get_contents(__DIR__ . '/../data/users.json'), true);
+
+        foreach ($utilisateurs as $u) {
+            if ($u['id'] === $idUser) {
+                if (isset($u['bloqué']) && $u['bloqué'] === true) {
+                    // L'utilisateur est bloqué dans le fichier -> On détruit sa session
+                    session_unset();
+                    session_destroy();
+                    header('Location: connexion.php?erreur=compte_bloque');
+                    exit();
+                }
+                break;
+            }
+        }
+    }
 }
 
 ?>

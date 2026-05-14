@@ -6,6 +6,8 @@
       "description": "Saumon frais, avocat, concombre et sauce soja onctueuse.",
       "prix": 14.90,
       "categorie": "bowls",
+      "regime": "classique",
+      "commandes": 150,
       "image": "../images/poke_saumon.png"
     },
     {
@@ -14,6 +16,8 @@
       "description": "Poulet croustillant (froid), maïs, mangue et sauce sésame.",
       "prix": 13.50,
       "categorie": "bowls",
+      "regime": "classique",
+      "commandes": 85,
       "image": "../images/poke_poulet.png"
     },
     {
@@ -22,6 +26,8 @@
       "description": "Tofu mariné, edamames, carottes râpées et éclats de cacahuètes.",
       "prix": 12.90,
       "categorie": "bowls",
+      "regime": "vegetarien",
+      "commandes": 42,
       "image": "../images/veggie_ice.png"
     },
     {
@@ -30,6 +36,8 @@
       "description": "Riz froid, crevettes roses, radis noir, edamame et sauce citronnée.",
       "prix": 15.50,
       "categorie": "bowls",
+      "regime": "classique",
+      "commandes": 65,
       "image": "../images/poke_crevette.png"
     },
     {
@@ -38,6 +46,8 @@
       "description": "Tortilla de blé, thon mayo, maïs, salade croquante et tomates.",
       "prix": 8.90,
       "categorie": "wraps",
+      "regime": "classique",
+      "commandes": 110,
       "image": "../images/wrap_banquise.png"
     },
     {
@@ -46,6 +56,8 @@
       "description": "Poulet végé, sauce césar froide, parmesan et feuilles de romaine.",
       "prix": 9.50,
       "categorie": "wraps",
+      "regime": "vegetarien",
+      "commandes": 95,
       "image": "../images/wrap_arctique.png"
     },
     {
@@ -54,6 +66,8 @@
       "description": "Pain de mie complet, saumon fumé, fromage frais à l'aneth et concombre.",
       "prix": 9.90,
       "categorie": "wraps",
+      "regime": "classique",
+      "commandes": 70,
       "image": "../images/sandwich_nordique.png"
     },
     {
@@ -62,6 +76,8 @@
       "description": "Pâtes froides, mozzarella, tomates cerises et pesto.",
       "prix": 11.50,
       "categorie": "salades",
+      "regime": "vegetarien",
+      "commandes": 55,
       "image": "../images/salade_cristal.png"
     },
     {
@@ -70,6 +86,8 @@
       "description": "Mélange de crevettes roses, avocat, pamplemousse, assaisonné à l'aneth fraîche.",
       "prix": 12.90,
       "categorie": "salades",
+      "regime": "classique",
+      "commandes": 48,
       "image": "../images/salade_fraiche.png"
     },
     {
@@ -78,6 +96,8 @@
       "description": "Endives croquantes, pomme, noix et copeaux de fromage de chèvre.",
       "prix": 10.90,
       "categorie": "salades",
+      "regime": "vegetarien",
+      "commandes": 30,
       "image": "../images/salade_blanche.png"
     },
     {
@@ -86,6 +106,8 @@
       "description": "Énorme boule de sorbet menthe avec des pépites de chocolat noir.",
       "prix": 5.50,
       "categorie": "desserts",
+      "regime": "vegetarien",
+      "commandes": 210,
       "image": "../images/iceberg.png"
     },
     {
@@ -94,6 +116,8 @@
       "description": "Gâteau au fromage blanc très frais sur un biscuit croquant, coulis glacé.",
       "prix": 6.90,
       "categorie": "desserts",
+      "regime": "vegetarien",
+      "commandes": 140,
       "image": "../images/cheesecake.png"
     },
     {
@@ -102,6 +126,8 @@
       "description": "Coque de glace vanille, noisettes croquantes et cœur de meringue.",
       "prix": 6.50,
       "categorie": "desserts",
+      "regime": "vegetarien",
+      "commandes": 90,
       "image": "../images/dome_de_neige.png"
     },
     {
@@ -110,6 +136,8 @@
       "description": "Un café classique servi avec des glaçons.",
       "prix": 3.50,
       "categorie": "boissons",
+      "regime": "vegetarien",
+      "commandes": 300,
       "image": "../images/cafe_glace.png"
     },
     {
@@ -118,6 +146,8 @@
       "description": "Cocktail bleu (Vodka, curaçao, citron) très rafraîchissant.",
       "prix": 8.50,
       "categorie": "boissons",
+      "regime": "vegetarien",
+      "commandes": 180,
       "image": "../images/blue_lagoon.png"
     },
     {
@@ -126,38 +156,9 @@
       "description": "Tequila et citron, mixés avec de la glace pilée.",
       "prix": 9.00,
       "categorie": "boissons",
+      "regime": "vegetarien",
+      "commandes": 50,
       "image": "../images/margarita_givree.png"
-    },
-    {
-      "id": 17,
-      "nom": "Bière Arctique",
-      "description": "Une bière blonde servie dans un verre sorti du congélateur.",
-      "prix": 5.00,
-      "categorie": "boissons",
-      "image": "../images/biere_arctique.png"
-    }
-  ],
-  "menus": [
-    {
-      "id": 1,
-      "nom": "Menu Banquise",
-      "description": "Un Wrap Banquise, un dessert Iceberg et une boisson.",
-      "prix": 16.00,
-      "plats_inclus": [5, 11, 14]
-    },
-    {
-      "id": 2,
-      "nom": "Menu Grand Froid",
-      "description": "Le Poke Saumon accompagné de son cocktail Blue Lagoon.",
-      "prix": 21.00,
-      "plats_inclus": [1, 15]
-    },
-    {
-      "id": 3,
-      "nom": "Menu Fraîcheur",
-      "description": "Une Salade Blanche légère et un Cheesecake en dessert.",
-      "prix": 15.00,
-      "plats_inclus": [10, 12]
     }
   ]
 }

@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once '../includes/fonctions.php';
+verifierUtilisateurBloque();
 
 require_once '../includes/fonctions.php';
 
@@ -18,7 +20,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             exit();
         }
 
-        $_SESSION['user'] = true;
+
+        $_SESSION['user'] = $user['id']; // On stocke l'ID (ex: 2, 5, 12) et pas juste "true"
+        
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['prenom'] = $user['prenom'];
         $_SESSION['email'] = $user['email'];

@@ -99,13 +99,12 @@ if ($user_id_detail) {
                             </form>
                         </div>
 
-                        <div class="action-group">
+                       <div class="action-group">
                             <label>Compte:</label>
-                            <?php if ($user_detail['bloqué']): ?>
-                                <button class="btn btn-success">✓ Débloquer le compte</button>
-                            <?php else: ?>
-                                <button class="btn btn-danger">✗ Bloquer le compte</button>
-                            <?php endif; ?>
+                            <button class="btn-toggle-block btn <?php echo $user_detail['bloqué'] ? 'btn-success' : 'btn-danger'; ?>" 
+                                    data-id="<?php echo $user_detail['id']; ?>">
+                                <?php echo $user_detail['bloqué'] ? '✓ Débloquer le compte' : '✗ Bloquer le compte'; ?>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -154,6 +153,45 @@ if ($user_id_detail) {
     </main>
 
     <?php include '../includes/footer.html'; ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const boutons = document.querySelectorAll('.btn-toggle-block');
+
+        boutons.forEach(monBouton => {
+            monBouton.addEventListener('click', function(e) {
+                e.preventDefault(); // Empêche la page de recharger
+                
+                const idUser = this.getAttribute('data-id');
+                const donnees = new FormData();
+                donnees.append('action', 'toggle_block');
+                donnees.append('id', idUser);
+
+                // Envoi du message au serveur PHP
+                fetch('ajax_handler.php', {
+                    method: 'POST',
+                    body: donnees
+                })
+                .then(reponse => reponse.json())
+                .then(data => {
+                    if (data.success) {
+                        // Mise à jour de la couleur et du texte du bouton sans recharger !
+                        if (data.estBloque) {
+                            this.innerText = '✓ Débloquer le compte';
+                            this.classList.remove('btn-danger');
+                            this.classList.add('btn-success');
+                        } else {
+                            this.innerText = '✗ Bloquer le compte';
+                            this.classList.remove('btn-success');
+                            this.classList.add('btn-danger');
+                        }
+                    } else {
+                        alert("Erreur lors de la modification.");
+                    }
+                });
+            });
+        });
+    });
+    </script>
 
 </body>
 </html>
