@@ -150,7 +150,7 @@ $livreurs = getTousLesLivreurs();
                 <?php if ($_SESSION['role'] === 'livreur'): ?>
                     <div class="form-box">
                         <h4>Statut de la livraison</h4>
-                        <form method="post" action="traitement_livraison.php" class="workflow-form">
+                        <form method="post" id="form-statut-ajax">
                             <input type="hidden" name="id_commande" value="<?php echo htmlspecialchars($commande['id']); ?>" />
                             <select name="nouveau_statut" class="statusselect">
                                 <option value="terminée" <?php echo $commande['statut_commande'] === 'terminée' ? 'selected' : ''; ?>>Terminée</option>
@@ -162,7 +162,7 @@ $livreurs = getTousLesLivreurs();
                 <?php else: ?>
                     <div class="form-box">
                         <h4>Statut de la commande</h4>
-                        <form method="post" action="traitement_livraison.php" class="workflow-form">
+                        <form method="post" id="form-statut-ajax">
                             <input type="hidden" name="id_commande" value="<?php echo htmlspecialchars($commande['id']); ?>" />
                             <select name="nouveau_statut" class="statusselect">
                                 <option value="en attente" <?php echo $commande['statut_commande'] === 'en attente' ? 'selected' : ''; ?>>En attente</option>
@@ -177,7 +177,7 @@ $livreurs = getTousLesLivreurs();
 
                     <div class="form-box">
                         <h4>Assigner à un livreur</h4>
-                        <form method="post" action="traitement_livraison.php" class="workflow-form">
+                        <form method="post" id="form-livreur-ajax">
                             <input type="hidden" name="id_commande" value="<?php echo htmlspecialchars($commande['id']); ?>" />
                             <?php if (!empty($livreurs)): ?>
                                 <select name="id_livreur" class="livreur-select">
@@ -219,6 +219,52 @@ $livreurs = getTousLesLivreurs();
     </main>
 
     <?php include '../includes/footer.html'; ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Changement de Statut
+            const formStatut = document.getElementById('form-statut-ajax');
+            if (formStatut) {
+                formStatut.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const fd = new FormData(this);
+                    fd.append('action', 'update_order_status');
+
+                    fetch('ajax_handler.php', { method: 'POST', body: fd })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.success) {
+                            // On modifie l'affichage en direct
+                            document.querySelector('.statut-badge').innerText = data.nouveau_statut;
+                            alert('Statut mis à jour avec succès : ' + data.nouveau_statut);
+                        } else {
+                            alert('Erreur: ' + data.message);
+                        }
+                    });
+                });
+            }
+
+            // 2. Assignation Livreur
+            const formLivreur = document.getElementById('form-livreur-ajax');
+            if (formLivreur) {
+                formLivreur.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const fd = new FormData(this);
+                    fd.append('action', 'assign_livreur');
+
+                    fetch('ajax_handler.php', { method: 'POST', body: fd })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.success) {
+                            alert('Livreur assigné avec succès !');
+                        } else {
+                            alert('Erreur: ' + data.message);
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

@@ -87,5 +87,30 @@ $details = calculerDetailCommande($commande);
 
     <?php include '../includes/footer.html'; ?>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notationForm = document.querySelector('.notation-form');
+            
+            if (notationForm) {
+                notationForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Annule le rechargement classique de la page
+                    
+                    const formData = new FormData(this);
+                    
+                    fetch('traitement_notation.php', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        // Le PHP effectue un header('Location: ...'), on peut intercepter pour faire un retour asynchrone
+                        alert("✓ Votre note a bien été enregistrée. Merci !");
+                        window.location.href = "historique_commandes_client.php"; 
+                    }).catch(error => {
+                        alert("Une erreur est survenue lors de l'enregistrement de votre note.");
+                    });
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

@@ -97,7 +97,11 @@ if ($action === 'filter_menu') {
                 <h3 class="product-name"><?= htmlspecialchars($p['nom']) ?></h3>
                 <div class="product-action">
                     <span class="product-price"><?= number_format($p['prix'], 2, '.', ' ') ?> €</span>
-                    <button class="btn-brutal btn-small">AJOUTER</button>
+                    <form method="POST" action="traitement_ajouter_panier.php" style="margin:0;">
+                        <input type="hidden" name="action" value="ajouter">
+                        <input type="hidden" name="id_produit" value="<?= $p['id'] ?>">
+                        <button type="submit" class="btn-brutal btn-small">AJOUTER</button>
+                    </form>
                 </div>
             </div>
             <?php
@@ -106,7 +110,92 @@ if ($action === 'filter_menu') {
     echo '</div>';
     exit();
 }
-   
+
+// --- ACTION : MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) ---
+if ($action === 'update_order_status') {
+    $id_commande = (int)$_POST['id_commande'];
+    $nouveau_statut = $_POST['nouveau_statut'];
+
+    // Sécurité : Réservé aux rôles concernés
+    if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['restaurateur', 'admin', 'livreur'])) {
+        echo json_encode(['success' => false, 'message' => 'Accès refusé']);
+        exit();
+    }
+
+    if (mettreAJourStatutCommande($id_commande, $nouveau_statut)) {
+        echo json_encode(['success' => true, 'nouveau_statut' => $nouveau_statut]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour']);
+    }
+    exit();
+}
+
+// --- ACTION : ASSIGNER UN LIVREUR (RESTAURATEUR) ---
+if ($action === 'assign_livreur') {
+    $id_commande = (int)$_POST['id_commande'];
+    $id_livreur = (int)$_POST['id_livreur'];
+
+    if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['restaurateur', 'admin'])) {
+        echo json_encode(['success' => false, 'message' => 'Accès refusé']);
+        exit();
+    }
+
+    $livreur_final = ($id_livreur === 0) ? null : $id_livreur;
+    if (attribuerLivreurCommande($id_commande, $livreur_final)) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Erreur d\'assignation']);
+    }
+    exit();
+}
+
+// --- ACTION : MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE (CLIENT) ---
+if ($action === 'modify_order_quantity') {
+    $id_commande = (int)$_POST['id_commande'];
+    $id_produit = (int)$_POST['id_produit'];
+    $changement = (int)$_POST['changement']; // +1 ou -1
+
+    $commandes = getToutesLesCommandes();
+    $success = false;
+    $montant_supplementaire = 0;
+
+    foreach ($commandes as &$c) {
+        // La commande doit être au client et ne pas être commencée
+        if ($c['id'] === $id_commande && $c['user_id'] == $_SESSION['user'] && $c['statut_commande'] === 'en attente') {
+            foreach ($c['articles'] as $k => &$art) {
+                if ($art['id_produit'] == $id_produit) {
+                    $art['quantite'] += $changement;
+                    if ($art['quantite'] <= 0) {
+                        unset($c['articles'][$k]); // Retire l'article s'il tombe à 0
+                    }
+                    
+                    // Recalcul du montant
+                    $ancien_prix = floatval($c['montant_payé']);
+                    $details = calculerDetailCommande($c); // Fonction existante dans fonctions.php
+                    $nouveau_prix = $details['prix_apres_remise'];
+                    
+                    if ($nouveau_prix > $ancien_prix) {
+                        $montant_supplementaire = $nouveau_prix - $ancien_prix;
+                    }
+                    
+                    $c['montant_payé'] = $nouveau_prix;
+                    $c['articles'] = array_values($c['articles']); // Réindexer le tableau JSON
+                    $success = true;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    if ($success) {
+        enregistrerToutesLesCommandes($commandes);
+        echo json_encode(['success' => true, 'montant_supplementaire' => $montant_supplementaire]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Modification impossible à ce stade.']);
+    }
+    exit();
+}
 
 // Si aucune action ne correspond
 echo json_encode(['success' => false, 'message' => 'Action inconnue']);

@@ -71,6 +71,7 @@ $tous_les_plats = getTousLesPlats();
                         <div class="product-action">
                             <span class="product-price"><?php echo number_format($plat['prix'], 2, '.', ' ') ?> €</span>
                             <form method="POST" action="traitement_ajouter_panier.php" style="margin:0;">
+                                <input type="hidden" name="action" value="ajouter">
                                 <input type="hidden" name="id_produit" value="<?php echo $plat['id']; ?>">
                                 <button type="submit" class="btn-brutal btn-small">AJOUTER</button>
                             </form>

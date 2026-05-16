@@ -65,7 +65,7 @@ if ($id_commande) {
         $transaction = "CMD" . str_pad($id_commande, 7, "0", STR_PAD_LEFT); 
         $montant = number_format($total_apres_remise, 2, '.', '');
         
-        $retour = "http://localhost/CREATIVE-YUMLAND/src/retour_paiement.php"; 
+        $retour = "http://localhost/CREATIVE-YUMLAND/src/retour_paiment.php"; 
 
         // Calcul du hash de sécurité
         $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");

@@ -69,7 +69,17 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
                                     
                                     <div class="article-quantite">
                                         <span class="label">Quantité</span>
-                                        <span class="valeur"><?php echo $article['quantite']; ?></span>
+                                        <span class="valeur">
+                                            <?php if ($commande['statut_commande'] === 'en attente'): ?>
+                                                <button class="btn-brutal btn-modif-qty" data-cmd="<?php echo $commande['id']; ?>" data-prod="<?php echo $article['id_produit']; ?>" data-change="-1" style="padding: 2px 10px; margin-right: 10px; font-size:1rem;">-</button>
+                                            <?php endif; ?>
+                                            
+                                            <?php echo $article['quantite']; ?>
+                                            
+                                            <?php if ($commande['statut_commande'] === 'en attente'): ?>
+                                                <button class="btn-brutal btn-modif-qty" data-cmd="<?php echo $commande['id']; ?>" data-prod="<?php echo $article['id_produit']; ?>" data-change="1" style="padding: 2px 10px; margin-left: 10px; font-size:1rem;">+</button>
+                                            <?php endif; ?>
+                                        </span>
                                     </div>
                                     
                                     <!-- Si c'est un menu, afficher les plats inclus -->
@@ -137,6 +147,39 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
     </main>
 
     <?php include '../includes/footer.html'; ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.btn-modif-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idCommande = this.dataset.cmd;
+                    const idProduit = this.dataset.prod;
+                    const changement = this.dataset.change; // 1 ou -1
+
+                    const fd = new FormData();
+                    fd.append('action', 'modify_order_quantity');
+                    fd.append('id_commande', idCommande);
+                    fd.append('id_produit', idProduit);
+                    fd.append('changement', changement);
+
+                    fetch('ajax_handler.php', { method: 'POST', body: fd })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.success) {
+                            if (data.montant_supplementaire > 0) {
+                                alert('Votre commande a été modifiée.\nUn paiement additionnel de ' + data.montant_supplementaire.toFixed(2) + ' € est requis.');
+                            } else {
+                                alert('Commande modifiée avec succès. Vous bénéficiez d\'un avoir pour la différence.');
+                            }
+                            location.reload(); // Recharge pour afficher le nouveau panier recalculé
+                        } else {
+                            alert('Erreur : ' + data.message);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
