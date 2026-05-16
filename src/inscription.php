@@ -5,7 +5,7 @@ include '../includes/fonctions.php';
 <!DOCTYPE html>
 <html lang="fr">
 
-<<?php 
+<?php 
     $titre_page = "KØLD | INSCRIPTION";
     include '../includes/head.php';
 ?>
@@ -23,8 +23,7 @@ include '../includes/fonctions.php';
         <div class="kold-form">
             <h2 class="section-title-simple">Inscription</h2>
 
-            <form action="traitement_inscription.php" method="post">
-
+                    <form action="traitement_inscription.php" method="post" onsubmit="return validerInscription()">
                 <div class="input-group">
                     <label class="label-tech" for="nom">Nom</label>
                     <div class="input-col">
@@ -48,10 +47,11 @@ include '../includes/fonctions.php';
 
                 <div class="input-group">
                     <label class="label-tech" for="password">Mot de passe</label>
-                    <div class="input-col">
-                        <input type="password" id="password" name="password" placeholder="*******" required>
+                    <div class="input-col" style="display: flex; gap: 5px;">
+                        <input type="password" id="password" name="password" placeholder="*******" style="flex-grow: 1;" required>
+                        <button type="button" onclick="basculerMotDePasse('password')" style="cursor: pointer; background: var(--white); border: 3px solid var(--text); padding: 0 15px; font-size: 1.2rem;" title="Afficher/Masquer">👁️</button>
                     </div>
-                </div>
+                    </div>
 
                 <div class="input-group">
                     <label class="label-tech" for="telephone">Téléphone</label>
@@ -71,7 +71,11 @@ include '../includes/fonctions.php';
                 <div class="input-group">
                     <label class="label-tech" for="infos">Informations supplémentaires</label>
                     <div class="input-col">
-                        <input type="text" id="infos" name="infos" placeholder="INTERPHONE, ÉTAGE...">
+                          <input type="text" id="infos" name="infos" placeholder="INTERPHONE, ÉTAGE..." maxlength="150" oninput="mettreAJourCompteur('infos', 'compteur-infos', 150)">
+                        
+                        <div id="compteur-infos" style="font-size: 0.8rem; margin-top: 5px; text-align: right; font-family: 'Space Mono'; opacity: 0.8;">
+                            0 / 150
+                        </div>
                     </div>
                 </div>
 

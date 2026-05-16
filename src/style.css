@@ -1758,3 +1758,13 @@ body {
     }
 }
 }
+
+body.light-mode {
+    --bg: #ffffff;        
+    --text: #0a0a0a;      
+    --white: #ffffff;     
+    --accent: #ffcc00;    
+    
+    --border-weight: 4px;
+    --main-border: var(--border-weight) solid var(--text);
+}

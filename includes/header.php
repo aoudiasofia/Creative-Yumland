@@ -67,6 +67,10 @@ verifierUtilisateurBloque();
                 echo "<li class='user-status'>STATUT: INVITÉ</li>";
             }
             ?>
+            <li class="theme-controls" style="display: flex; gap: 5px; margin-left: 10px; align-items: center;">
+                <button onclick="changerTheme('kold-mode')" title="Mode KØLD" style="cursor: pointer; background: none; border: 1px solid white; color: white;">❄️</button>
+                <button onclick="changerTheme('light-mode')" title="Mode Clair" style="cursor: pointer; background: none; border: 1px solid white; color: white;">☀️</button>
+            </li>
 
         </ul>
     </nav>
