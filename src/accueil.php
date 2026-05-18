@@ -1,6 +1,8 @@
 <?php 
 session_start(); 
 include '../includes/fonctions.php';
+
+$top_plats = getPlatsPopulaires(3);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,38 +37,28 @@ include '../includes/fonctions.php';
         </section>
 
         <section class="menu-category" style="padding: 40px 5%; margin: 0 auto;">
-            <h2 class="category-title" style="text-align: center; display: block; font-size: 2rem; margin-bottom: 30px;">TOP COMMANDES</h2>
+            <h2 class="category-title" style="text-align: center; display: block; font-size: 2rem; margin-bottom: 30px; text-transform: uppercase; font-weight: 900;">
+                🔥 TOP COMMANDES 
+            </h2>
             
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-                <div class="product-card" style="width: 280px; padding: 15px;">
-                    <img src="../images/poke_saumon.png" alt="Le Poke Saumon" class="product-image" style="width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; border: none;">
-                    <h3 class="product-name" style="font-size: 1.2rem; margin-bottom: 5px;">Le Poke Saumon</h3>
-                    <p class="product-desc" style="font-size: 0.8rem; margin-bottom: 15px;">Notre best-seller. Saumon frais, avocat, concombre.</p>
-                    <div class="product-action">
-                        <button class="btn-brutal btn-small" style="padding: 10px 15px; font-size: 0.9rem;">AJOUTER</button>
-                        <span class="product-price" style="font-size: 1.2rem;">14.90 €</span>
+                <?php foreach ($top_plats as $plat): ?>
+                    <div class="product-card" style="width: 280px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <span style="background: #000; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 10px;">
+                                ⭐ <?= $plat['commandes'] ?> commandés
+                            </span>
+                            
+                            <img src="<?= htmlspecialchars($plat['image']) ?>" alt="<?= htmlspecialchars($plat['nom']) ?>" class="product-image" style="width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; border: none;">
+                            <h3 class="product-name" style="font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; font-weight: 900;"><?= htmlspecialchars($plat['nom']) ?></h3>
+                            <p class="product-desc" style="font-size: 0.8rem; margin-bottom: 15px; color: #555;"><?= htmlspecialchars($plat['description']) ?></p>
+                        </div>
+                        <div class="product-action" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+                            <a href="carte.php" class="btn-brutal btn-small" style="padding: 10px 15px; font-size: 0.9rem; text-decoration: none; text-align: center;">VOIR</a>
+                            <span class="product-price" style="font-size: 1.2rem; font-weight: 900;"><?= number_format($plat['prix'], 2, ',', ' ') ?> €</span>
+                        </div>
                     </div>
-                </div>
-
-                <div class="product-card" style="width: 280px; padding: 15px;">
-                    <img src="../images/wrap_banquise.png" alt="Le Wrap Banquise" class="product-image" style="width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; border: none;">
-                    <h3 class="product-name" style="font-size: 1.2rem; margin-bottom: 5px;">Le Wrap Banquise</h3>
-                    <p class="product-desc" style="font-size: 0.8rem; margin-bottom: 15px;">Le choix rapide. Thon mayo, maïs, salade croquante.</p>
-                    <div class="product-action">
-                        <button class="btn-brutal btn-small" style="padding: 10px 15px; font-size: 0.9rem;">AJOUTER</button>
-                        <span class="product-price" style="font-size: 1.2rem;">8.90 €</span>
-                    </div>
-                </div>
-
-                <div class="product-card" style="width: 280px; padding: 15px;">
-                    <img src="../images/iceberg.png" alt="Le Spécial Iceberg" class="product-image" style="width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; border: none;">
-                    <h3 class="product-name" style="font-size: 1.2rem; margin-bottom: 5px;">L'Iceberg</h3>
-                    <p class="product-desc" style="font-size: 0.8rem; margin-bottom: 15px;">Le dessert du moment. Sorbet menthe et pépites chocolat.</p>
-                    <div class="product-action">
-                        <button class="btn-brutal btn-small" style="padding: 10px 15px; font-size: 0.9rem;">AJOUTER</button>
-                        <span class="product-price" style="font-size: 1.2rem;">5.50 €</span>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
     </main>
