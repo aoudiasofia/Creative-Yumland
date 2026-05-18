@@ -495,4 +495,32 @@ function verifierUtilisateurBloque() {
     }
 }
 
+function getPlatsPopulaires($limite = 3) {
+    // 1. Chemin vers ton fichier JSON (vérifie bien le dossier !)
+    $chemin = __DIR__ . '/../data/produits.json'; 
+    if (!file_exists($chemin)) {
+        return [];
+    }
+
+    // 2. Décoder le fichier
+    $data = json_decode(file_get_contents($chemin), true);
+    
+    // On vérifie que la clé 'plats' existe bien
+    if (!isset($data['plats']) || !is_array($data['plats'])) {
+        return [];
+    }
+
+    $plats = $data['plats'];
+
+    // 3. ALGORITHME : Tri décroissant basé sur le champ 'commandes'
+    usort($plats, function($a, $b) {
+        $cmdA = $a['commandes'] ?? 0;
+        $cmdB = $b['commandes'] ?? 0;
+        return $cmdB <=> $cmdA; // Du plus commandé au moins commandé
+    });
+
+    // 4. On extrait le TOP (le nombre de plats demandé)
+    return array_slice($plats, 0, $limite);
+}
+
 ?>
