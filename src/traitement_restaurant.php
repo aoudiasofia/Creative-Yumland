@@ -8,14 +8,24 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'restaurateur' && $_SESS
     exit();
 }
 
+// ATTENTION : Vérifie bien que ton fichier s'appelle "produits.json" ou "menu.json" 
+// Ici, j'ai gardé "produits.json" car c'est ce que tu as écrit dans ton code.
 $chemin_menu = __DIR__ . '/../data/produits.json';
+
+// Vérification de sécurité pour être sûr que le fichier existe avant d'essayer de le lire
+if (!file_exists($chemin_menu)) {
+    die("Erreur critique de chemin : Le fichier JSON est introuvable à cet emplacement : " . htmlspecialchars($chemin_menu));
+}
+
 $data = json_decode(file_get_contents($chemin_menu), true);
 
-if (!isset($data['plats'])) {
+if (!isset($data['plats']) || !is_array($data['plats'])) {
     $data['plats'] = [];
 }
 
+// ==========================================
 // 1. ACTION : AJOUTER UN PLAT
+// ==========================================
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'ajouter') {
     $nom = htmlspecialchars($_POST['nom']);
     $description = htmlspecialchars($_POST['description']);
@@ -35,23 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (isset($_FILES['image_plat']) && $_FILES['image_plat']['error'] === 0) {
         $dossier_destination = __DIR__ . '/../images/';
         
-        // Sécurité : Vérifier l'extension du fichier
         $nom_fichier = $_FILES['image_plat']['name'];
         $extension = strtolower(pathinfo($nom_fichier, PATHINFO_EXTENSION));
         $extensions_autorisees = ['jpg', 'jpeg', 'png', 'webp'];
 
         if (in_array($extension, $extensions_autorisees)) {
-            // On renomme le fichier de manière unique pour éviter les doublons ou bugs d'accents
+            // On renomme le fichier de manière unique
             $nouveau_nom_image = 'produit_' . $nouvel_id . '.' . $extension;
             $chemin_complet_stockage = $dossier_destination . $nouveau_nom_image;
 
-            // Déplacement du fichier temporaire vers ton vrai dossier images
             if (move_uploaded_file($_FILES['image_plat']['tmp_name'], $chemin_complet_stockage)) {
                 $chemin_image_bdd = "../images/" . $nouveau_nom_image;
             }
         }
     }
-    // ------------------------------------
 
     // Structure exacte insérée dans ton JSON
     $nouveau_plat = [
@@ -62,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         "categorie" => $categorie,
         "regime" => $regime,
         "commandes" => 0, 
-        "image" => $chemin_image_bdd // Utilise le chemin généré dynamiquement !
+        "image" => $chemin_image_bdd
     ];
 
     $data['plats'][] = $nouveau_plat;
@@ -74,6 +81,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit();
 }
 
-// Si aucune action ne correspond, retour sécurité
-header('Location: restaurant.php');
+// ==========================================
+// 2. ACTION : SUPPRIMER UN PLAT (RÉINTRODUITE ET FIABILISÉE)
+// ==========================================
+if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['id'])) {
+    $id_a_supprimer = (int)$_GET['id'];
+    
+    $nouveaux_plats = [];
+    
+    // On passe en revue les plats et on exclut celui qui doit sauter
+    foreach ($data['plats'] as $plat) {
+        if ((int)$plat['id'] !== $id_a_supprimer) {
+            $nouveaux_plats[] = $plat;
+        }
+    }
+
+    // On écrase l'ancienne liste par la nouvelle liste filtrée
+    $data['plats'] = $nouveaux_plats;
+
+    // Enregistrement forcé dans ton fichier JSON
+    $sauvegarde = file_put_contents($chemin_menu, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    
+    if ($sauvegarde === false) {
+        die("Erreur : Impossible d'écrire ou de modifier le fichier JSON. Vérifie ses droits d'écriture.");
+    }
+    
+    header('Location: restaurant_carte.php?statut=supprime');
+    exit();
+}
+
+// Si aucune action ne correspond, retour sécurité vers l'espace carte
+header('Location: restaurant_carte.php');
 exit();

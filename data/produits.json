@@ -1,164 +1,164 @@
 {
-  "plats": [
-    {
-      "id": 1,
-      "nom": "Le Poke Saumon",
-      "description": "Saumon frais, avocat, concombre et sauce soja onctueuse.",
-      "prix": 14.90,
-      "categorie": "bowls",
-      "regime": "classique",
-      "commandes": 150,
-      "image": "../images/poke_saumon.png"
-    },
-    {
-      "id": 2,
-      "nom": "Le Poke Poulet",
-      "description": "Poulet croustillant (froid), maïs, mangue et sauce sésame.",
-      "prix": 13.50,
-      "categorie": "bowls",
-      "regime": "classique",
-      "commandes": 85,
-      "image": "../images/poke_poulet.png"
-    },
-    {
-      "id": 3,
-      "nom": "Le Veggie Ice",
-      "description": "Tofu mariné, edamames, carottes râpées et éclats de cacahuètes.",
-      "prix": 12.90,
-      "categorie": "bowls",
-      "regime": "vegetarien",
-      "commandes": 42,
-      "image": "../images/veggie_ice.png"
-    },
-    {
-      "id": 4,
-      "nom": "La Poke Crevette",
-      "description": "Riz froid, crevettes roses, radis noir, edamame et sauce citronnée.",
-      "prix": 15.50,
-      "categorie": "bowls",
-      "regime": "classique",
-      "commandes": 65,
-      "image": "../images/poke_crevette.png"
-    },
-    {
-      "id": 5,
-      "nom": "Le Wrap Banquise",
-      "description": "Tortilla de blé, thon mayo, maïs, salade croquante et tomates.",
-      "prix": 8.90,
-      "categorie": "wraps",
-      "regime": "classique",
-      "commandes": 110,
-      "image": "../images/wrap_banquise.png"
-    },
-    {
-      "id": 6,
-      "nom": "Le Wrap Arctique",
-      "description": "Poulet végé, sauce césar froide, parmesan et feuilles de romaine.",
-      "prix": 9.50,
-      "categorie": "wraps",
-      "regime": "vegetarien",
-      "commandes": 95,
-      "image": "../images/wrap_arctique.png"
-    },
-    {
-      "id": 7,
-      "nom": "Le Sandwich Nordique",
-      "description": "Pain de mie complet, saumon fumé, fromage frais à l'aneth et concombre.",
-      "prix": 9.90,
-      "categorie": "wraps",
-      "regime": "classique",
-      "commandes": 70,
-      "image": "../images/sandwich_nordique.png"
-    },
-    {
-      "id": 8,
-      "nom": "La Salade Cristal",
-      "description": "Pâtes froides, mozzarella, tomates cerises et pesto.",
-      "prix": 11.50,
-      "categorie": "salades",
-      "regime": "vegetarien",
-      "commandes": 55,
-      "image": "../images/salade_cristal.png"
-    },
-    {
-      "id": 9,
-      "nom": "La Salade fraîche",
-      "description": "Mélange de crevettes roses, avocat, pamplemousse, assaisonné à l'aneth fraîche.",
-      "prix": 12.90,
-      "categorie": "salades",
-      "regime": "classique",
-      "commandes": 48,
-      "image": "../images/salade_fraiche.png"
-    },
-    {
-      "id": 10,
-      "nom": "Salade Blanche",
-      "description": "Endives croquantes, pomme, noix et copeaux de fromage de chèvre.",
-      "prix": 10.90,
-      "categorie": "salades",
-      "regime": "vegetarien",
-      "commandes": 30,
-      "image": "../images/salade_blanche.png"
-    },
-    {
-      "id": 11,
-      "nom": "Le Spécial 'Iceberg'",
-      "description": "Énorme boule de sorbet menthe avec des pépites de chocolat noir.",
-      "prix": 5.50,
-      "categorie": "desserts",
-      "regime": "vegetarien",
-      "commandes": 210,
-      "image": "../images/iceberg.png"
-    },
-    {
-      "id": 12,
-      "nom": "Cheesecake aux Fruits Rouges",
-      "description": "Gâteau au fromage blanc très frais sur un biscuit croquant, coulis glacé.",
-      "prix": 6.90,
-      "categorie": "desserts",
-      "regime": "vegetarien",
-      "commandes": 140,
-      "image": "../images/cheesecake.png"
-    },
-    {
-      "id": 13,
-      "nom": "Le Dôme de Neige",
-      "description": "Coque de glace vanille, noisettes croquantes et cœur de meringue.",
-      "prix": 6.50,
-      "categorie": "desserts",
-      "regime": "vegetarien",
-      "commandes": 90,
-      "image": "../images/dome_de_neige.png"
-    },
-    {
-      "id": 14,
-      "nom": "Café Glacé",
-      "description": "Un café classique servi avec des glaçons.",
-      "prix": 3.50,
-      "categorie": "boissons",
-      "regime": "vegetarien",
-      "commandes": 300,
-      "image": "../images/cafe_glace.png"
-    },
-    {
-      "id": 15,
-      "nom": "Blue Lagoon",
-      "description": "Cocktail bleu (Vodka, curaçao, citron) très rafraîchissant.",
-      "prix": 8.50,
-      "categorie": "boissons",
-      "regime": "vegetarien",
-      "commandes": 180,
-      "image": "../images/blue_lagoon.png"
-    },
-    {
-      "id": 16,
-      "nom": "Margarita Givrée",
-      "description": "Tequila et citron, mixés avec de la glace pilée.",
-      "prix": 9.00,
-      "categorie": "boissons",
-      "regime": "vegetarien",
-      "commandes": 50,
-      "image": "../images/margarita_givree.png"
-    }
-  ]
+    "plats": [
+        {
+            "id": 1,
+            "nom": "Le Poke Saumon",
+            "description": "Saumon frais, avocat, concombre et sauce soja onctueuse.",
+            "prix": 14.9,
+            "categorie": "bowls",
+            "regime": "classique",
+            "commandes": 150,
+            "image": "..\/images\/poke_saumon.png"
+        },
+        {
+            "id": 2,
+            "nom": "Le Poke Poulet",
+            "description": "Poulet croustillant (froid), maïs, mangue et sauce sésame.",
+            "prix": 13.5,
+            "categorie": "bowls",
+            "regime": "classique",
+            "commandes": 85,
+            "image": "..\/images\/poke_poulet.png"
+        },
+        {
+            "id": 3,
+            "nom": "Le Veggie Ice",
+            "description": "Tofu mariné, edamames, carottes râpées et éclats de cacahuètes.",
+            "prix": 12.9,
+            "categorie": "bowls",
+            "regime": "vegetarien",
+            "commandes": 42,
+            "image": "..\/images\/veggie_ice.png"
+        },
+        {
+            "id": 4,
+            "nom": "La Poke Crevette",
+            "description": "Riz froid, crevettes roses, radis noir, edamame et sauce citronnée.",
+            "prix": 15.5,
+            "categorie": "bowls",
+            "regime": "classique",
+            "commandes": 65,
+            "image": "..\/images\/poke_crevette.png"
+        },
+        {
+            "id": 5,
+            "nom": "Le Wrap Banquise",
+            "description": "Tortilla de blé, thon mayo, maïs, salade croquante et tomates.",
+            "prix": 8.9,
+            "categorie": "wraps",
+            "regime": "classique",
+            "commandes": 110,
+            "image": "..\/images\/wrap_banquise.png"
+        },
+        {
+            "id": 6,
+            "nom": "Le Wrap Arctique",
+            "description": "Poulet végé, sauce césar froide, parmesan et feuilles de romaine.",
+            "prix": 9.5,
+            "categorie": "wraps",
+            "regime": "vegetarien",
+            "commandes": 95,
+            "image": "..\/images\/wrap_arctique.png"
+        },
+        {
+            "id": 7,
+            "nom": "Le Sandwich Nordique",
+            "description": "Pain de mie complet, saumon fumé, fromage frais à l'aneth et concombre.",
+            "prix": 9.9,
+            "categorie": "wraps",
+            "regime": "classique",
+            "commandes": 70,
+            "image": "..\/images\/sandwich_nordique.png"
+        },
+        {
+            "id": 8,
+            "nom": "La Salade Cristal",
+            "description": "Pâtes froides, mozzarella, tomates cerises et pesto.",
+            "prix": 11.5,
+            "categorie": "salades",
+            "regime": "vegetarien",
+            "commandes": 55,
+            "image": "..\/images\/salade_cristal.png"
+        },
+        {
+            "id": 9,
+            "nom": "La Salade fraîche",
+            "description": "Mélange de crevettes roses, avocat, pamplemousse, assaisonné à l'aneth fraîche.",
+            "prix": 12.9,
+            "categorie": "salades",
+            "regime": "classique",
+            "commandes": 48,
+            "image": "..\/images\/salade_fraiche.png"
+        },
+        {
+            "id": 10,
+            "nom": "Salade Blanche",
+            "description": "Endives croquantes, pomme, noix et copeaux de fromage de chèvre.",
+            "prix": 10.9,
+            "categorie": "salades",
+            "regime": "vegetarien",
+            "commandes": 30,
+            "image": "..\/images\/salade_blanche.png"
+        },
+        {
+            "id": 11,
+            "nom": "Le Spécial 'Iceberg'",
+            "description": "Énorme boule de sorbet menthe avec des pépites de chocolat noir.",
+            "prix": 5.5,
+            "categorie": "desserts",
+            "regime": "vegetarien",
+            "commandes": 210,
+            "image": "..\/images\/iceberg.png"
+        },
+        {
+            "id": 12,
+            "nom": "Cheesecake aux Fruits Rouges",
+            "description": "Gâteau au fromage blanc très frais sur un biscuit croquant, coulis glacé.",
+            "prix": 6.9,
+            "categorie": "desserts",
+            "regime": "vegetarien",
+            "commandes": 140,
+            "image": "..\/images\/cheesecake.png"
+        },
+        {
+            "id": 13,
+            "nom": "Le Dôme de Neige",
+            "description": "Coque de glace vanille, noisettes croquantes et cœur de meringue.",
+            "prix": 6.5,
+            "categorie": "desserts",
+            "regime": "vegetarien",
+            "commandes": 90,
+            "image": "..\/images\/dome_de_neige.png"
+        },
+        {
+            "id": 14,
+            "nom": "Café Glacé",
+            "description": "Un café classique servi avec des glaçons.",
+            "prix": 3.5,
+            "categorie": "boissons",
+            "regime": "vegetarien",
+            "commandes": 300,
+            "image": "..\/images\/cafe_glace.png"
+        },
+        {
+            "id": 15,
+            "nom": "Blue Lagoon",
+            "description": "Cocktail bleu (Vodka, curaçao, citron) très rafraîchissant.",
+            "prix": 8.5,
+            "categorie": "boissons",
+            "regime": "vegetarien",
+            "commandes": 180,
+            "image": "..\/images\/blue_lagoon.png"
+        },
+        {
+            "id": 16,
+            "nom": "Margarita Givrée",
+            "description": "Tequila et citron, mixés avec de la glace pilée.",
+            "prix": 9,
+            "categorie": "boissons",
+            "regime": "vegetarien",
+            "commandes": 50,
+            "image": "..\/images\/margarita_givree.png"
+        }
+    ]
 }
