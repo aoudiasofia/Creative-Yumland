@@ -37,6 +37,12 @@ foreach ($commandes as $commande) {
 
     <main class="restaurant-container">
         <h1>Gestion des Commandes</h1>
+
+        <div style="margin: 20px 0 40px 0;">
+            <a href="restaurant_carte.php" class="btn-brutal" style="display: inline-block; background: #000; color: #fff; padding: 15px 25px; font-weight: 900; text-transform: uppercase; text-decoration: none; border: 3px solid #000; box-shadow: 5px 5px 0px #fff;">
+                ⚙️ GÉRER LA CARTE ET LES PLATS 
+            </a>
+        </div>
         
         <?php
         $statuts = ["en attente", "a livrée", "en livraison", "terminée", "abandonnée"];
