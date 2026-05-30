@@ -54,12 +54,26 @@ foreach ($commandes as $commande) {
                 echo "<div class='commandes-list'>";
                 
                 foreach ($grouped_commandes[$statut] as $commande) {
-                    echo "<div class='commande-item'>";
+                    echo "<div class='commande-item' style='border: 3px solid #000; padding: 15px; background: #fff; box-shadow: 4px 4px 0px #000; margin-bottom: 15px;'>";
                     echo "<p><strong>ID Commande:</strong> " . htmlspecialchars($commande['id']) . "</p>";
                     echo "<p><strong>Date:</strong> " . htmlspecialchars($commande['date_heure']) . "</p>";
                     echo "<p><strong>Livraison:</strong> " . ($commande['quand'] === 'maintenant' ? 'Dès que possible' : 'Plus tard') . "</p>";
                     echo "<p><strong>Montant:</strong> " . htmlspecialchars($commande['montant_payé']) . " €</p>";
-                    echo "<a href='detail_commande.php?id=" . $commande['id'] . "' class='btn-detail'>Voir le détail</a>";
+    
+                    echo "<div style='display: flex; gap: 10px; margin-top: 10px;'>";
+                    // Bouton pour voir les détails
+                    echo "<a href='detail_commande.php?id=" . $commande['id'] . "' class='btn-detail' style='text-decoration: none; border: 2px solid #000; padding: 5px 10px; background: #fff; color: #000; font-weight: bold; font-size: 0.85rem;'>Détails</a>";
+
+                    // BOUTONS SELON LE STATUT
+                    if ($statut === 'en attente') {
+                        echo "<a href='traitement_statut.php?id=" . $commande['id'] . "&nouveau_statut=a livrée' style='text-decoration: none; border: 2px solid #000; padding: 5px 10px; background: #00ff66; color: #000; font-weight: 900; font-size: 0.85rem; box-shadow: 2px 2px 0px #000;'>✔️ PRÊTE (À LIVRER)</a>";
+                    } elseif ($statut === 'a livrée') {
+                        echo "<span style='font-size: 0.85rem; color: #666; font-style: italic; align-self: center;'>⏳ En attente d'un livreur...</span>";
+                    } elseif ($statut === 'en livraison') {
+                        echo "<span style='font-size: 0.85rem; color: #0055ff; font-weight: bold; align-self: center;'>🚴 En cours de livraison</span>";
+                    }
+                    echo "</div>";
+    
                     echo "</div>";
                 }
                 
