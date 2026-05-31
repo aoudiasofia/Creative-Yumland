@@ -23,7 +23,7 @@ include '../includes/fonctions.php';
         <div class="kold-form">
             <h2 class="section-title-simple">Inscription</h2>
 
-                    <form action="traitement_inscription.php" method="post" onsubmit="return validerInscription()">
+            <form action="traitement_inscription.php" method="post" onsubmit="return validerInscription()">
                 <div class="input-group">
                     <label class="label-tech" for="nom">Nom</label>
                     <div class="input-col">
@@ -47,11 +47,16 @@ include '../includes/fonctions.php';
 
                 <div class="input-group">
                     <label class="label-tech" for="password">Mot de passe</label>
-                    <div class="input-col" style="display: flex; gap: 5px;">
-                        <input type="password" id="password" name="password" placeholder="*******" style="flex-grow: 1;" required>
-                        <button type="button" onclick="basculerMotDePasse('password')" style="cursor: pointer; background: var(--white); border: 3px solid var(--text); padding: 0 15px; font-size: 1.2rem;" title="Afficher/Masquer">👁️</button>
+                    <div class="input-col" style="display: flex; flex-direction: column; gap: 5px;">
+                        <div style="display: flex; gap: 5px;">
+                            <input type="password" id="password" name="password" placeholder="*******" style="flex-grow: 1;" maxlength="20" oninput="mettreAJourCompteur('password', 'compteur-mdp-insc', 20)" required>
+                            <button type="button" onclick="basculerMotDePasse('password')" style="cursor: pointer; background: var(--white); border: 3px solid var(--text); padding: 0 15px; font-size: 1.2rem;" title="Afficher/Masquer">👁️</button>
+                        </div>
+                        <div id="compteur-mdp-insc" style="font-size: 0.8rem; text-align: right; font-family: 'Space Mono'; opacity: 0.8;">
+                            0 / 20
+                        </div>
                     </div>
-                    </div>
+                </div>
 
                 <div class="input-group">
                     <label class="label-tech" for="telephone">Téléphone</label>

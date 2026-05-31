@@ -1768,3 +1768,35 @@ body.light-mode {
     --border-weight: 4px;
     --main-border: var(--border-weight) solid var(--text);
 }
+
+
+body.accessible-mode {
+    --bg: #ffffff !important;
+    --text: #000000 !important;
+    --white: #ffffff !important;
+    --accent: #000000 !important;
+    --border-weight: 6px !important;
+    --main-border: var(--border-weight) solid var(--text) !important;
+    
+    font-size: 1.35rem !important;
+}
+
+body.accessible-mode * {
+    font-size: inherit !important;
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+body.accessible-mode .main-title {
+    font-size: clamp(3.5rem, 15vw, 9rem) !important;
+}
+
+body.accessible-mode .btn-brutal,
+body.accessible-mode .btn-login,
+body.accessible-mode .product-card,
+body.accessible-mode .kold-form,
+body.accessible-mode .search-form {
+    box-shadow: 12px 12px 0px #000000 !important;
+    background-color: #ffffff !important;
+    border: var(--main-border) !important;
+}

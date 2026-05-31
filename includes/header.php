@@ -50,6 +50,7 @@ verifierUtilisateurBloque();
             // Bouton panier dynamique si connecté
             if (isset($_SESSION['user']) && $nom_page === 'carte') {
                 initialiserPanier();
+                $total_panier = powder_total_panier();
                 $total_panier = calculerTotalPanier();
                 // Utilisation de $_SESSION['user'] pour l'ID
                 $user_info = getInfoUser($_SESSION['user']);
@@ -70,6 +71,7 @@ verifierUtilisateurBloque();
             <li class="theme-controls" style="display: flex; gap: 5px; margin-left: 10px; align-items: center;">
                 <button onclick="changerTheme('kold-mode')" title="Mode KØLD" style="cursor: pointer; background: none; border: 1px solid white; color: white;">❄️</button>
                 <button onclick="changerTheme('light-mode')" title="Mode Clair" style="cursor: pointer; background: none; border: 1px solid white; color: white;">☀️</button>
+                <button onclick="changerTheme('accessible-mode')" title="Mode Accessibilité / Gros caractères" style="cursor: pointer; background: none; border: 1px solid white; color: white;">👁️‍🗨️</button>
             </li>
 
         </ul>
