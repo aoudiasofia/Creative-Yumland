@@ -23,6 +23,13 @@ if ($action === 'toggle_block') {
             $user['bloqué'] = !$user['bloqué'];
             $success = true;
             $nouvelEtat = $user['bloqué'];
+            
+            // TRIGGER 3 : Journalisation de l'action de modération effectuée par l'admin
+            $terme_action = $nouvelEtat ? "BLOQUÉ" : "DÉBLOQUÉ";
+            $admin_identite = isset($_SESSION['user']) ? "ID: " . $_SESSION['user'] : "ID inconnu";
+            
+            ajouterLog('ADMIN_ACTION', "L'administrateur (" . $admin_identite . ") a " . $terme_action . " l'utilisateur (ID : " . $idSaisi . " | Email : " . $user['email'] . ").");
+            
             break;
         }
     }

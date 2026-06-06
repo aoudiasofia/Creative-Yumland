@@ -10,6 +10,16 @@ function ajouterAuPanier($id_produit, $quantite = 1) {
     }
 }
 
+function ajouterLog($type, $details) {
+    $chemin_log = __DIR__ . '/../data/incidents.log';
+    
+    $date_heure = date('Y-m-d H:i:s');
+    
+    $ligne_log = "[" . $date_heure . "] [" . strtoupper($type) . "] " . $details . PHP_EOL;
+    
+    file_put_contents($chemin_log, $ligne_log, FILE_APPEND | LOCK_EX);
+}
+
 function ajouterNotationCommande($id_commande, $notation, $commentaire = '') {
     $commandes = getToutesLesCommandes();
     $trouve = false;
@@ -135,12 +145,14 @@ function calculerTotalPanier() {
 function creerNouvelUtilisateur($nom, $prenom, $mdp, $email, $tel, $adresse, $infos) {
     $fichier_users = __DIR__ . '/../data/users.json';
     
+    $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
+    
     $nouvel_user = [
         "id" => getDernierId($fichier_users) + 1,
         "nom" => strtoupper($nom),
         "prenom" => $prenom,
         "email" => $email,
-        "password" => $mdp,
+        "password" => $mdp_hache, // Stockage de la clé de hachage sécurisée
         "tel" => $tel,
         "role" => "client",
         "adresse" => $adresse,
@@ -162,9 +174,9 @@ function creerNouvelUtilisateur($nom, $prenom, $mdp, $email, $tel, $adresse, $in
     $users[] = $nouvel_user;
     
     if (file_put_contents($fichier_users, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-        return true; // Succès
+        return true; 
     } else {
-        return false; // Échec
+        return false; 
     }
 }
 
@@ -461,12 +473,20 @@ function verifierConnexion($email, $password) {
     
     foreach ($users as $user) {
         if (isset($user['email']) && isset($user['password'])) {
-            if ($user['email'] === $email && $user['password'] === $password) {
-                return $user['id'];
+            if (strtolower($user['email']) === strtolower($email)) {
+                // TÂCHE 1 : Vérification du mot de passe haché
+                if (password_verify($password, $user['password'])) {
+                    return $user['id'];
+                } else {
+                    // TRIGER 1 : Le mot de passe associé à cet e-mail est incorrect
+                    ajouterLog('CONNEXION_ECHEC', "Mot de passe incorrect pour la tentative sur le compte : " . $email);
+                    return false;
+                }
             }
         }
     }
     
+    ajouterLog('CONNEXION_ECHEC', "Tentative de connexion avec un e-mail non enregistré : " . $email);
     return false;
 }
 
@@ -483,6 +503,9 @@ function verifierUtilisateurBloque() {
         foreach ($utilisateurs as $u) {
             if ($u['id'] === $idUser) {
                 if (isset($u['bloqué']) && $u['bloqué'] === true) {
+                    // TRIGGER 2 : Un utilisateur banni tente de forcer l'accès à l'environnement applicatif
+                    ajouterLog('ACCES_FORCE', "L'utilisateur bloqué (ID : " . $idUser . " | Email : " . $u['email'] . ") a tenté de charger une page protégée.");
+
                     // L'utilisateur est bloqué dans le fichier -> On détruit sa session
                     session_unset();
                     session_destroy();
