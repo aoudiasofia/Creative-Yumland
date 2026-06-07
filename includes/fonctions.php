@@ -495,6 +495,81 @@ function viderPanier() {
     $_SESSION['panier'] = [];
 }
 
+function verifierEtJouerRoulette($id_user, $id_commande) {
+    $fichier_commandes = __DIR__ . '/../data/commandes.json';
+    if (!file_exists($fichier_commandes)) return false;
+
+    $commandes = json_decode(file_get_contents($fichier_commandes), true);
+    $deja_joue = false;
+    $commande_existe = false;
+    $index_commande = -1;
+
+    // 1. Vérification que la commande existe, appartient à l'utilisateur et n'a pas déjà bénéficié du tirage
+    foreach ($commandes as $index => $commande) {
+        if ($commande['id'] === $id_commande && $commande['user_id'] == $id_user) {
+            $commande_existe = true;
+            $index_commande = $index;
+            if (isset($commande['roulette_jouee']) && $commande['roulette_jouee'] === true) {
+                $deja_joue = true;
+            }
+            break;
+        }
+    }
+
+    if (!$commande_existe || $deja_joue) {
+        return false;
+    }
+
+    // 2. Tirage au sort selon les probabilités demandées
+    $tirage = rand(1, 100);
+    if ($tirage <= 50) {
+        $remise_pourcent = 0; // 50% de chances
+    } elseif ($tirage <= 90) {
+        $remise_pourcent = 5; // 40% de chances (50 + 40)
+    } else {
+        $remise_pourcent = 10; // 10% de chances (90 + 10)
+    }
+
+    $fichier_users = __DIR__ . '/../data/users.json';
+    $users = json_decode(file_get_contents($fichier_users), true);
+
+    // 3. ÉTAPE A : Enregistrer temporairement la remise dans le json de l'utilisateur
+    if ($remise_pourcent > 0) {
+        foreach ($users as &$user) {
+            if ($user['id'] == $id_user) {
+                $user['remise'] = (string)$remise_pourcent;
+                break;
+            }
+        }
+        file_put_contents($fichier_users, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    // 4. ÉTAPE B : Gérer la remise qui s'applique à cette commande
+    $commandes[$index_commande]['roulette_jouee'] = true; // Sécurise la commande contre les rafraîchissements
+    if ($remise_pourcent > 0) {
+        $montant_actuel = floatval($commandes[$index_commande]['montant_payé']);
+        $montant_remise = round($montant_actuel * ($remise_pourcent / 100), 2);
+        
+        $commandes[$index_commande]['remise'] += $montant_remise;
+        $commandes[$index_commande]['montant_payé'] = max(0, $montant_actuel - $montant_remise);
+    }
+    file_put_contents($fichier_commandes, json_encode($commandes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+    // 5. ÉTAPE C : Supprimer la remise du profil de l'utilisateur (Usage unique pour la commande)
+    if ($remise_pourcent > 0) {
+        $users = json_decode(file_get_contents($fichier_users), true);
+        foreach ($users as &$user) {
+            if ($user['id'] == $id_user) {
+                $user['remise'] = "0";
+                break;
+            }
+        }
+        file_put_contents($fichier_users, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    return $remise_pourcent;
+}
+
 function verifierUtilisateurBloque() {
     if (isset($_SESSION['user'])) {
         $idUser = (int)$_SESSION['user'];

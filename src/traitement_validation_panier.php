@@ -81,8 +81,8 @@ if ($id_commande) {
               <script>document.getElementById('cybank_form').submit();</script>";
         exit;
     } else {
-        // Si le client a choisi "Payer plus tard"
-        header('Location: historique_commandes_client.php?success=1&id=' . $id_commande);
+        // Si le client a choisi "Payer plus tard", redirection vers la roulette
+        header('Location: roulette.php?id_commande=' . $id_commande);
         exit;
     }
 } else {
