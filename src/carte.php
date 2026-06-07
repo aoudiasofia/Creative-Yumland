@@ -125,16 +125,15 @@ $tous_les_plats = getTousLesPlats();
         });
     });
 
-    // Changement du filtre spécifique (Végé, Gluten...)
+    // Changement du filtre spécifique (Végé)
     document.getElementById('refine-filter').addEventListener('change', function() {
         activeRefine = this.value;
         updateMenu();
     });
 
-    /**
-     * TRIS (LOCAUX)
-     * Réorganise les cartes déjà présentes sans appel serveur
-     */
+    //TRIS (LOCAUX)
+      //Réorganise les cartes déjà présentes sans appel serveur
+     //
     document.querySelectorAll('.sort-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const sortType = this.getAttribute('data-sort');

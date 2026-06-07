@@ -222,7 +222,7 @@ $livreurs = getTousLesLivreurs();
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Changement de Statut
+            // Changement de Statut
             const formStatut = document.getElementById('form-statut-ajax');
             if (formStatut) {
                 formStatut.addEventListener('submit', function(e) {
@@ -244,7 +244,7 @@ $livreurs = getTousLesLivreurs();
                 });
             }
 
-            // 2. Assignation Livreur
+            // Assignation Livreur
             const formLivreur = document.getElementById('form-livreur-ajax');
             if (formLivreur) {
                 formLivreur.addEventListener('submit', function(e) {
