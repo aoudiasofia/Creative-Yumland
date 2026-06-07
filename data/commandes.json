@@ -132,7 +132,7 @@
         "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "payé",
-        "statut_commande": "en livraison",
+        "statut_commande": "abandonnée",
         "date_heure": "2026-03-31 15:30",
         "montant_payé": 16,
         "remise": 0,

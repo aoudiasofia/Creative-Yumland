@@ -159,6 +159,50 @@
             "regime": "vegetarien",
             "commandes": 50,
             "image": "..\/images\/margarita_givree.png"
+        },
+        {
+            "id": 17,
+            "nom": "Formule Fjord Express",
+            "description": "Le combo idéal du midi : un Wrap au choix + une boisson fraîche.",
+            "prix": 11.0,
+            "categorie": "menus",
+            "regime": "classique",
+            "commandes": 145,
+            "image": "..\/images\/menu_fjord.png",
+            "plats_inclus": [5, 14]
+        },
+        {
+            "id": 18,
+            "nom": "Menu Toundra XL",
+            "description": "Pour les grosses faims : un grand Poke Bowl au choix + un dessert givré + une boisson.",
+            "prix": 21.5,
+            "categorie": "menus",
+            "regime": "classique",
+            "commandes": 92,
+            "image": "..\/images\/menu_toundra.png",
+            "plats_inclus": [1, 13, 14]
+        },
+        {
+            "id": 19,
+            "nom": "Le Pack Banquise Végé",
+            "description": "Formule 100% verte : Le Veggie Ice bowl + un dessert au choix.",
+            "prix": 16.0,
+            "categorie": "menus",
+            "regime": "vegetarien",
+            "commandes": 68,
+            "image": "..\/images\/menu_veggie.png",
+            "plats_inclus": [3, 11]
+        },
+        {
+            "id": 20,
+            "nom": "Soupe Froide Permafrost",
+            "description": "Entrée croquante : Velouté glacé de concombre, menthe fraîche et yaourt grec.",
+            "prix": 5.0,
+            "categorie": "salades",
+            "regime": "vegetarien",
+            "commandes": 34,
+            "image": "..\/images\/soupe_permafrost.png"
         }
+
     ]
 }

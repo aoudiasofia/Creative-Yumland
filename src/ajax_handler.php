@@ -7,9 +7,9 @@ $cheminFichier = '../data/users.json';
 $action = $_POST['action'] ?? '';
 $idSaisi = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
-// --- ACTION 1 : BLOQUER UN UTILISATEUR (RESERVÉ ADMIN) ---
+// BLOQUER UN UTILISATEUR (RESERVÉ ADMIN) 
 if ($action === 'toggle_block') {
-    // La sécurité admin est UNIQUEMENT ici
+    // La sécurité admin ici
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         echo json_encode(['success' => false, 'message' => 'Accès refusé : réservé à l\'admin']);
         exit();
@@ -24,7 +24,7 @@ if ($action === 'toggle_block') {
             $success = true;
             $nouvelEtat = $user['bloqué'];
             
-            // TRIGGER 3 : Journalisation de l'action de modération effectuée par l'admin
+            
             $terme_action = $nouvelEtat ? "BLOQUÉ" : "DÉBLOQUÉ";
             $admin_identite = isset($_SESSION['user']) ? "ID: " . $_SESSION['user'] : "ID inconnu";
             
@@ -41,10 +41,10 @@ if ($action === 'toggle_block') {
     exit();
 }
 
-// --- ACTION 2 : MODIFIER SON PROFIL (CLIENT OU ADMIN) ---
+// MODIFIER PROFIL
 if ($action === 'update_profile') {
     
-    // SÉCURITÉ : L'utilisateur doit être connecté ET ne peut modifier que son PROPRE ID
+    // L'utilisateur doit être connecté ET ne peut modifier que son PROPRE ID
     if (!isset($_SESSION['user']) || (int)$_SESSION['user'] !== $idSaisi) {
         echo json_encode(['success' => false, 'message' => 'Accès refusé : vous ne pouvez pas modifier ce profil']);
         exit();
@@ -78,7 +78,7 @@ if ($action === 'update_profile') {
     }
     exit();
 }
-// --- ACTION 3 : FILTRER LE MENU ---
+// FILTRER LE MENU
 if ($action === 'filter_menu') {
     require_once '../includes/fonctions.php';
     
@@ -90,10 +90,10 @@ if ($action === 'filter_menu') {
     echo '<div class="product-grid">';
     
     foreach ($plats as $p) {
-        // Condition 1 : La catégorie (bowls, wraps, etc.)
+        //  La catégorie (bowls, wraps, etc.)
         $matchCategorie = ($catDemandee === 'tous') || ($p['categorie'] === $catDemandee);
         
-        // Condition 2 : Le régime (seulement si "vegetarien" est demandé)
+        // Le régime (vege ou pas)
         $matchFiltre = ($filtreDemande === 'tous') || 
                        (isset($p['regime']) && $p['regime'] === 'vegetarien');
 
@@ -118,7 +118,7 @@ if ($action === 'filter_menu') {
     exit();
 }
 
-// --- ACTION : MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) ---
+// MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) 
 if ($action === 'update_order_status') {
     $id_commande = (int)$_POST['id_commande'];
     $nouveau_statut = $_POST['nouveau_statut'];
@@ -137,7 +137,7 @@ if ($action === 'update_order_status') {
     exit();
 }
 
-// --- ACTION : ASSIGNER UN LIVREUR (RESTAURATEUR) ---
+// ASSIGNER UN LIVREUR 
 if ($action === 'assign_livreur') {
     $id_commande = (int)$_POST['id_commande'];
     $id_livreur = (int)$_POST['id_livreur'];
@@ -156,7 +156,7 @@ if ($action === 'assign_livreur') {
     exit();
 }
 
-// --- ACTION : MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE (CLIENT) ---
+// MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE 
 if ($action === 'modify_order_quantity') {
     $id_commande = (int)$_POST['id_commande'];
     $id_produit = (int)$_POST['id_produit'];

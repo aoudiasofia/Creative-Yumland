@@ -27,9 +27,10 @@ $tous_les_plats = getTousLesPlats();
             
             <div class="category-tabs" style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: center;">
                 <button class="btn-brutal cat-btn active" data-cat="tous" style="padding: 5px 10px; font-size: 0.75rem;">TOUT</button>
+                <button class="btn-brutal cat-btn" data-cat="menus" style="padding: 5px 10px; font-size: 0.75rem;">MENUS</button>
                 <button class="btn-brutal cat-btn" data-cat="bowls" style="padding: 5px 10px; font-size: 0.75rem;">POKÉS</button>
-                <button class="btn-brutal cat-btn" data-cat="wraps" style="padding: 5px 10px; font-size: 0.75rem;">WRAPS</button>
-                <button class="btn-brutal cat-btn" data-cat="salades" style="padding: 5px 10px; font-size: 0.75rem;">SALADES</button>
+                <button class="btn-brutal cat-btn" data-cat="wraps" style="padding: 5px 10px; font-size: 0.75rem;">WRAPS/SANDWICHS</button>
+                <button class="btn-brutal cat-btn" data-cat="salades" style="padding: 5px 10px; font-size: 0.75rem;">SALADES/ENTREES</button>
                 <button class="btn-brutal cat-btn" data-cat="desserts" style="padding: 5px 10px; font-size: 0.75rem;">DESSERTS</button>
                 <button class="btn-brutal cat-btn" data-cat="boissons" style="padding: 5px 10px; font-size: 0.75rem;">BOISSONS</button>
             </div>
