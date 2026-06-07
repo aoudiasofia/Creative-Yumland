@@ -4,7 +4,7 @@
         "nom": "ADMIN",
         "prenom": "Admin",
         "email": "admin@cytech.fr",
-        "password": "abc",
+        "password": "$2y$10$621K7hYjAgxD6KYxwVaG2OtTN6lk9Y1JTg\/gA47P31on7rvzMYjkG",
         "tel": "0657656329",
         "role": "admin",
         "adresse": "blablabla",
@@ -80,6 +80,20 @@
         "adresse": "blablabla",
         "infosup": "",
         "statut": "Moldu",
+        "remise": "0",
+        "bloqué": false
+    },
+    {
+        "id": 7,
+        "nom": "AO",
+        "prenom": "so",
+        "email": "soso@cytech.fr",
+        "password": "$2y$10$621K7hYjAgxD6KYxwVaG2OtTN6lk9Y1JTg\/gA47P31on7rvzMYjkG",
+        "tel": "0676872637",
+        "role": "client",
+        "adresse": "1 avenue du parc CERGY",
+        "infosup": "1234",
+        "statut": "moldu",
         "remise": "0",
         "bloqué": false
     }
