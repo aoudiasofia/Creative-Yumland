@@ -433,5 +433,32 @@
         "livreur": null,
         "notation": null,
         "commentaire": null
+    },
+    {
+        "id": 18,
+        "user_id": 6,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 17,
+                "quantite": 4
+            },
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": 1
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "en attente",
+        "date_heure": "2026-06-09 20:18",
+        "montant_payé": 58.9,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null,
+        "roulette_jouee": true
     }
 ]

@@ -128,19 +128,7 @@ function calculerDetailCommande($commande) {
     ];
 }
 
-function calculerTotalPanier() {
-    initialiserPanier();
-    $total = 0.0;
-    
-    foreach ($_SESSION['panier'] as $id_produit => $quantite) {
-        $plat = getPlatById($id_produit);
-        if ($plat) {
-            $total += $plat['prix'] * $quantite;
-        }
-    }
-    
-    return $total;
-}
+
 
 function creerNouvelUtilisateur($nom, $prenom, $mdp, $email, $tel, $adresse, $infos) {
     $fichier_users = __DIR__ . '/../data/users.json';
@@ -321,16 +309,41 @@ function getMenuById($id_recherche) {
 }
 
 function getPanier(){
+    // Assure que la session et le panier existent
+    initialiserPanier();
+
     $articles_panier = [];
-    foreach ($_SESSION['panier'] as $id_produit => $quantite) {
-        $plat = getPlatById($id_produit);
-        if ($plat) {
-            $articles_panier[] = [
-                'plat' => $plat,
-                'quantite' => $quantite,
-                'prix_total' => $plat['prix'] * $quantite
-            ];
+    foreach ($_SESSION['panier'] as $cle => $item) {
+        // Supporte deux formes : $_SESSION['panier'][id] = quantite  OU  $_SESSION['panier'][] = ['id'=>..., 'quantite'=>...]
+        if (is_array($item)) {
+            $id_produit = isset($item['id']) ? (int)$item['id'] : (int)$cle;
+            $quantite = isset($item['quantite']) ? (int)$item['quantite'] : (int)($item['quantity'] ?? 0);
+        } else {
+            $id_produit = (int)$cle;
+            $quantite = (int)$item;
         }
+
+        $plat = getPlatById($id_produit);
+        if (!$plat) continue;
+
+        // Garantit que le prix est un nombre (si 'prix' est malformé, on tombe à 0.0)
+        $prix_unitaire = 0.0;
+        if (isset($plat['prix'])) {
+            if (is_array($plat['prix'])) {
+                // si c'est un tableau, cherche une première valeur numérique
+                foreach ($plat['prix'] as $v) {
+                    if (is_numeric($v)) { $prix_unitaire = (float)$v; break; }
+                }
+            } elseif (is_numeric($plat['prix'])) {
+                $prix_unitaire = (float)$plat['prix'];
+            }
+        }
+
+        $articles_panier[] = [
+            'plat' => $plat,
+            'quantite' => $quantite,
+            'prix_total' => $prix_unitaire * $quantite
+        ];
     }
     return $articles_panier;
 }
@@ -594,31 +607,79 @@ function verifierUtilisateurBloque() {
 }
 
 function getPlatsPopulaires($limite = 3) {
-    // 1. Chemin vers ton fichier JSON (vérifie bien le dossier !)
+    //  Chemin vers fichier JSON 
     $chemin = __DIR__ . '/../data/produits.json'; 
     if (!file_exists($chemin)) {
         return [];
     }
 
-    // 2. Décoder le fichier
+    // Décoder le fichier
     $data = json_decode(file_get_contents($chemin), true);
     
-    // On vérifie que la clé 'plats' existe bien
+    // vérifie que la clé 'plats' existe bien
     if (!isset($data['plats']) || !is_array($data['plats'])) {
         return [];
     }
 
     $plats = $data['plats'];
 
-    // 3. ALGORITHME : Tri décroissant basé sur le champ 'commandes'
+    // Tri décroissant basé sur le champ 'commandes'
     usort($plats, function($a, $b) {
         $cmdA = $a['commandes'] ?? 0;
         $cmdB = $b['commandes'] ?? 0;
         return $cmdB <=> $cmdA; // Du plus commandé au moins commandé
     });
 
-    // 4. On extrait le TOP (le nombre de plats demandé)
+    // On extrait le TOP (le nombre de plats demandé)
     return array_slice($plats, 0, $limite);
+}
+
+function getProduitsParCategorie($categorie_recherchee) {
+    // On récupère tous les plats du JSON
+    $tous_les_plats = getTousLesPlats(); 
+    $resultat = [];
+
+    foreach ($tous_les_plats as $plat) {
+        if (isset($plat['categorie']) && $plat['categorie'] === $categorie_recherchee) {
+            // On ne garde que les infos essentielles pour le JavaScript [id, nom]
+            $resultat[] = [
+                'id' => $plat['id'],
+                'nom' => $plat['nom']
+            ];
+        }
+    }
+    return $resultat;
+}
+function calculerTotalPanier() {
+    if (!isset($_SESSION['panier']) || empty($_SESSION['panier'])) {
+        return 0.0;
+    }
+
+    $total = 0.0;
+    $liste_produits = getTousLesPlats(); 
+
+    $prix_par_id = [];
+    foreach ($liste_produits as $p) {
+        $prix_par_id[$p['id']] = (float)$p['prix'];
+    }
+
+    // Parcours du panier 
+    foreach ($_SESSION['panier'] as $cle => $item) {
+        if (is_array($item)) {
+            
+            $id_produit = isset($item['id']) ? (int)$item['id'] : 0;
+            $quantite = isset($item['quantite']) ? (int)$item['quantite'] : 0;
+        } else {
+            
+            $id_produit = (int)$cle;
+            $quantite = (int)$item;
+        }
+
+        $prix_article = isset($prix_par_id[$id_produit]) ? $prix_par_id[$id_produit] : 0.0;
+        $total += $quantite * $prix_article;
+    }
+
+    return $total;
 }
 
 ?>

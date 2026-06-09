@@ -90,7 +90,7 @@ if ($action === 'filter_menu') {
     echo '<div class="product-grid">';
     
     foreach ($plats as $p) {
-        //  La catégorie (bowls, wraps, etc.)
+        // La catégorie (bowls, wraps, etc.)
         $matchCategorie = ($catDemandee === 'tous') || ($p['categorie'] === $catDemandee);
         
         // Le régime (vege ou pas)
@@ -100,15 +100,33 @@ if ($action === 'filter_menu') {
         if ($matchCategorie && $matchFiltre) {
             ?>
             <div class="product-card" data-price="<?= $p['prix'] ?>" data-orders="<?= $p['commandes'] ?? 0 ?>">
+                
+                <?php if (isset($p['categorie']) && $p['categorie'] === 'menus'): ?>
+                    <span style="position:absolute; top:10px; left:10px; background:#000; color:#fff; font-size:10px; font-weight:bold; padding:2px 5px; border:1px solid #fff;">FORMULE</span>
+                <?php endif; ?>
+
                 <img src="<?= htmlspecialchars($p['image']) ?>" class="product-image">
                 <h3 class="product-name"><?= htmlspecialchars($p['nom']) ?></h3>
+                
+                <?php if (isset($p['categorie']) && $p['categorie'] === 'menus'): ?>
+                    <p class="product-desc" style="display:none;"><?= htmlspecialchars($p['description']) ?></p>
+                <?php endif; ?>
+
                 <div class="product-action">
                     <span class="product-price"><?= number_format($p['prix'], 2, '.', ' ') ?> €</span>
-                    <form method="POST" action="traitement_ajouter_panier.php" style="margin:0;">
-                        <input type="hidden" name="action" value="ajouter">
-                        <input type="hidden" name="id_produit" value="<?= $p['id'] ?>">
-                        <button type="submit" class="btn-brutal btn-small">AJOUTER</button>
-                    </form>
+                    
+                    <?php if (isset($p['categorie']) && $p['categorie'] === 'menus'): ?>
+                        <button type="button" class="btn-brutal btn-small" onclick="ouvrirModalMenu(<?= $p['id']; ?>, '<?= addslashes($p['nom']); ?>', '<?= addslashes($p['description'] ?? ''); ?>')">
+                            ⚡ CONFIGURER
+                        </button>
+                    <?php else: ?>
+                        <form method="POST" action="traitement_ajouter_panier.php" style="margin:0;">
+                            <input type="hidden" name="action" value="ajouter">
+                            <input type="hidden" name="type" value="plat">
+                            <input type="hidden" name="id_produit" value="<?= $p['id'] ?>">
+                            <button type="submit" class="btn-brutal btn-small">AJOUTER</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             </div>
             <?php

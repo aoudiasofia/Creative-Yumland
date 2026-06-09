@@ -50,7 +50,8 @@ verifierUtilisateurBloque();
             // Bouton panier dynamique si connecté
             if (isset($_SESSION['user']) && $nom_page === 'carte') {
                 initialiserPanier();
-                $total_panier = powder_total_panier();
+                $total_panier = calculerTotalPanier();
+                // suppression de l'appel erroné powder_total_panier()
                 $total_panier = calculerTotalPanier();
                 // Utilisation de $_SESSION['user'] pour l'ID
                 $user_info = getInfoUser($_SESSION['user']);
