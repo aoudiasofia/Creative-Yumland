@@ -168,7 +168,7 @@
             "categorie": "menus",
             "regime": "classique",
             "commandes": 145,
-            "image": "..\/images\/menu_fjord.png",
+            "image": "..\/images\/fjord.png",
             "plats_inclus": [5, 14]
         },
         {
@@ -179,7 +179,7 @@
             "categorie": "menus",
             "regime": "classique",
             "commandes": 92,
-            "image": "..\/images\/menu_toundra.png",
+            "image": "..\/images\/toundra.png",
             "plats_inclus": [1, 13, 14]
         },
         {
@@ -190,7 +190,7 @@
             "categorie": "menus",
             "regime": "vegetarien",
             "commandes": 68,
-            "image": "..\/images\/menu_veggie.png",
+            "image": "..\/images\/banquise.png",
             "plats_inclus": [3, 11]
         },
         {
@@ -201,7 +201,37 @@
             "categorie": "salades",
             "regime": "vegetarien",
             "commandes": 34,
-            "image": "..\/images\/soupe_permafrost.png"
+            "image": "..\/images\/permafrost.png"
+        },
+        {
+            "id": 21,
+            "nom": "L'Aurore Boréale",
+            "description": "Sorbet givré au yuzu ultra-frais et éclats de curaçao bleu croustillants.",
+            "prix": 4.5,
+            "categorie": "desserts",
+            "regime": "vegetarien",
+            "commandes": 0,
+            "image": "../images/aurore-boreale.png"
+        },
+        {
+            "id": 22,
+            "nom": "Limonade des Fjords",
+            "description": "Citronnade maison peu sucrée, infusée à la menthe polaire et au yuzu.",
+            "prix": 3.8,
+            "categorie": "boissons",
+            "regime": "vegetarien",
+            "commandes": 0,
+            "image": "../images/limonade.png"
+        },
+        {
+            "id": 23,
+            "nom": "Cola",
+            "description": "Cola artisanal aux extraits naturels de plantes et de cardamome, intensément rafraîchissant.",
+            "prix": 3.5,
+            "categorie": "boissons",
+            "regime": "vegetarien",
+            "commandes": 0,
+            "image": "../images/cola.png"
         }
 
     ]

@@ -7,9 +7,8 @@ $cheminFichier = '../data/users.json';
 $action = $_POST['action'] ?? '';
 $idSaisi = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
-// BLOQUER UN UTILISATEUR (RESERVÉ ADMIN) 
+// 1. BLOQUER UN UTILISATEUR (RESERVÉ ADMIN) 
 if ($action === 'toggle_block') {
-    // La sécurité admin ici
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         echo json_encode(['success' => false, 'message' => 'Accès refusé : réservé à l\'admin']);
         exit();
@@ -23,7 +22,6 @@ if ($action === 'toggle_block') {
             $user['bloqué'] = !$user['bloqué'];
             $success = true;
             $nouvelEtat = $user['bloqué'];
-            
             
             $terme_action = $nouvelEtat ? "BLOQUÉ" : "DÉBLOQUÉ";
             $admin_identite = isset($_SESSION['user']) ? "ID: " . $_SESSION['user'] : "ID inconnu";
@@ -41,10 +39,8 @@ if ($action === 'toggle_block') {
     exit();
 }
 
-// MODIFIER PROFIL
+// 2. MODIFIER PROFIL
 if ($action === 'update_profile') {
-    
-    // L'utilisateur doit être connecté ET ne peut modifier que son PROPRE ID
     if (!isset($_SESSION['user']) || (int)$_SESSION['user'] !== $idSaisi) {
         echo json_encode(['success' => false, 'message' => 'Accès refusé : vous ne pouvez pas modifier ce profil']);
         exit();
@@ -60,7 +56,6 @@ if ($action === 'update_profile') {
             $user['email'] = htmlspecialchars($_POST['email']);
             $user['tel'] = htmlspecialchars($_POST['tel']);
             
-            // On met à jour la session pour que l'affichage change partout
             $_SESSION['prenom'] = $user['prenom'];
             $_SESSION['nom'] = $user['nom'];
             $_SESSION['email'] = $user['email'];
@@ -78,7 +73,8 @@ if ($action === 'update_profile') {
     }
     exit();
 }
-// FILTRER LE MENU
+
+// 3. FILTRER LE MENU (CORRIGÉ : AFFICHAGE DE TOUTES LES DESCRIPTIONS)
 if ($action === 'filter_menu') {
     require_once '../includes/fonctions.php';
     
@@ -90,10 +86,8 @@ if ($action === 'filter_menu') {
     echo '<div class="product-grid">';
     
     foreach ($plats as $p) {
-        // La catégorie (bowls, wraps, etc.)
         $matchCategorie = ($catDemandee === 'tous') || ($p['categorie'] === $catDemandee);
         
-        // Le régime (vege ou pas)
         $matchFiltre = ($filtreDemande === 'tous') || 
                        (isset($p['regime']) && $p['regime'] === 'vegetarien');
 
@@ -108,9 +102,7 @@ if ($action === 'filter_menu') {
                 <img src="<?= htmlspecialchars($p['image']) ?>" class="product-image">
                 <h3 class="product-name"><?= htmlspecialchars($p['nom']) ?></h3>
                 
-                <?php if (isset($p['categorie']) && $p['categorie'] === 'menus'): ?>
-                    <p class="product-desc" style="display:none;"><?= htmlspecialchars($p['description']) ?></p>
-                <?php endif; ?>
+                <p class="product-desc"><?= htmlspecialchars($p['description'] ?? '') ?></p>
 
                 <div class="product-action">
                     <span class="product-price"><?= number_format($p['prix'], 2, '.', ' ') ?> €</span>
@@ -136,12 +128,11 @@ if ($action === 'filter_menu') {
     exit();
 }
 
-// MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) 
+// 4. MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) 
 if ($action === 'update_order_status') {
     $id_commande = (int)$_POST['id_commande'];
     $nouveau_statut = $_POST['nouveau_statut'];
 
-    // Sécurité : Réservé aux rôles concernés
     if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['restaurateur', 'admin', 'livreur'])) {
         echo json_encode(['success' => false, 'message' => 'Accès refusé']);
         exit();
@@ -155,7 +146,7 @@ if ($action === 'update_order_status') {
     exit();
 }
 
-// ASSIGNER UN LIVREUR 
+// 5. ASSIGNER UN LIVREUR 
 if ($action === 'assign_livreur') {
     $id_commande = (int)$_POST['id_commande'];
     $id_livreur = (int)$_POST['id_livreur'];
@@ -174,29 +165,27 @@ if ($action === 'assign_livreur') {
     exit();
 }
 
-// MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE 
+// 6. MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE 
 if ($action === 'modify_order_quantity') {
     $id_commande = (int)$_POST['id_commande'];
     $id_produit = (int)$_POST['id_produit'];
-    $changement = (int)$_POST['changement']; // +1 ou -1
+    $changement = (int)$_POST['changement'];
 
     $commandes = getToutesLesCommandes();
     $success = false;
     $montant_supplementaire = 0;
 
     foreach ($commandes as &$c) {
-        // La commande doit être au client et ne pas être commencée
         if ($c['id'] === $id_commande && $c['user_id'] == $_SESSION['user'] && $c['statut_commande'] === 'en attente') {
             foreach ($c['articles'] as $k => &$art) {
                 if ($art['id_produit'] == $id_produit) {
                     $art['quantite'] += $changement;
                     if ($art['quantite'] <= 0) {
-                        unset($c['articles'][$k]); // Retire l'article s'il tombe à 0
+                        unset($c['articles'][$k]); 
                     }
                     
-                    // Recalcul du montant
                     $ancien_prix = floatval($c['montant_payé']);
-                    $details = calculerDetailCommande($c); // Fonction existante dans fonctions.php
+                    $details = calculerDetailCommande($c); 
                     $nouveau_prix = $details['prix_apres_remise'];
                     
                     if ($nouveau_prix > $ancien_prix) {
@@ -204,7 +193,7 @@ if ($action === 'modify_order_quantity') {
                     }
                     
                     $c['montant_payé'] = $nouveau_prix;
-                    $c['articles'] = array_values($c['articles']); // Réindexer le tableau JSON
+                    $c['articles'] = array_values($c['articles']); 
                     $success = true;
                     break;
                 }
@@ -222,6 +211,5 @@ if ($action === 'modify_order_quantity') {
     exit();
 }
 
-// Si aucune action ne correspond
 echo json_encode(['success' => false, 'message' => 'Action inconnue']);
 ?>
