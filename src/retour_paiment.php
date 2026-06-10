@@ -44,7 +44,7 @@ if ($control_recu === $control_attendu && $vendeur_recu === $vendeur) {
     }
 
     // 4. Redirection de l'utilisateur vers son historique
-    header('Location: roulette.php?id_commande=' . $id_commande);
+    header('Location: historique_commandes_client.php');
     exit;
 
 } else {

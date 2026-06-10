@@ -9,6 +9,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 $id_commande = isset($_GET['id_commande']) ? intval($_GET['id_commande']) : 0;
+$paiement = isset($_GET['paiement']) ? $_GET['paiement'] : 'plus_tard';
 
 // Traitement AJAX sécurisé
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'spin') {
@@ -149,6 +150,13 @@ if (!$commande_valide) {
 
                 resultBox.style.display = 'block';
                 resultBox.scrollIntoView({ behavior: 'smooth' });
+                
+                if ("<?php echo htmlspecialchars($paiement); ?>" === "cy_bank") {
+                    const btnSuite = document.querySelector('.roulette-result-box a');
+                    btnSuite.innerText = "PROCÉDER AU PAIEMENT";
+                    btnSuite.href = "traitement_paiement_cybank.php?id_commande=<?php echo $id_commande; ?>";
+                    btnSuite.style.backgroundColor = "#ff4444"; // Mettre en avant le bouton de paiement
+                }
             }, 4000);
         })
         .catch(error => {

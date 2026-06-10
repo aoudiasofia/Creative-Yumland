@@ -55,36 +55,9 @@ $id_commande = creerNouvelleCommande($user_id, $articles, $quand, $adresse_livra
 if ($id_commande) {
     viderPanier();
 
-    if ($paiement === 'cy_bank') {
-        require_once '../includes/getapikey.php';
-        
-        $vendeur = "MEF-2_A"; 
-        $api_key = getAPIKey($vendeur);
-        
-        // L'identifiant doit faire entre 10 et 24 caractères alphanumériques
-        $transaction = "CMD" . str_pad($id_commande, 7, "0", STR_PAD_LEFT); 
-        $montant = number_format($total_apres_remise, 2, '.', '');
-        
-        $retour = "http://localhost/CREATIVE-YUMLAND/src/retour_paiment.php"; 
-
-        // Calcul du hash de sécurité
-        $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
-
-        // On génère un formulaire HTML invisible qui se soumet tout seul vers CY Bank
-        echo "<form id='cybank_form' action='https://www.plateforme-smc.fr/cybank/index.php' method='POST'>
-                <input type='hidden' name='transaction' value='$transaction'>
-                <input type='hidden' name='montant' value='$montant'>
-                <input type='hidden' name='vendeur' value='$vendeur'>
-                <input type='hidden' name='retour' value='$retour'>
-                <input type='hidden' name='control' value='$control'>
-              </form>
-              <script>document.getElementById('cybank_form').submit();</script>";
-        exit;
-    } else {
-        // Si le client a choisi "Payer plus tard", redirection vers la roulette
-        header('Location: roulette.php?id_commande=' . $id_commande);
-        exit;
-    }
+    // Redirection vers la roulette pour TOUS les paiements (on joue avant de payer)
+    header('Location: roulette.php?id_commande=' . $id_commande . '&paiement=' . urlencode($paiement));
+    exit;
 } else {
     header('Location: panier.php?error=creation');
     exit;
