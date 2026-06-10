@@ -19,12 +19,18 @@ Le rapport complet détaillant la conception du site est disponible juste ici :
 
 ## Ce que fait le projet (Fonctionnalités)
 
-- **Changement de thème à la volée** : Le site propose trois visuels différents. Le mode **KØLD** (sombre et percutant), un mode **Clair** classique, et un mode **Accessibilité** qui bascule tout l'affichage avec de très gros caractères et des boutons XXL pour le confort visuel.
-- **Panier et formules menus** : On peut composer son panier en y ajoutant des plats à la carte ou des formules menus complètes. Le site calcule les totaux en temps réel et intègre une option pour trier ses articles (par prix ou par ordre alphabétique).
+- **Changement de thème à la volée** : Le site propose trois visuels différents. Le mode **KØLD** (sombre et percutant), un mode 
+**Clair** classique, et un mode 
+**Accessibilité** qui bascule tout l'affichage avec de très gros caractères et des boutons XXL pour le confort visuel.
+
+- **Panier et formules menus** : On peut composer son panier en y ajoutant des plats à la carte ou des formules menus complètes. Le site calcule les totaux en temps réel et intègre une option pour trier ses articles (par prix ou par top commandes).
+
 - **Quatre profils d'utilisateurs (Rôles)** : 
   - Les **clients** commandent et voient leur historique.
   - Les **restaurateurs** modifient la carte et valident les plats prêts.
   - Les **livreurs** s'attribuent les livraisons et mettent à jour le statut en route/livré.
   - Les **administrateurs** gèrent les comptes et peuvent bloquer des utilisateurs.
+
 - **La Roulette de la Fidélité 🎰** : Un mini-jeu se déclenche dès qu'une commande est validée. Le client tente sa chance et peut gagner immédiatement 5% ou 10% de réduction sur son ticket.
+
 - **Sécurité et suivi** : Les mots de passe sont chiffrés en base de données. De plus, un système détecte et déconnecte automatiquement les utilisateurs bannis, tout en inscrivant les tentatives suspectes dans un fichier de logs.
