@@ -431,8 +431,8 @@
         "montant_payé": 24.4,
         "remise": 0,
         "livreur": null,
-        "notation": null,
-        "commentaire": null
+        "notation": 5,
+        "commentaire": "la régalade"
     },
     {
         "id": 18,
@@ -456,6 +456,114 @@
         "date_heure": "2026-06-09 20:18",
         "montant_payé": 58.9,
         "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null,
+        "roulette_jouee": true
+    },
+    {
+        "id": 19,
+        "user_id": 4,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": {
+                    "id": 1,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "en attente",
+        "date_heure": "2026-06-10 16:55",
+        "montant_payé": 14.15,
+        "remise": 0.75,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null,
+        "roulette_jouee": true
+    },
+    {
+        "id": 20,
+        "user_id": 4,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": {
+                    "id": 2,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "en attente",
+        "date_heure": "2026-06-10 16:56",
+        "montant_payé": 13.5,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null,
+        "roulette_jouee": true
+    },
+    {
+        "id": 21,
+        "user_id": 4,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": "menu_17_5_14_",
+                "quantite": {
+                    "id": 17,
+                    "type": "menu",
+                    "quantite": 1,
+                    "choix": {
+                        "plat": 5,
+                        "boisson": 14,
+                        "dessert": null
+                    }
+                }
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "en attente",
+        "date_heure": "2026-06-10 16:56",
+        "montant_payé": 11,
+        "remise": 0,
+        "livreur": null,
+        "notation": null,
+        "commentaire": null
+    },
+    {
+        "id": 22,
+        "user_id": 4,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 2,
+                "quantite": {
+                    "id": 2,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "en attente",
+        "date_heure": "2026-06-10 16:57",
+        "montant_payé": 12.15,
+        "remise": 1.35,
         "livreur": null,
         "notation": null,
         "commentaire": null,
