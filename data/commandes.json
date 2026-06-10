@@ -1,4 +1,4 @@
-[ 
+[
     {
         "id": 1,
         "user_id": 1,
@@ -111,7 +111,7 @@
         "quand": "plus tard",
         "adresse_livraison": "blablabla",
         "statut_paiement": "en attente",
-        "statut_commande": "a livrée",
+        "statut_commande": "en livraison",
         "date_heure": "2026-03-31 10:20",
         "montant_payé": 0,
         "remise": 0,
@@ -202,7 +202,7 @@
         "date_heure": "2026-03-20 09:30",
         "montant_payé": 0,
         "remise": 0,
-        "livreur": null,
+        "livreur": 4,
         "notation": null,
         "commentaire": null
     },
@@ -560,7 +560,7 @@
         "quand": "maintenant",
         "adresse_livraison": "blablabla",
         "statut_paiement": "en attente",
-        "statut_commande": "a livrée",
+        "statut_commande": "terminée",
         "date_heure": "2026-06-10 16:57",
         "montant_payé": 12.15,
         "remise": 1.35,
@@ -705,6 +705,86 @@
         "montant_payé": 10.45,
         "remise": 0.55,
         "livreur": null,
+        "notation": 5,
+        "commentaire": "",
+        "roulette_jouee": true
+    },
+    {
+        "id": 28,
+        "user_id": 1,
+        "articles": [
+            {
+                "type": "plats",
+                "id_produit": 23,
+                "quantite": {
+                    "id": 23,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            },
+            {
+                "type": "plats",
+                "id_produit": 20,
+                "quantite": {
+                    "id": 20,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            },
+            {
+                "type": "plats",
+                "id_produit": 1,
+                "quantite": {
+                    "id": 1,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            },
+            {
+                "type": "plats",
+                "id_produit": 7,
+                "quantite": {
+                    "id": 7,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            },
+            {
+                "type": "plats",
+                "id_produit": 15,
+                "quantite": {
+                    "id": 15,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            },
+            {
+                "type": "plats",
+                "id_produit": 21,
+                "quantite": {
+                    "id": 21,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            },
+            {
+                "type": "plats",
+                "id_produit": 22,
+                "quantite": {
+                    "id": 22,
+                    "type": "plat",
+                    "quantite": 1
+                }
+            }
+        ],
+        "quand": "maintenant",
+        "adresse_livraison": "blablabla",
+        "statut_paiement": "en attente",
+        "statut_commande": "a livrée",
+        "date_heure": "2026-06-10 20:13",
+        "montant_payé": 47.589999999999996,
+        "remise": 2.51,
+        "livreur": 4,
         "notation": 5,
         "commentaire": "",
         "roulette_jouee": true

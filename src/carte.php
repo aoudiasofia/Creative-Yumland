@@ -118,7 +118,7 @@ $tous_les_plats = getTousLesPlats();
     </div>
 
     <script>
-    // 1. GESTION DES FILTRES ET TRIS DE LA CARTE
+    //  GESTION DES FILTRES ET TRIS DE LA CARTE
     let activeCategory = 'tous';
     let activeRefine = 'tous';
 
@@ -179,7 +179,7 @@ $tous_les_plats = getTousLesPlats();
         });
     });
 
-    // 2. LOGIQUE DE LA POP-UP MENU (ALIMENTÉE PAR TON JSON)
+    // LOGIQUE DE LA POP-UP MENU (ALIMENTÉE PAR TON JSON)
     const optionsBoissons = <?php echo json_encode(getProduitsParCategorie('boissons')); ?>;
     const optionsDesserts = <?php echo json_encode(getProduitsParCategorie('desserts')); ?>;
     const optionsWraps = <?php echo json_encode(getProduitsParCategorie('wraps')); ?>;

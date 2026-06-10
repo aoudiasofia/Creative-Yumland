@@ -1,4 +1,4 @@
-<?php //livraison
+<?php 
 session_start();
 include '../includes/fonctions.php';
 

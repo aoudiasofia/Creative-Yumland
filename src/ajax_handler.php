@@ -7,7 +7,7 @@ $cheminFichier = '../data/users.json';
 $action = $_POST['action'] ?? '';
 $idSaisi = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
-// 1. BLOQUER UN UTILISATEUR (RESERVÉ ADMIN) 
+// BLOQUER UN UTILISATEUR (RESERVÉ ADMIN) 
 if ($action === 'toggle_block') {
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         echo json_encode(['success' => false, 'message' => 'Accès refusé : réservé à l\'admin']);
@@ -39,7 +39,7 @@ if ($action === 'toggle_block') {
     exit();
 }
 
-// 2. MODIFIER PROFIL
+//  MODIFIER PROFIL
 if ($action === 'update_profile') {
     if (!isset($_SESSION['user']) || (int)$_SESSION['user'] !== $idSaisi) {
         echo json_encode(['success' => false, 'message' => 'Accès refusé : vous ne pouvez pas modifier ce profil']);
@@ -74,7 +74,7 @@ if ($action === 'update_profile') {
     exit();
 }
 
-// 3. FILTRER LE MENU (CORRIGÉ : AFFICHAGE DE TOUTES LES DESCRIPTIONS)
+//  FILTRER LE MENU (CORRIGÉ : AFFICHAGE DE TOUTES LES DESCRIPTIONS)
 if ($action === 'filter_menu') {
     require_once '../includes/fonctions.php';
     
@@ -128,7 +128,7 @@ if ($action === 'filter_menu') {
     exit();
 }
 
-// 4. MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) 
+//  MODIFIER LE STATUT D'UNE COMMANDE (RESTAURATEUR / LIVREUR) 
 if ($action === 'update_order_status') {
     $id_commande = (int)$_POST['id_commande'];
     $nouveau_statut = $_POST['nouveau_statut'];
@@ -146,7 +146,7 @@ if ($action === 'update_order_status') {
     exit();
 }
 
-// 5. ASSIGNER UN LIVREUR 
+//  ASSIGNER UN LIVREUR 
 if ($action === 'assign_livreur') {
     $id_commande = (int)$_POST['id_commande'];
     $id_livreur = (int)$_POST['id_livreur'];
@@ -165,7 +165,7 @@ if ($action === 'assign_livreur') {
     exit();
 }
 
-// 6. MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE 
+//  MODIFIER LA QUANTITÉ D'UN ARTICLE DANS UNE COMMANDE 
 if ($action === 'modify_order_quantity') {
     $id_commande = (int)$_POST['id_commande'];
     $id_produit = (int)$_POST['id_produit'];

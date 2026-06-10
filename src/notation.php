@@ -1,4 +1,4 @@
-<?php //notation.php
+<?php 
 session_start();
 include '../includes/fonctions.php';
 

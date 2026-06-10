@@ -561,7 +561,7 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
     $commande_existe = false;
     $index_commande = -1;
 
-    // 1. Utilisation de == (comparaison souple) pour éviter le conflit string/int de l'ID
+    // Utilisation de == (comparaison souple) pour éviter le conflit string/int de l'ID
     foreach ($commandes as $index => $commande) {
         if ($commande['id'] == $id_commande && $commande['user_id'] == $id_user) {
             $commande_existe = true;
@@ -577,7 +577,7 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
         return false;
     }
 
-    // 2. Tirage au sort
+    //  Tirage au sort
     $tirage = rand(1, 100);
     if ($tirage <= 50) {
         $remise_pourcent = 0; 
@@ -590,7 +590,7 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
     $fichier_users = __DIR__ . '/../data/users.json';
     $users = json_decode(file_get_contents($fichier_users), true);
 
-    // 3. Enregistrement temporaire dans le profil utilisateur
+    //  Enregistrement temporaire dans le profil utilisateur
     if ($remise_pourcent > 0) {
         foreach ($users as &$user) {
             if ($user['id'] == $id_user) {
@@ -601,7 +601,7 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
         file_put_contents($fichier_users, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
-    // 4. Détection dynamique de la clé de prix utilisée dans votre JSON
+    //  Détection dynamique de la clé de prix utilisée dans votre JSON
     $cle_montant = 'montant_payé';
     if (isset($commandes[$index_commande]['total'])) {
         $cle_montant = 'total';
@@ -611,7 +611,7 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
         $cle_montant = 'prix';
     }
 
-    // 5. Application de la remise sur la commande
+    //  Application de la remise sur la commande
     $commandes[$index_commande]['roulette_jouee'] = true;
     if ($remise_pourcent > 0) {
         $montant_actuel = floatval($commandes[$index_commande][$cle_montant]);
@@ -625,7 +625,7 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
     }
     file_put_contents($fichier_commandes, json_encode($commandes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-    // 6. Nettoyage de la remise utilisateur immédiat
+    //  Nettoyage de la remise utilisateur immédiat
     if ($remise_pourcent > 0) {
         $users = json_decode(file_get_contents($fichier_users), true);
         foreach ($users as &$user) {
