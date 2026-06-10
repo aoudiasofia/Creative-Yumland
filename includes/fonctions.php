@@ -517,9 +517,9 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
     $commande_existe = false;
     $index_commande = -1;
 
-    // 1. Vérification que la commande existe, appartient à l'utilisateur et n'a pas déjà bénéficié du tirage
+    // 1. Utilisation de == (comparaison souple) pour éviter le conflit string/int de l'ID
     foreach ($commandes as $index => $commande) {
-        if ($commande['id'] === $id_commande && $commande['user_id'] == $id_user) {
+        if ($commande['id'] == $id_commande && $commande['user_id'] == $id_user) {
             $commande_existe = true;
             $index_commande = $index;
             if (isset($commande['roulette_jouee']) && $commande['roulette_jouee'] === true) {
@@ -533,20 +533,20 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
         return false;
     }
 
-    // 2. Tirage au sort selon les probabilités demandées
+    // 2. Tirage au sort
     $tirage = rand(1, 100);
     if ($tirage <= 50) {
-        $remise_pourcent = 0; // 50% de chances
+        $remise_pourcent = 0; 
     } elseif ($tirage <= 90) {
-        $remise_pourcent = 5; // 40% de chances (50 + 40)
+        $remise_pourcent = 5; 
     } else {
-        $remise_pourcent = 10; // 10% de chances (90 + 10)
+        $remise_pourcent = 10; 
     }
 
     $fichier_users = __DIR__ . '/../data/users.json';
     $users = json_decode(file_get_contents($fichier_users), true);
 
-    // 3. ÉTAPE A : Enregistrer temporairement la remise dans le json de l'utilisateur
+    // 3. Enregistrement temporaire dans le profil utilisateur
     if ($remise_pourcent > 0) {
         foreach ($users as &$user) {
             if ($user['id'] == $id_user) {
@@ -557,18 +557,31 @@ function verifierEtJouerRoulette($id_user, $id_commande) {
         file_put_contents($fichier_users, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
-    // 4. ÉTAPE B : Gérer la remise qui s'applique à cette commande
-    $commandes[$index_commande]['roulette_jouee'] = true; // Sécurise la commande contre les rafraîchissements
+    // 4. Détection dynamique de la clé de prix utilisée dans votre JSON
+    $cle_montant = 'montant_payé';
+    if (isset($commandes[$index_commande]['total'])) {
+        $cle_montant = 'total';
+    } elseif (isset($commandes[$index_commande]['prix_total'])) {
+        $cle_montant = 'prix_total';
+    } elseif (isset($commandes[$index_commande]['prix'])) {
+        $cle_montant = 'prix';
+    }
+
+    // 5. Application de la remise sur la commande
+    $commandes[$index_commande]['roulette_jouee'] = true;
     if ($remise_pourcent > 0) {
-        $montant_actuel = floatval($commandes[$index_commande]['montant_payé']);
+        $montant_actuel = floatval($commandes[$index_commande][$cle_montant]);
         $montant_remise = round($montant_actuel * ($remise_pourcent / 100), 2);
         
+        if (!isset($commandes[$index_commande]['remise'])) {
+            $commandes[$index_commande]['remise'] = 0;
+        }
         $commandes[$index_commande]['remise'] += $montant_remise;
-        $commandes[$index_commande]['montant_payé'] = max(0, $montant_actuel - $montant_remise);
+        $commandes[$index_commande][$cle_montant] = max(0, $montant_actuel - $montant_remise);
     }
     file_put_contents($fichier_commandes, json_encode($commandes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-    // 5. ÉTAPE C : Supprimer la remise du profil de l'utilisateur (Usage unique pour la commande)
+    // 6. Nettoyage de la remise utilisateur immédiat
     if ($remise_pourcent > 0) {
         $users = json_decode(file_get_contents($fichier_users), true);
         foreach ($users as &$user) {

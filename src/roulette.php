@@ -3,7 +3,6 @@ session_start();
 require_once '../includes/fonctions.php';
 verifierUtilisateurBloque();
 
-// Sécurité d'accès
 if (!isset($_SESSION['user'])) {
     header("Location: connexion.php");
     exit();
@@ -11,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 $id_commande = isset($_GET['id_commande']) ? intval($_GET['id_commande']) : 0;
 
-// Traitement AJAX pour lancer le tirage
+// Traitement AJAX sécurisé
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'spin') {
     header('Content-Type: application/json');
     $id_user = $_SESSION['user'];
@@ -19,16 +18,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $remise_gagnee = verifierEtJouerRoulette($id_user, $id_commande);
     
     if ($remise_gagnee === false) {
-        echo json_encode(['success' => false, 'message' => 'Erreur : Roulette déjà jouée ou commande invalide.']);
+        echo json_encode(['success' => false, 'message' => 'Erreur : Roulette déjà jouée ou commande introuvable.']);
     } else {
         echo json_encode(['success' => true, 'remise' => $remise_gagnee]);
     }
     exit();
 }
 
-// Récupération de la commande pour l'affichage initial
-$commande = getCommandeById($id_commande);
-if (!$commande || $commande['user_id'] != $_SESSION['user']) {
+// Vérification autonome de l'existence et propriété de la commande
+$fichier_commandes = '../data/commandes.json';
+$commande_valide = false;
+if (file_exists($fichier_commandes)) {
+    $commandes = json_decode(file_get_contents($fichier_commandes), true);
+    foreach ($commandes as $c) {
+        if ($c['id'] == $id_commande && $c['user_id'] == $_SESSION['user']) {
+            $commande_valide = true;
+            break;
+        }
+    }
+}
+
+if (!$commande_valide) {
     header("Location: historique_commandes_client.php");
     exit();
 }
