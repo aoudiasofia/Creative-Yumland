@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); //histo
 include '../includes/fonctions.php';
 
 if (!isset($_SESSION['user'])) {
@@ -34,10 +34,27 @@ $commandes = array_reverse(getCommandesByUserId($user_id));
         <?php else: ?>
             <?php foreach ($commandes as $commande): ?>
                 <?php $details = calculerDetailCommande($commande); ?>
-                <div class="historique-commande-detail">
-                    
+                <?php
+                    $details = calculerDetailCommande($commande);
+                    if (!is_array($details)) $details = [];
+                    // si la fonction retourne 'items' au lieu de 'articles', normaliser
+                    if (isset($details['items']) && !isset($details['articles'])) {
+                        $details['articles'] = $details['items'];
+                    }
+                    // valeurs par défaut pour éviter warnings
+                    $details['prix_total_avant_remise'] = floatval($details['prix_total_avant_remise'] ?? ($details['total'] ?? 0));
+                    $details['remise'] = floatval($details['remise'] ?? 0);
+                    $details['prix_apres_remise'] = floatval($details['prix_apres_remise'] ?? ($details['prix_total_avant_remise'] - $details['remise']));
+                    $articles = isset($details['articles']) && is_array($details['articles']) ? $details['articles'] : [];
+                    ?>
+                 <div class="historique-commande-detail">
+                     <div class="detail-header">
+                         <h2>Commande #<?php echo htmlspecialchars($commande['id']); ?></h2>
+                     </div>
+
                     <!-- En-tête de la commande -->
                     <div class="detail-header">
+                        
                         <div>
                             <h2>Commande #<?php echo htmlspecialchars($commande['id']); ?></h2>
                             <p style="color: var(--accent); font-weight: bold; margin-top: 5px;">
