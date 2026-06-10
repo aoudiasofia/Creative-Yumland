@@ -67,6 +67,11 @@ function calculerDetailCommande($commande) {
         $type = isset($article['type']) ? $article['type'] : 'plats';
         $id_produit = $article['id_produit'];
         $quantite = $article['quantite'];
+        if (is_array($quantite) && isset($quantite['quantite'])) {
+            $quantite = (int)$quantite['quantite'];
+        } else {
+            $quantite = (int)$quantite;
+        }
         
         if ($type === 'plats') {
             $plat = getPlatById($id_produit);

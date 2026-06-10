@@ -44,7 +44,7 @@ $api_key = getAPIKey($vendeur);
 
 $transaction = "CMD" . str_pad($id_commande, 7, "0", STR_PAD_LEFT); 
 $montant_format = number_format($montant, 2, '.', '');
-$retour = "http://localhost/CREATIVE-YUMLAND/src/retour_paiment.php"; 
+$retour = "http://localhost/Creative-Yumland/src/retour_paiment.php"; 
 
 $control = md5($api_key . "#" . $transaction . "#" . $montant_format . "#" . $vendeur . "#" . $retour . "#");
 

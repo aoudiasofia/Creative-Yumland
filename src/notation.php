@@ -3,7 +3,7 @@ session_start();
 include '../includes/fonctions.php';
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: connexion.php");
     exit();
 }
 

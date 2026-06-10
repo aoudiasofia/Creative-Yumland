@@ -13,7 +13,7 @@ $vendeur_recu = $_GET['vendeur'] ?? '';
 $status       = $_GET['status'] ?? ''; // 'accepted' ou 'declined'
 $control_recu = $_GET['control'] ?? '';
 
-// 2. Vérification de sécurité (Recalcul du MD5 avec le statut)
+// 2. Vérification de sécurité (Recalcul du MD5 avec le statut renvoyé)
 $chaine_controle = $api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur_recu . "#" . $status . "#";
 $control_attendu = md5($chaine_controle);
 
