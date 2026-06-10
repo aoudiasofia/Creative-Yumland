@@ -1,4 +1,4 @@
-<?php
+<?php //livraison
 session_start();
 include '../includes/fonctions.php';
 
@@ -7,10 +7,24 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'livreur')) {
     exit();
 }
 
-$livreur_id = isset($_SESSION['id']) ? intval($_SESSION['id']) : 0;
+
+$livreur_id = isset($_SESSION['user']) ? intval($_SESSION['user']) : (isset($_SESSION['id']) ? intval($_SESSION['id']) : 0);
+
 $commandes = getToutesLesCommandes();
+if (!is_array($commandes)) $commandes = [];
+
 $commandes_attribuees = array_filter($commandes, function($commande) use ($livreur_id) {
-    return isset($commande['livreur']) && $commande['livreur'] === $livreur_id && isset($commande['statut_commande']) && $commande['statut_commande'] === 'en livraison';
+
+    $est_le_bon_livreur = isset($commande['livreur']) && ($commande['livreur'] == $livreur_id);
+    
+    
+    $statut_valide = false;
+    if (isset($commande['statut_commande'])) {
+        $statut = $commande['statut_commande'];
+        $statut_valide = ($statut === 'a livrée' || $statut === 'en livraison');
+    }
+    
+    return $est_le_bon_livreur && $statut_valide;
 });
 ?>
 

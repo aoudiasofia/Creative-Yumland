@@ -1,4 +1,4 @@
-<?php
+<?php // focntions
 
 function ajouterAuPanier($id_produit, $quantite = 1) {
     initialiserPanier();
@@ -59,78 +59,112 @@ function attribuerLivreurCommande($id_commande, $id_livreur) {
     return false;
 }
 
+
 function calculerDetailCommande($commande) {
-    $articles_detail = [];
-    $prix_total_avant_remise = 0;
-    
-    foreach ($commande['articles'] as $article) {
-        $type = isset($article['type']) ? $article['type'] : 'plats';
-        $id_produit = $article['id_produit'];
-        $quantite = $article['quantite'];
-        if (is_array($quantite) && isset($quantite['quantite'])) {
-            $quantite = (int)$quantite['quantite'];
-        } else {
-            $quantite = (int)$quantite;
-        }
-        
-        if ($type === 'plats') {
-            $plat = getPlatById($id_produit);
-            if ($plat) {
-                $prix_unitaire = $plat['prix'];
-                $prix_total_article = $prix_unitaire * $quantite;
-                $prix_total_avant_remise += $prix_total_article;
-                
-                $articles_detail[] = [
-                    'type' => 'plat',
-                    'nom' => $plat['nom'],
-                    'description' => $plat['description'],
-                    'quantite' => $quantite,
-                    'prix_unitaire' => $prix_unitaire,
-                    'prix_total' => $prix_total_article
-                ];
-            }
-        } elseif ($type === 'menu') {
-            $menu = getMenuById($id_produit);
-            if ($menu) {
-                $prix_unitaire = $menu['prix'];
-                $prix_total_article = $prix_unitaire * $quantite;
-                $prix_total_avant_remise += $prix_total_article;
-                
-                // Récupérer les plats du menu
-                $plats_du_menu = [];
-                foreach ($menu['plats_inclus'] as $id_plat) {
-                    $plat = getPlatById($id_plat);
-                    if ($plat) {
-                        $plats_du_menu[] = [
-                            'nom' => $plat['nom'],
-                            'description' => $plat['description'],
-                            'prix' => $plat['prix']
-                        ];
-                    }
-                }
-                
-                $articles_detail[] = [
-                    'type' => 'menu',
-                    'nom' => $menu['nom'],
-                    'description' => $menu['description'],
-                    'quantite' => $quantite,
-                    'prix_unitaire' => $prix_unitaire,
-                    'prix_total' => $prix_total_article,
-                    'plats_inclus' => $plats_du_menu
-                ];
-            }
+    $details = [
+        'articles' => [],
+        'prix_total_avant_remise' => 0,
+        'remise' => 0,
+        'prix_apres_remise' => 0
+    ];
+
+    // MODIFICATION ICI : On accepte 'items' OU 'articles'
+    $liste_brute = null;
+    if (!empty($commande)) {
+        if (isset($commande['items'])) {
+            $liste_brute = $commande['items'];
+        } elseif (isset($commande['articles'])) {
+            $liste_brute = $commande['articles'];
         }
     }
+
+    if (empty($liste_brute) || !is_array($liste_brute)) {
+        return $details;
+    }
+
+    // On récupère la base de données des produits (plats et menus)
+    $produits_data = getToutesLesProduits(); 
+    $tous_les_plats = $produits_data['plats'] ?? [];
+    $tous_les_menus = $produits_data['menus'] ?? [];
+
+    foreach ($liste_brute as $item) {
+        // Sécurité supplémentaire : On gère si la clé s'appelle 'id_produit' ou juste 'id'
+        $id_item = $item['id_produit'] ?? ($item['id'] ?? null);
+        $type_item = $item['type'] ?? 'plat'; // 'plat' ou 'menu'
+        $quantite = intval($item['quantite'] ?? 1);
+
+        $nom = "Produit indisponible";
+        $description = "";
+        $prix_unitaire = 0;
+        $plats_inclus_details = [];
+
+        if ($type_item === 'menu') {
+            // 1. CHERCHER DANS LES MENUS
+            foreach ($tous_les_menus as $menu) {
+                if ($menu['id'] == $id_item) {
+                    $nom = $menu['nom'];
+                    $description = $menu['description'] ?? '';
+                    $prix_unitaire = floatval($menu['prix']);
+                    
+                    // Récupérer les détails des plats inclus dans ce menu
+                    if (isset($menu['plats']) && is_array($menu['plats'])) {
+                        foreach ($menu['plats'] as $id_plat_inclus) {
+                            foreach ($tous_les_plats as $plat) {
+                                if ($plat['id'] == $id_plat_inclus) {
+                                    $plats_inclus_details[] = [
+                                        'nom' => $plat['nom'],
+                                        'prix' => floatval($plat['prix'])
+                                    ];
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        } else {
+            // 2. CHERCHER DANS LES PLATS SIMPLES
+            foreach ($tous_les_plats as $plat) {
+                if ($plat['id'] == $id_item) {
+                    $nom = $plat['nom'];
+                    $description = $plat['description'] ?? '';
+                    $prix_unitaire = floatval($plat['prix']);
+                    break;
+                }
+            }
+        }
+
+        $prix_total_article = $prix_unitaire * $quantite;
+
+        $details['articles'][] = [
+            'id_produit' => $id_item, // Ajouté pour le bouton de modification de quantité
+            'nom' => $nom,
+            'type' => $type_item,
+            'description' => $description,
+            'quantite' => $quantite,
+            'prix_unitaire' => $prix_unitaire,
+            'prix_total' => $prix_total_article,
+            'plats_inclus' => $plats_inclus_details
+        ];
+
+        $details['prix_total_avant_remise'] += $prix_total_article;
+    }
+
+    // Gestion des remises et totaux finaux
+    $details['remise'] = floatval($commande['remise'] ?? 0);
     
-    $remise = isset($commande['remise']) ? $commande['remise'] : 0;
-    $prix_apres_remise = $prix_total_avant_remise - $remise;
-    
-    return [
-        'articles' => $articles_detail,
-        'prix_total_avant_remise' => $prix_total_avant_remise,
-        'remise' => $remise,
-        'prix_apres_remise' => $prix_apres_remise
-    ];
+    // Si le montant payé est déjà écrit en dur dans la commande, on le garde en priorité
+    if (isset($commande['montant_payé']) && floatval($commande['montant_payé']) > 0) {
+        $details['prix_apres_remise'] = floatval($commande['montant_payé']);
+    } else {
+        $details['prix_apres_remise'] = $details['prix_total_avant_remise'] - $details['remise'];
+    }
+
+    // Backwards compatibility 
+    $details['total'] = $details['prix_apres_remise'];
+    $details['items'] = $details['articles'];
+
+    return $details;
 }
 
 
@@ -305,7 +339,7 @@ function getMenuById($id_recherche) {
     $menus = getTousLesMenus();
 
     foreach ($menus as $menu) {
-        if ($menu['id'] === $id_recherche) {
+        if ($menu['id'] == $id_recherche) {
             return $menu;
         }
     }
@@ -357,7 +391,7 @@ function getPlatById($id_recherche) {
     $plats = getTousLesPlats();
 
     foreach ($plats as $plat) {
-        if ($plat['id'] === $id_recherche) {
+        if ($plat['id'] == $id_recherche) {
             return $plat;
         }
     }
@@ -396,11 +430,15 @@ function getToutesLesProduits() {
     
     if (file_exists($fichier_chemin)) {
         $contenu_json = file_get_contents($fichier_chemin);
+        $donnees = json_decode($contenu_json, true);
         
-        return json_decode($contenu_json, true);
-    } else {
-        return ['plats' => [], 'menus' => []];
+        // On vérifie que le JSON est bien un tableau valide
+        if (is_array($donnees)) {
+            return $donnees;
+        }
     }
+    // Si le fichier n'existe pas ou est corrompu, on renvoie une structure vide propre
+    return ['plats' => [], 'menus' => []];
 }
 
 function getTousLesLivreurs() {
@@ -422,12 +460,13 @@ function getTousLesLivreurs() {
 
 function getTousLesMenus() {
     $donnees = getToutesLesProduits();
-    return $donnees['menus'];
+    return $donnees['menus'] ?? [];
 }
 
 function getTousLesPlats() {
     $donnees = getToutesLesProduits();
-    return $donnees['plats'];
+    // Le ?? [] garantit de renvoyer un tableau vide si la clé "plats" n'existe pas
+    return $donnees['plats'] ?? [];
 }
 
 function getTousLesUtilisateurs() {

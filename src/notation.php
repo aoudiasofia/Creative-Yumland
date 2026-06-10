@@ -1,4 +1,4 @@
-<?php
+<?php //notation.php
 session_start();
 include '../includes/fonctions.php';
 
@@ -27,6 +27,19 @@ if ($commande['user_id'] != $_SESSION['user']) {
 
 $details = calculerDetailCommande($commande);
 
+
+if (!is_array($details)) {
+    $details = [];
+}
+
+if (!isset($details['prix_apres_remise'])) {
+   
+    $details['prix_apres_remise'] = floatval($commande['montant_payé'] ?? ($commande['prix_total'] ?? ($details['total'] ?? 0.0)));
+} else {
+    $details['prix_apres_remise'] = floatval($details['prix_apres_remise']);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -50,14 +63,13 @@ $details = calculerDetailCommande($commande);
 
         <div class="notation-card">
             <div class="commande-preview">
-                <p><strong>Commande #<?php echo htmlspecialchars($commande['id']); ?></strong> - <?php echo $commande['date_heure']; ?></p>
+                <p><strong>Commande #<?php echo htmlspecialchars($commande['id']); ?></strong> - <?php echo htmlspecialchars($commande['date_heure'] ?? ''); ?></p>
                 <p style="font-size: 0.9rem; color: var(--accent);">Montant total: <?php echo number_format($details['prix_apres_remise'], 2, ',', ' '); ?> €</p>
             </div>
 
             <form method="post" action="traitement_notation.php" class="notation-form">
                 <input type="hidden" name="id_commande" value="<?php echo htmlspecialchars($commande['id']); ?>" />
 
-                <!-- NOTATION -->
                 <div class="form-group">
                     <label class="form-label">Notez votre commande (de 1 à 5)</label>
                     <div class="rating-grid">
@@ -70,13 +82,11 @@ $details = calculerDetailCommande($commande);
                     </div>
                 </div>
 
-                <!-- COMMENTAIRE -->
                 <div class="form-group">
                     <label class="form-label">Commentaire (optionnel)</label>
                     <textarea name="commentaire" class="kold-textarea" placeholder="Partagez votre retour..."></textarea>
                 </div>
 
-                <!-- BOUTONS -->
                 <div class="notation-actions">
                     <button type="submit" class="btn-brutal">ENVOYER VOTRE NOTE</button>
                     <a href="historique_commandes_client.php" class="btn-retour">← Retour</a>
@@ -101,7 +111,6 @@ $details = calculerDetailCommande($commande);
                         method: 'POST',
                         body: formData
                     }).then(response => {
-                        // Le PHP effectue un header('Location: ...'), on peut intercepter pour faire un retour asynchrone
                         alert("✓ Votre note a bien été enregistrée. Merci !");
                         window.location.href = "historique_commandes_client.php"; 
                     }).catch(error => {
