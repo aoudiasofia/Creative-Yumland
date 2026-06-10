@@ -65,7 +65,10 @@ verifierUtilisateurBloque();
                 echo "<li><a href='traitement_deconnexion.php' class='nav-login'>Déconnexion</a></li>";
                 echo "<li class='user-status'>ID: " . strtoupper(htmlspecialchars($_SESSION['prenom'])) . "</li>";
             } else {
-                echo "<li><a href='connexion.php' class='nav-login'>Connexion</a></li>";
+                if (!($nom_page === 'connexion' || $nom_page === 'inscription')) {
+                    echo "<li><a href='connexion.php' class='nav-login'>Connexion</a></li>";
+                    echo "<li><a href='inscription.php' class='nav-login'>Inscription</a></li>";
+                }
                 echo "<li class='user-status'>STATUT: INVITÉ</li>";
             }
             ?>
