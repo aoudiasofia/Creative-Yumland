@@ -46,7 +46,7 @@
         "nom": "DELECHENEAU",
         "prenom": "Camille",
         "email": "cam@cytech.fr",
-        "password": "1$2y$10$621K7hYjAgxD6KYxwVaG2OtTN6lk9Y1JTg\/gA47P31on7rvzMYjkG",
+        "password": "$2y$10$621K7hYjAgxD6KYxwVaG2OtTN6lk9Y1JTg\/gA47P31on7rvzMYjkG",
         "tel": "0601020304",
         "role": "livreur",
         "adresse": "blablabla",
