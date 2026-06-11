@@ -8,8 +8,7 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'restaurateur' && $_SESS
     exit();
 }
 
-// ATTENTION : Vérifie bien que ton fichier s'appelle "produits.json" ou "menu.json" 
-// Ici, j'ai gardé "produits.json" car c'est ce que tu as écrit dans ton code.
+
 $chemin_menu = __DIR__ . '/../data/produits.json';
 
 // Vérification de sécurité pour être sûr que le fichier existe avant d'essayer de le lire
